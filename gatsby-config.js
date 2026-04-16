@@ -2,7 +2,7 @@ require("dotenv").config();
 
 module.exports = {
   siteMetadata: {
-    title: "Dr sushree ",
+    title: "Dr sushree",
     description: "Gatsby + WordPress (WPGraphQL) site",
     author: "@Dr sushree",
     siteUrl:
