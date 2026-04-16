@@ -1,50 +1,25 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
+// src/layouts/index.js
 
-import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import React from 'react'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
-import Header from "./header"
-import "./layout.css"
+import "../css/common.css"
+import "../css/home.css"
+import "../css/ui-fixer.css"
+import "../css/contact.css"
+import "../css/obstetrics.css"
+import "../css/faq.css"
+import "../css/insidepage.css"
+import "../css/about.css"
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <div>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </div>
   )
 }
 

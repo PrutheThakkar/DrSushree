@@ -1,0 +1,35 @@
+.banner-section .hero-img {
+    width: 100%;
+}
+
+.gatsby-image-wrapper{
+    width: 100%;
+    height: 100%;
+}
+
+/* .swiper-horizontal{
+    height: 767px;
+} */
+
+.Benefits-laparoscopic .benef-wrapp li .img-wrap{
+    height: 395px;
+    width: 100%;
+}
+@media (max-width:1920px) {
+    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
+        height: 300px;
+        width: 100%;
+    }  
+}
+@media (max-width:1680px) {
+    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
+        height: 250px;
+        width: 100%;
+    }  
+}
+@media (max-width:1440px) {
+    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
+        height: 200px;
+        width: 100%;
+    }  
+}

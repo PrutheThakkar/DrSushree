@@ -1,0 +1,83 @@
+.expertise-wrap {
+  margin-bottom: 0;
+}
+.expertise-wrap .exp-list li {
+  margin-bottom: clamp(3.75rem, -8.5785rem + 14.4404vw, 8.75rem);
+}
+@media (max-width: 1366px) {
+  .expertise-wrap .exp-list li {
+    margin-bottom: clamp(3.75rem, 3.75rem + 0vw, 3.75rem);
+  }
+}
+.expertise-wrap .exp-list li .img-wrap {
+  width: 1012px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: clamp(3.75rem, -2.4143rem + 7.2202vw, 6.25rem);
+}
+@media (max-width: 1920px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 950px;
+  }
+}
+@media (max-width: 1680px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 850px;
+  }
+}
+@media (max-width: 1440px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 800px;
+  }
+}
+@media (max-width: 1366px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 700px;
+  }
+}
+@media (max-width: 1280px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 600px;
+  }
+}
+@media (max-width: 1279px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 100%;
+    height: 400px;
+  }
+}
+@media (max-width: 820px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 100%;
+    height: 300px;
+  }
+}
+@media (max-width: 767px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    width: 100%;
+    height: 200px;
+  }
+}
+@media (max-width: 1365px) {
+  .expertise-wrap .exp-list li .img-wrap {
+    margin-bottom: clamp(2.5rem, 2.1176rem + 1.912vw, 3.75rem);
+  }
+}
+.expertise-wrap .exp-list li .img-wrap img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  display: block;
+}
+.expertise-wrap .exp-list li p {
+  padding: 0 10%;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .expertise-wrap .exp-list li p {
+    padding: 0 5%;
+  }
+}/*# sourceMappingURL=obstetrics.css.map */

@@ -1,0 +1,450 @@
+.about-section .img-wrap {
+  height: 858px;
+  width: auto;
+}
+@media (max-width: 1920px) {
+  .about-section .img-wrap {
+    height: 780px;
+  }
+}
+@media (max-width: 1680px) {
+  .about-section .img-wrap {
+    height: 750px;
+  }
+}
+@media (max-width: 1440px) {
+  .about-section .img-wrap {
+    height: 650px;
+  }
+}
+@media (max-width: 1366px) {
+  .about-section .img-wrap {
+    height: 550px;
+  }
+}
+@media (max-width: 1440px) {
+  .about-section .img-wrap {
+    height: 550px;
+  }
+}
+@media (max-width: 768px) {
+  .about-section .img-wrap {
+    height: 320px;
+  }
+}
+.about-section .img-wrap img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.about-section .text-wrap {
+  text-align: center;
+  margin-top: 30px;
+}
+.about-section .text-wrap p {
+  font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem);
+}
+@media (max-width: 1024px) {
+  .about-section .text-wrap p {
+    font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
+  }
+}
+@media (max-width: 800px) {
+  .about-section .text-wrap p br {
+    display: none;
+  }
+}
+
+.Infertility.about {
+  position: relative;
+}
+.Infertility.about::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/page-new-bg.svg);
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-position-x: 62%;
+  background-position-y: 50%;
+}
+@media (max-width: 1920px) {
+  .Infertility.about::before {
+    background-position-y: 45%;
+  }
+}
+@media (max-width: 1680px) {
+  .Infertility.about::before {
+    background-position-y: 48%;
+  }
+}
+@media (max-width: 1680px) {
+  .Infertility.about::before {
+    background-size: 140%;
+  }
+}
+@media (max-width: 767px) {
+  .Infertility.about::before {
+    background-position-y: 160%;
+  }
+}
+.Infertility.about .infertility-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .Infertility.about .infertility-wrapper {
+    flex-wrap: wrap;
+  }
+}
+.Infertility.about .infertility-wrapper li {
+  width: 50%;
+  margin-bottom: 180px;
+  align-items: center;
+}
+@media (max-width: 1680px) {
+  .Infertility.about .infertility-wrapper li {
+    margin-bottom: 150px;
+  }
+}
+@media (max-width: 1152px) {
+  .Infertility.about .infertility-wrapper li {
+    margin-bottom: 100px;
+    justify-content: center;
+  }
+}
+.Infertility.about .infertility-wrapper li .wrap {
+  width: 32%;
+  margin-left: 15%;
+  height: 100%;
+  background: #E2ECE8;
+  padding: 20px;
+  border-radius: 10px;
+}
+@media (max-width: 1920px) {
+  .Infertility.about .infertility-wrapper li .wrap {
+    width: 35%;
+  }
+}
+@media (max-width: 1152px) {
+  .Infertility.about .infertility-wrapper li .wrap {
+    width: 45%;
+  }
+}
+@media (max-width: 1000px) {
+  .Infertility.about .infertility-wrapper li .wrap {
+    width: 70%;
+    margin-left: 0;
+    margin: 0 auto !important;
+  }
+}
+.Infertility.about .infertility-wrapper li .wrap h3 {
+  margin-bottom: 20px;
+  color: #5f8f7a;
+  font-style: italic;
+}
+.Infertility.about .infertility-wrapper li:nth-child(3) {
+  margin-bottom: 80px;
+}
+@media (max-width: 1000px) {
+  .Infertility.about .infertility-wrapper li:nth-child(3) {
+    margin-bottom: 30px;
+  }
+}
+.Infertility.about .infertility-wrapper li:nth-child(3) .wrap {
+  margin-left: 50%;
+}
+@media (max-width: 1152px) {
+  .Infertility.about .infertility-wrapper li:nth-child(3) .wrap {
+    margin-left: 30%;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 1000px) {
+  .Infertility.about .infertility-wrapper li:nth-child(3) .wrap {
+    margin-left: 0;
+  }
+}
+.Infertility.about .infertility-wrapper li:last-child {
+  margin-bottom: 80px;
+}
+@media (max-width: 1000px) {
+  .Infertility.about .infertility-wrapper li:last-child {
+    margin-bottom: 30px;
+  }
+}
+.Infertility.about .infertility-wrapper li:last-child .wrap {
+  margin-left: 50%;
+}
+@media (max-width: 1152px) {
+  .Infertility.about .infertility-wrapper li:last-child .wrap {
+    margin-left: 30%;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 1000px) {
+  .Infertility.about .infertility-wrapper li:last-child .wrap {
+    margin-left: 0;
+  }
+}
+.Infertility.about p.content {
+  text-align: center;
+  text-align: center;
+  font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem);
+}
+@media (max-width: 1170px) {
+  .Infertility.about p.content br {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .Infertility.about p.content {
+    font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
+  }
+}
+
+.philosophy-labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  width: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (max-width: 767px) {
+  .philosophy-labels {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.philosophy-labels__item {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 15px;
+  color: #1e2a2a;
+  white-space: nowrap;
+  font-family: "Georgia", serif;
+  opacity: 0;
+  transform: translateY(10px);
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item {
+    margin-bottom: 10px;
+    position: relative !important;
+  }
+}
+.philosophy-labels__item--1 {
+  top: 18%;
+  left: 45%;
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item--1 {
+    left: 0;
+    top: auto;
+  }
+}
+.philosophy-labels__item--2 {
+  top: 28%;
+  right: 4%;
+}
+@media (max-width: 1680px) {
+  .philosophy-labels__item--2 {
+    right: -10%;
+  }
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item--2 {
+    left: 0;
+    right: auto;
+    top: auto;
+  }
+}
+.philosophy-labels__item--3 {
+  top: 44%;
+  left: 4%;
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item--3 {
+    left: 0;
+    right: auto;
+    top: auto;
+  }
+}
+.philosophy-labels__item--4 {
+  bottom: 18%;
+  left: 10%;
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item--4 {
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+}
+.philosophy-labels__item--5 {
+  bottom: 18%;
+  right: 8%;
+}
+@media (max-width: 767px) {
+  .philosophy-labels__item--5 {
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: auto;
+  }
+}
+@media (max-width: 768px) {
+  .philosophy-labels__item {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
+.Comprehensive .section-wrap ul li {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
+.Comprehensive .section-wrap ul li .left {
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li .left {
+    width: 100%;
+  }
+}
+.Comprehensive .section-wrap ul li .left .img {
+  height: 400px;
+  width: auto;
+}
+@media (max-width: 1920px) {
+  .Comprehensive .section-wrap ul li .left .img {
+    height: 300px;
+  }
+}
+@media (max-width: 1680px) {
+  .Comprehensive .section-wrap ul li .left .img {
+    height: 250px;
+  }
+}
+@media (max-width: 1440px) {
+  .Comprehensive .section-wrap ul li .left .img {
+    height: 200px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li .left .img {
+    margin-bottom: 20px;
+  }
+}
+.Comprehensive .section-wrap ul li .left .img img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.Comprehensive .section-wrap ul li .right {
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li .right {
+    width: 100%;
+  }
+}
+.Comprehensive .section-wrap ul li .right .pragraph-wrap {
+  padding-left: 50px;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li .right .pragraph-wrap {
+    padding-left: 0;
+    text-align: center;
+  }
+}
+.Comprehensive .section-wrap ul li .right .pragraph-wrap p {
+  font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem);
+}
+@media (max-width: 1024px) {
+  .Comprehensive .section-wrap ul li .right .pragraph-wrap p {
+    font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
+  }
+}
+@media (max-width: 1255px) {
+  .Comprehensive .section-wrap ul li .right .pragraph-wrap p br {
+    display: none;
+  }
+}
+.Comprehensive .section-wrap ul li:nth-child(even) {
+  flex-direction: row-reverse;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li:nth-child(even) {
+    flex-direction: column;
+  }
+}
+.Comprehensive .section-wrap ul li:nth-child(even) .right .pragraph-wrap {
+  padding-right: 50px;
+  padding-left: 0;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li:nth-child(even) .right .pragraph-wrap {
+    padding-right: 0;
+  }
+}
+.Comprehensive .section-wrap ul li:nth-child(even) .right .pragraph-wrap p {
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .Comprehensive .section-wrap ul li:nth-child(even) .right .pragraph-wrap p {
+    text-align: center;
+  }
+}
+
+.Beyond-the-Clinic .img-wrap {
+  margin-bottom: 50px;
+}
+@media (max-width: 1680px) {
+  .Beyond-the-Clinic .img-wrap {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 1440px) {
+  .Beyond-the-Clinic .img-wrap {
+    margin-bottom: 30px;
+  }
+}
+.Beyond-the-Clinic p {
+  text-align: center;
+  font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem);
+}
+@media (max-width: 1024px) {
+  .Beyond-the-Clinic p {
+    font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
+  }
+}/*# sourceMappingURL=about.css.map */

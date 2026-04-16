@@ -1,0 +1,86 @@
+/* Contact page styles (SCSS) - follows brand variables from common.css */
+.contact-page .contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  align-items: start;
+}
+.contact-page .contact-form-wrap {
+  background: #fff;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(6, 24, 40, 0.06);
+}
+.contact-page .contact-form .form-row {
+  margin-bottom: 20px;
+}
+.contact-page .contact-form .form-row label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2F3A36;
+}
+.contact-page .contact-form .form-row input,
+.contact-page .contact-form .form-row textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(47, 58, 54, 0.08);
+  background: #FBFBFB;
+  font-size: 15px;
+  color: #2F3A36;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.contact-page .contact-form .form-row input:focus,
+.contact-page .contact-form .form-row textarea:focus {
+  outline: none;
+  border-color: var(--accent-green, #4caf50);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.06);
+}
+.contact-page .contact-form .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.contact-page .contact-form .submit-btn {
+  background: var(--accent-green, #4caf50);
+  border: none;
+  color: var(--text-white, #fff);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(76, 175, 80, 0.12);
+}
+.contact-page .contact-info .info-block {
+  background: rgba(95, 143, 122, 0.06);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.contact-page .contact-info .info-block h3 {
+  margin-bottom: 6px;
+  color: #2F3A36;
+}
+.contact-page .contact-info .info-block a {
+  color: var(--blue-mid, #1e4d7b);
+  text-decoration: none;
+}
+.contact-page .contact-info .map-wrap {
+  margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.contact-page .contact-info .map-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 900px) {
+  .contact-page .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-page .contact-info {
+    order: 2;
+  }
+}/*# sourceMappingURL=contact.css.map */
