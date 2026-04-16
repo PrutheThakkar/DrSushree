@@ -1,7 +1,7 @@
 // src/layouts/index.js
 
 import React from 'react'
-import Header from './Header'
+import Header from './Headernew'
 import Footer from './Footer'
 
 import "../css/common.css"

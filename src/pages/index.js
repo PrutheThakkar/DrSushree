@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby";
 import Swiper from "swiper";
 
 import Layout from "../components/layout";
@@ -222,5 +222,163 @@ const IndexPage = ({ data }) => {
   );
 };
 
+export const query = graphql`
+  query MyQuery {
+    allWpPage(filter: { databaseId: { eq: 118 } }) {
+      edges {
+        node {
+          homePage {
+            homePageTitle
+
+            homePageMobImage {
+              node {
+                altText
+                gatsbyImage(layout: FULL_WIDTH, quality: 90, width: 767)
+                mediaItemUrl
+                slug
+              }
+            }
+
+            homePageDeskImage {
+              node {
+                altText
+                gatsbyImage(layout: FULL_WIDTH, quality: 90, width: 1920)
+                mediaItemUrl
+                slug
+              }
+            }
+
+            womensHealthcareTitle
+            womensHealthcareParagraph
+
+            womensHealthcareImage {
+              node {
+                altText
+                gatsbyImage(
+                  layout: FULL_WIDTH
+                  quality: 90
+                  width: 1920
+                  height: 839
+                )
+                mediaItemUrl
+                slug
+              }
+            }
+
+            womensHealthcareBottomPara
+
+            obstetricsTitle
+            obstetricsSubtitle
+            obstetricsSwiper {
+              slideImage {
+                node {
+                  altText
+                  gatsbyImage(
+                    layout: FULL_WIDTH
+                    quality: 90
+                    width: 1720
+                    height: 767
+                  )
+                  mediaItemUrl
+                  slug
+                }
+              }
+              slideTitle
+            }
+
+            gynaecologyTitle
+            gynaecologySubtitle
+            gynaecologyAccordion {
+              title
+              paragraph
+              image {
+                node {
+                  altText
+                  gatsbyImage(
+                    layout: FULL_WIDTH
+                    quality: 90
+                    width: 825
+                    height: 533
+                  )
+                  mediaItemUrl
+                  slug
+                }
+              }
+            }
+
+            benefitsOfLaparoscopicTitle
+            benefitsOfLaparoscopicSubtitle {
+              benefitsTitle
+              benefitsSubtitle
+              fieldGroupName
+              benefitsImage {
+                node {
+                  altText
+                  gatsbyImage(
+                    layout: FULL_WIDTH
+                    quality: 90
+                    width: 395
+                    height: 395
+                  )
+                  mediaItemUrl
+                  slug
+                }
+              }
+            }
+
+            infertilityTitle
+            infertilitySubtitle
+            infertilityPara
+            infertilityListnew {
+              fieldGroupName
+              title
+              subtitle
+            }
+
+            herApproachTitle
+            herApproachSubtitle
+            herApproachList {
+              herApproachTitle
+              herApproachSubtitle
+              herApproachImage {
+                node {
+                  altText
+                  gatsbyImage(
+                    layout: CONSTRAINED
+                    quality: 90
+                    width: 825
+                    height: 533
+                  )
+                  mediaItemUrl
+                  slug
+                }
+              }
+            }
+
+            careAcrossTitle
+            careAcrossPara
+            careAcrossHorizontalSlider {
+              sectionImage {
+                node {
+                  altText
+                  gatsbyImage(
+                    layout: CONSTRAINED
+                    quality: 10
+                    width: 10
+                    height: 10
+                  )
+                  mediaItemUrl
+                  slug
+                }
+              }
+              sectionTitle
+              sectionSubTitle
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default IndexPage;
