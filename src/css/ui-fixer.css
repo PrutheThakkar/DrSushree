@@ -33,3 +33,17 @@
         width: 100%;
     }  
 }
+
+.Obstetrics .container{
+    position: relative;
+    padding-bottom: 85px;
+}
+
+.Obstetrics .swiper-pagination{
+   justify-content: center;
+    width: auto !important;
+    left: 50% !important;
+    position: absolute;
+    bottom: 8px;
+}
+

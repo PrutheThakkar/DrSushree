@@ -21,6 +21,10 @@
   overflow: hidden;
   transition: all 0.6s ease;
 }
+
+.faq-section .faq-item.active{
+  padding-bottom: 10px;
+}
 .faq-section .faq-item .faq-question {
   width: 100%;
   border: 0;

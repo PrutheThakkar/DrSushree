@@ -209,7 +209,7 @@ const IndexPage = ({ data }) => {
           </ul>
 
           {infertilityPara && (
-            <div
+            <p
               className="content"
               dangerouslySetInnerHTML={{ __html: infertilityPara }}
             />
@@ -364,8 +364,8 @@ export const query = graphql`
                   gatsbyImage(
                     layout: CONSTRAINED
                     quality: 10
-                    width: 10
-                    height: 10
+                    width: 500
+                    height: 600
                   )
                   mediaItemUrl
                   slug

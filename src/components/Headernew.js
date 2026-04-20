@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "gatsby";
-import logo from "../images/site-logo.svg"; // update path if needed
+import logo from "../images/site-logo.svg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +39,9 @@ const Header = () => {
     <header>
       <div className="container wrapper">
         <div className="logo">
-          <img src={logo} alt="site logo" />
+          <Link to="/" onClick={closeMenu}>
+            <img src={logo} alt="site logo" />
+          </Link>
         </div>
 
         <button
@@ -47,8 +49,9 @@ const Header = () => {
           className={`burger ${isMenuOpen ? "is-open" : ""}`}
           id="burgerBtn"
           aria-label="Toggle menu"
-          aria-expanded={isMenuOpen ? "true" : "false"}
+          aria-expanded={isMenuOpen}
           onClick={toggleMenu}
+          type="button"
         >
           <span className="burger-line"></span>
           <span className="burger-line"></span>
@@ -61,28 +64,46 @@ const Header = () => {
           id="menuList"
         >
           <li className="menu-item">
-            <Link to="#" onClick={closeMenu}>About</Link>
+            <Link to="/about/" onClick={closeMenu}>
+              About
+            </Link>
           </li>
-          <li data-target="about-section" className="menu-item">
-            <Link to="#" onClick={closeMenu}>Obstetrics</Link>
-          </li>
+
           <li className="menu-item">
-            <Link to="#" onClick={closeMenu}>Gynaecology</Link>
+            <Link to="/obstetrics/" onClick={closeMenu}>
+              Obstetrics
+            </Link>
           </li>
+
           <li className="menu-item">
-            <Link to="#" onClick={closeMenu}>Infertility</Link>
+            <Link to="/gynaecology/" onClick={closeMenu}>
+              Gynaecology
+            </Link>
           </li>
+
           <li className="menu-item">
-            <Link to="#" onClick={closeMenu}>FAQ</Link>
+            <Link to="/infertility/" onClick={closeMenu}>
+              Infertility
+            </Link>
           </li>
+
           <li className="menu-item">
-            <Link to="#" onClick={closeMenu}>Blogs</Link>
+            <Link to="/faq/" onClick={closeMenu}>
+              FAQ
+            </Link>
           </li>
+
+          <li className="menu-item">
+            <Link to="/blogs/" onClick={closeMenu}>
+              Blogs
+            </Link>
+          </li>
+
           <li className="menu-item contact">
             <div className="btn-wrapper">
-              <a className="btn" href="#" onClick={closeMenu}>
+              <Link className="btn" to="/contact/" onClick={closeMenu}>
                 Contact
-              </a>
+              </Link>
             </div>
           </li>
         </ul>

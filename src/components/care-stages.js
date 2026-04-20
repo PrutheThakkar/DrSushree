@@ -219,7 +219,7 @@ const CareStages = ({ data }) => {
 
         window.scrollTo({
           top: targetY,
-          behavior: "smooth",
+          behavior: "smooth", 
         });
       }
     };
@@ -325,6 +325,8 @@ const CareStages = ({ data }) => {
                       <GatsbyImage
                         image={image}
                         alt={imageAlt}
+                        height={600}
+                        width={500}
                         className="care-card__img"
                       />
                     )}
