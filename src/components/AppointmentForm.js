@@ -1,0 +1,168 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const WEBSITE_URL = process.env.GATSBY_WEBSITE_URL;
+const CF7_FORM_ID = process.env.GATSBY_CF7_FORM_ID || "60";
+
+const AppointmentForm = () => {
+  const [formMessage, setFormMessage] = useState("");
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
+    phone: Yup.string().required("Phone Number is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    message: Yup.string().required("Message is required"),
+  });
+
+  const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      setFormMessage("");
+
+      if (!WEBSITE_URL) {
+        setFormMessage("Missing GATSBY_WEBSITE_URL in .env");
+        setSubmitting(false);
+        return;
+      }
+
+      const bodyFormData = new FormData();
+
+      // These names must match your Contact Form 7 field names exactly
+      bodyFormData.set("first-name", values.firstName);
+      bodyFormData.set("last-name", values.lastName);
+      bodyFormData.set("phone", values.phone);
+      bodyFormData.set("email", values.email);
+      bodyFormData.set("message", values.message);
+
+      // IMPORTANT: CF7 unit tag
+      bodyFormData.set("_wpcf7_unit_tag", `wpcf7-f${CF7_FORM_ID}-o1`);
+
+      const response = await axios.post(
+        `${WEBSITE_URL}/wp-json/contact-form-7/v1/contact-forms/${CF7_FORM_ID}/feedback`,
+        bodyFormData,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      console.log("CF7 response:", response.data);
+
+      if (response?.data?.status === "mail_sent") {
+        try {
+          await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              firstName: values.firstName,
+              lastName: values.lastName,
+              phone: values.phone,
+              email: values.email,
+              message: values.message,
+            }),
+          });
+        } catch (n8nError) {
+          console.error("n8n error:", n8nError);
+        }
+
+        resetForm();
+        setFormMessage(
+          "Thank you! Your message has been sent. We'll get back to you shortly."
+        );
+        setSubmitting(false);
+        return;
+      }
+
+      setFormMessage(
+        response?.data?.message ||
+          "There was an error trying to send your message."
+      );
+      setSubmitting(false);
+    } catch (error) {
+      console.error("CF7 submit error:", error);
+      console.error("CF7 submit error response:", error?.response?.data);
+
+      setFormMessage(
+        error?.response?.data?.message ||
+          "There was an error trying to send your message. Please try again later."
+      );
+
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Formik
+      initialValues={{
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        message: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={handleFormSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form className="appointment-form">
+          <div className="form-group">
+            <Field type="text" name="firstName" placeholder="First Name" />
+            <ErrorMessage name="firstName" component="div" className="error" />
+          </div>
+
+          <div className="form-group">
+            <Field type="text" name="lastName" placeholder="Last Name" />
+            <ErrorMessage name="lastName" component="div" className="error" />
+          </div>
+
+          <div className="form-group">
+            <Field type="tel" name="phone" placeholder="Phone Number" />
+            <ErrorMessage name="phone" component="div" className="error" />
+          </div>
+
+          <div className="form-group">
+            <Field type="email" name="email" placeholder="Email" />
+            <ErrorMessage name="email" component="div" className="error" />
+          </div>
+
+          <div className="form-group">
+            <Field
+              as="textarea"
+              name="message"
+              rows="4"
+              placeholder="Your message"
+            />
+            <ErrorMessage name="message" component="div" className="error" />
+          </div>
+
+          <div className="btn-wrap">
+            <button type="submit" className="btn" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Consult Now"}
+            </button>
+          </div>
+
+          {formMessage && (
+            <div
+              className="wpcf7-response-output"
+              style={{
+                color: formMessage.startsWith("Thank you") ? "green" : "red",
+                marginTop: "12px",
+              }}
+            >
+              {formMessage}
+            </div>
+          )}
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default AppointmentForm;

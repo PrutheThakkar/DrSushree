@@ -84,3 +84,201 @@
     order: 2;
   }
 }/*# sourceMappingURL=contact.css.map */
+
+
+
+.Contact-section.contact-page {
+  padding: 90px 0 100px;
+}
+
+.Contact-section .title-wrap {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.Contact-section .title {
+  margin: 0;
+}
+
+.Contact-section .sub-title {
+  display: block;
+  margin-top: 10px;
+}
+
+.Contact-section .contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 32px;
+  align-items: start;
+}
+
+.Contact-section .contact-form-wrap {
+  background: #fff;
+  border: 1px solid #e7e3dc;
+  border-radius: 18px;
+  padding: 34px 36px;
+  min-height: 320px;
+}
+
+.Contact-section .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.Contact-section .info-block {
+  background: #f4f7f3;
+  border-radius: 14px;
+  padding: 18px 18px 20px;
+}
+
+.Contact-section .info-block h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.Contact-section .info-block p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.Contact-section .info-block a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Contact-section .map-wrap {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.Contact-section .map-wrap .gatsby-image-wrapper,
+.Contact-section .map-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Appointment form */
+.appointment-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+}
+
+.appointment-form .form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.appointment-form .form-group:nth-child(5),
+.appointment-form .btn-wrap,
+.appointment-form .wpcf7-response-output {
+  grid-column: 1 / -1;
+}
+
+.appointment-form input,
+.appointment-form textarea {
+  /* width: 100%; */
+  border: 1px solid #d8d4cd;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #2c2c2c;
+  outline: none;
+  box-shadow: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.appointment-form input::placeholder,
+.appointment-form textarea::placeholder {
+  color: #8a8a8a;
+}
+
+.appointment-form input:focus,
+.appointment-form textarea:focus {
+  border-color: #6d9b86;
+  box-shadow: 0 0 0 3px rgba(109, 155, 134, 0.12);
+}
+
+.appointment-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.appointment-form .error {
+  margin-top: 6px;
+  color: #d93025;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.appointment-form .btn-wrap {
+  margin-top: 4px;
+}
+
+.appointment-form .btn {
+  min-width: 180px;
+  height: 52px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: #5f8f7a;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.appointment-form .btn:hover {
+  transform: translateY(-1px);
+}
+
+.appointment-form .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.appointment-form .wpcf7-response-output {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 4px !important;
+}
+
+@media (max-width: 991px) {
+  .Contact-section .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .Contact-section.contact-page {
+    padding: 70px 0 80px;
+  }
+
+  .Contact-section .title-wrap {
+    margin-bottom: 32px;
+  }
+
+  .Contact-section .contact-form-wrap {
+    padding: 22px 18px;
+    min-height: auto;
+  }
+
+  .appointment-form {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .appointment-form .form-group:nth-child(5),
+  .appointment-form .btn-wrap,
+  .appointment-form .wpcf7-response-output {
+    grid-column: auto;
+  }
+}

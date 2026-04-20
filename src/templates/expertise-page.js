@@ -229,7 +229,7 @@ export const query = graphql`
                 height: 1200
                 layout: CONSTRAINED
                 placeholder: BLURRED
-                quality: 90
+                quality: 100
               )
             }
           }
@@ -241,7 +241,7 @@ export const query = graphql`
                 height: 900
                 layout: CONSTRAINED
                 placeholder: BLURRED
-                quality: 90
+                quality: 100
               )
             }
           }
@@ -257,7 +257,7 @@ export const query = graphql`
                   height: 421
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality: 90
+                  quality: 100
                 )
               }
             }

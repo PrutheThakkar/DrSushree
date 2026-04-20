@@ -299,15 +299,14 @@ const CareStages = ({ data }) => {
   return (
     <section className="care-stages-section" id="care-stages" ref={sectionRef}>
       <div className="care-stages__sticky-wrap" ref={stickyWrapRef}>
-        <div className="care-stages__header">
-          <h2>{careAcrossTitle}</h2>
-          {careAcrossPara && (
-            <div
-              className="care-stages__para"
-              dangerouslySetInnerHTML={{ __html: careAcrossPara }}
-            />
-          )}
-        </div>
+      
+    <div className="title-wrap">
+
+        <h2 className="title">
+            {careAcrossTitle}
+            <span className="subtitle">{careAcrossPara}</span>
+          </h2>
+    </div>
 
         <div className="care-stages__track-outer" ref={outerRef}>
           <div className="care-stages__track" id="careTrack" ref={trackRef}>

@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link, graphql } from "gatsby";
 import Swiper from "swiper";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Layout from "../components/layout";
 import Obstetrics from "../components/Obstetrics";
 import Gynaecology from "../components/Gynaecology";
 import HerApproach from "../components/HerApproach";
 import CareStages from "../components/care-stages";
+import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim";
+
 
 const IndexPage = ({ data }) => {
   const homePage = data?.allWpPage?.edges?.[0]?.node?.homePage;
@@ -82,6 +86,16 @@ const IndexPage = ({ data }) => {
     };
   }, []);
 
+  useLayoutEffect(() => {
+  if (typeof window === "undefined") return;
+
+  initHomeAnimations();
+
+  return () => {
+    destroyHomeAnimations();
+  };
+}, []);
+
   return (
     <Layout>
       <section className="banner-section">
@@ -127,7 +141,13 @@ const IndexPage = ({ data }) => {
       </section>
 
       <section className="Womens-Healthcare">
-        <h2 dangerouslySetInnerHTML={{ __html: womensHealthcareTitle }} />
+      
+        <div className="title-wrap">
+            <h2 className="title">
+              {womensHealthcareTitle}
+              <span className="sub-title">{womensHealthcareParagraph}</span>
+            </h2>
+          </div>
 
         <div className="img-wrap">
           {womensHealthcareImage && (
@@ -249,8 +269,8 @@ export const query = graphql`
             }
 
             womensHealthcareTitle
-            womensHealthcareParagraph
 
+            womensHealthcareParagraph
             womensHealthcareImage {
               node {
                 altText
@@ -363,7 +383,7 @@ export const query = graphql`
                   altText
                   gatsbyImage(
                     layout: CONSTRAINED
-                    quality: 10
+                    quality: 90
                     width: 500
                     height: 600
                   )
