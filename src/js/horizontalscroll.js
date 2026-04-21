@@ -44,18 +44,32 @@
   let st = null;
   let resizeTimer = null;
 
-  // ── Size cards ─────────────────────────────────────────────
-  function sizeCards() {
-    const cardsVisible = getCardsVisible();
-    const outerW = outer.clientWidth;
-    const totalGap = GAP * (cardsVisible - 1);
-    const cardW = (outerW - totalGap) / cardsVisible;
+  // // ── Size cards ─────────────────────────────────────────────
+  // function sizeCards() {
+  //   const cardsVisible = getCardsVisible();
+  //   const outerW = outer.clientWidth;
+  //   const totalGap = GAP * (cardsVisible - 1);
+  //   const cardW = (outerW - totalGap) / cardsVisible;
 
-    cards.forEach(function (card) {
-      card.style.width = cardW + "px";
-      card.style.flex = "0 0 " + cardW + "px";
-    });
-  }
+  //   cards.forEach(function (card) {
+  //     card.style.width = cardW + "px";
+  //     card.style.flex = "0 0 " + cardW + "px";
+  //   });
+  // }
+
+  function sizeCards() {
+  const cardsVisible = getCardsVisible();
+  const outerW = outer.clientWidth;
+  const totalGap = GAP * (cardsVisible - 1);
+  const cardW = (outerW - totalGap) / cardsVisible;
+
+  // Ensure that the cards are responsive and center them
+  cards.forEach(function (card) {
+    card.style.width = cardW + "px";
+    card.style.flex = "0 0 " + cardW + "px";
+    card.style.margin = "0 auto"; // Center the cards
+  });
+}
 
   // ── Helpers ────────────────────────────────────────────────
   function getStepWidth() {
@@ -100,12 +114,26 @@
   }
 
   // ── Section height ─────────────────────────────────────────
+  // function setSectionHeight() {
+  //   const maxStep = getMaxStep();
+  //   var scrollDistance = maxStep * SCROLL_PER_STEP * window.innerHeight;
+  //   var contentHeight = stickyWrap.offsetHeight;
+  //   section.style.height = (contentHeight + scrollDistance) + "px";
+  // }
+
   function setSectionHeight() {
-    const maxStep = getMaxStep();
-    var scrollDistance = maxStep * SCROLL_PER_STEP * window.innerHeight;
-    var contentHeight = stickyWrap.offsetHeight;
-    section.style.height = (contentHeight + scrollDistance) + "px";
-  }
+  const maxStep = getMaxStep();
+  var scrollDistance = maxStep * SCROLL_PER_STEP * window.innerHeight;
+  var contentHeight = stickyWrap.offsetHeight;
+  
+  // Center the section's height calculation
+  section.style.height = (contentHeight + scrollDistance) + "px";
+  
+  // Ensure the layout remains centered horizontally as well
+  section.style.display = "flex";
+  section.style.justifyContent = "center";
+  section.style.alignItems = "center";
+}
 
   // ── Init ScrollTrigger ─────────────────────────────────────
   function initScrollTrigger() {
@@ -117,33 +145,36 @@
 
     const maxOffset = getMaxOffset();
     const scrollDistance = Math.max(window.innerHeight, maxStep * SCROLL_PER_STEP * window.innerHeight);
+const contentHeight = stickyWrap.offsetHeight; // Get the total content height of the sticky section
+const extendedEnd = contentHeight + 500; // Adjust this value based on how much extra space you need
 
-    st = gsap.to(track, {
-      x: -maxOffset,
-      ease: "none",
-      overwrite: true,
-      scrollTrigger: {
-        trigger: section,
-        pin: stickyWrap,
-        pinSpacing: false,
-        start: window.innerWidth <= 768 ? "top 20%" : "top 10%", 
-        end: "+=" + scrollDistance,
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-        snap: maxStep > 0 ? {
-          snapTo: 1 / maxStep,
-          duration: { min: 0.25, max: 0.55 },
-          ease: "power1.inOut"
-        } : false,
-        onUpdate: function (self) {
-          const step = maxStep > 0 ? Math.round(self.progress * maxStep) : 0;
-          if (step !== currentStep) {
-            currentStep = step;
-            updateDots(step);
-          }
-        }
+st = gsap.to(track, {
+  x: -maxOffset,
+  ease: "none",
+  overwrite: true,
+  scrollTrigger: {
+    trigger: section,
+    pin: stickyWrap,
+    pinSpacing: false,
+    start: window.innerWidth <= 768 ? "top 20%" : "top 10%", 
+    end: "+=" + extendedEnd, // Extend the end point
+    markers: true,
+    scrub: 1.2,
+    invalidateOnRefresh: true,
+    snap: maxStep > 0 ? {
+      snapTo: 1 / maxStep,
+      duration: { min: 0.25, max: 0.55 },
+      ease: "power1.inOut"
+    } : false,
+    onUpdate: function (self) {
+      const step = maxStep > 0 ? Math.round(self.progress * maxStep) : 0;
+      if (step !== currentStep) {
+        currentStep = step;
+        updateDots(step);
       }
-    }).scrollTrigger;
+    }
+  }
+}).scrollTrigger;
   }
 
   // ── Touch swipe support ────────────────────────────────────
@@ -210,13 +241,24 @@
     ScrollTrigger.refresh();
   }
 
+  // window.addEventListener("resize", function () {
+  //   clearTimeout(resizeTimer);
+  //   resizeTimer = setTimeout(function () {
+  //     currentStep = 0;
+  //     init();
+  //   }, 200);
+  // });
+
   window.addEventListener("resize", function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      currentStep = 0;
-      init();
-    }, 200);
-  });
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () {
+    currentStep = 0;
+    setSectionHeight();
+    sizeCards();
+    buildDots();
+    ScrollTrigger.refresh(); // Ensure layout recalculates properly
+  }, 200);
+});
 
   if (document.readyState === "complete") {
     init();

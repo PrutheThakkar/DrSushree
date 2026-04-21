@@ -67,6 +67,7 @@ const CareStages = ({ data }) => {
       getCards().forEach((card) => {
         card.style.width = `${cardW}px`;
         card.style.flex = `0 0 ${cardW}px`;
+        card.style.margin = "0 auto"; // Center the cards
       });
     };
 
@@ -113,68 +114,61 @@ const CareStages = ({ data }) => {
       }
     };
 
-    const setSectionHeight = () => {
-      const maxStep = getMaxStep();
-      const scrollDistance = Math.max(
-        window.innerHeight,
-        maxStep * 0.65 * window.innerHeight
-      );
-      const contentHeight = stickyWrapRef.current.offsetHeight;
-      sectionRef.current.style.height = `${contentHeight + scrollDistance}px`;
-    };
+   const setSectionHeight = () => {
+  const maxStep = getMaxStep();
+  const stepW = getStepWidth();
+  const scrollDistance = Math.max(
+    window.innerHeight,
+    maxStep * stepW * 1.2  // ← use actual pixel offset, not vh-based
+  );
+  const contentHeight = stickyWrapRef.current.offsetHeight;
+  sectionRef.current.style.height = `${contentHeight + scrollDistance}px`;
+};
 
-    const initScrollTrigger = () => {
-      const maxStep = getMaxStep();
-      const maxOffset = getMaxOffset();
-      const scrollDistance = Math.max(
-        window.innerHeight,
-        maxStep * 0.65 * window.innerHeight
-      );
+   const initScrollTrigger = () => {
+  const maxStep = getMaxStep();
+  const maxOffset = getMaxOffset();
+  const stepW = getStepWidth();
+  const scrollDistance = Math.max(
+    window.innerHeight,
+    maxStep * stepW * 1.2  // ← match setSectionHeight
+  );
 
-      if (stRef.current) {
-        stRef.current.kill();
-        stRef.current = null;
-      }
+  if (stRef.current) { stRef.current.kill(); stRef.current = null; }
+  if (tweenRef.current) { tweenRef.current.kill(); tweenRef.current = null; }
 
-      if (tweenRef.current) {
-        tweenRef.current.kill();
-        tweenRef.current = null;
-      }
+  gsap.set(trackRef.current, { x: 0 });
 
-      gsap.set(trackRef.current, { x: 0 });
+  tweenRef.current = gsap.to(trackRef.current, {
+    x: -maxOffset,
+    ease: "none",
+    overwrite: true,
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      pin: stickyWrapRef.current,
+      pinSpacing: false,
+      start: window.innerWidth <= 768 ? "top 20%" : "top 10%",
+      end: `+=${scrollDistance}`,  // ← remove the broken extendedEnd addition
+      scrub: 1.1,
+      invalidateOnRefresh: true,
+      // markers: true,
+      snap: maxStep > 0 ? {
+        snapTo: 1 / maxStep,
+        duration: { min: 0.2, max: 0.45 },
+        ease: "power1.inOut",
+      } : false,
+      onUpdate: (self) => {
+        const step = maxStep > 0 ? Math.round(self.progress * maxStep) : 0;
+        if (step !== currentStepRef.current) {
+          currentStepRef.current = step;
+          updateDots(step);
+        }
+      },
+    },
+  });
 
-      tweenRef.current = gsap.to(trackRef.current, {
-        x: -maxOffset,
-        ease: "none",
-        overwrite: true,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: stickyWrapRef.current,
-          pinSpacing: false,
-          start: window.innerWidth <= 768 ? "top top" : "top top",
-          end: `+=${scrollDistance}`,
-          scrub: 1.1,
-          invalidateOnRefresh: true,
-          snap:
-            maxStep > 0
-              ? {
-                  snapTo: 1 / maxStep,
-                  duration: { min: 0.2, max: 0.45 },
-                  ease: "power1.inOut",
-                }
-              : false,
-          onUpdate: (self) => {
-            const step = maxStep > 0 ? Math.round(self.progress * maxStep) : 0;
-            if (step !== currentStepRef.current) {
-              currentStepRef.current = step;
-              updateDots(step);
-            }
-          },
-        },
-      });
-
-      stRef.current = tweenRef.current.scrollTrigger;
-    };
+  stRef.current = tweenRef.current.scrollTrigger;
+};
 
     const init = () => {
       currentStepRef.current = 0;
@@ -299,14 +293,12 @@ const CareStages = ({ data }) => {
   return (
     <section className="care-stages-section" id="care-stages" ref={sectionRef}>
       <div className="care-stages__sticky-wrap" ref={stickyWrapRef}>
-      
-    <div className="title-wrap">
-
-        <h2 className="title">
+        <div className="title-wrap">
+          <h2 className="title">
             {careAcrossTitle}
             <span className="subtitle">{careAcrossPara}</span>
           </h2>
-    </div>
+        </div>
 
         <div className="care-stages__track-outer" ref={outerRef}>
           <div className="care-stages__track" id="careTrack" ref={trackRef}>

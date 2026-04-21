@@ -269,6 +269,7 @@ export const query = graphql`
                 gatsbyImage(
                   height: 860
                   width: 1720
+                  quality: 90
                   placeholder: BLURRED
                   layout: CONSTRAINED
                 )
@@ -280,7 +281,7 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: CONSTRAINED
-                  quality: 10
+                  quality: 90
                   width: 10
                   height: 10
                 )
@@ -292,7 +293,7 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: CONSTRAINED
-                  quality: 10
+                  quality: 90
                   width: 1920
                   height: 1020
                 )

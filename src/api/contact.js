@@ -7,7 +7,8 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      "https://pruthe.app.n8n.cloud/webhook/e804e415-42cd-45f4-8d91-6bd2adc1b6ad",
+      "https://pruthe.app.n8n.cloud/webhook-test/b31572ee-6a3f-4b46-8f1c-eda3de345b35",
+      
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

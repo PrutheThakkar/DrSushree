@@ -103,7 +103,7 @@
   }
 }
 .banner-section .div-wrapper .btn-wrapper:hover .btn {
-  transform: translateY(-15px);
+  transform: translateY(-15px) !important;
 }
 .banner-section .hero-img {
   position: absolute;
