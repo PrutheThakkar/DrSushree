@@ -103,7 +103,7 @@ const IndexPage = ({ data }) => {
           <div className="div-wrapper">
             <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
             <div className="btn-wrapper">
-              <Link className="btn" to="#">
+              <Link className="btn" to="/contact">
                 Book An Appointment
               </Link>
             </div>

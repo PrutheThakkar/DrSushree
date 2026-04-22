@@ -1,22 +1,34 @@
 const path = require("path");
 
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const template = path.resolve("./src/templates/expertise-page.js");
+  // Fetch blog post slugs and IDs
+  const result = await graphql(`
+    query {
+      allWpPost {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
+    }
+  `);
 
-  const pages = [
-    { pageId: 154, path: "/obstetrics/" },
-    { pageId: 169, path: "/infertility/" },
-    { pageId: 166, path: "/gynaecology/" },
-  ];
+  if (result.errors) {
+    console.error("Error fetching blog posts", result.errors);
+    return;
+  }
 
-  pages.forEach((page) => {
+  // Create a page for each blog post
+  result.data.allWpPost.edges.forEach(({ node }) => {
     createPage({
-      path: page.path,
-      component: template,
+      path: `/blog/${node.slug}`, 
+      component: path.resolve("./src/templates/blog-post.js"), 
       context: {
-        pageId: page.pageId,
+        id: node.id, 
       },
     });
   });

@@ -94,7 +94,7 @@ const Header = () => {
           </li>
 
           <li className="menu-item">
-            <Link to="/blogs/" onClick={closeMenu}>
+            <Link to="/blog/" onClick={closeMenu}>
               Blogs
             </Link>
           </li>
