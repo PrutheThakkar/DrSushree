@@ -1,10 +1,18 @@
 // src/components/Footer.js
 
-import React from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import logo from "../images/site-logo.svg";
 
 const Footer = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+    const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   return (
     <footer>
       <div className="footer-top">
@@ -26,7 +34,9 @@ const Footer = () => {
         <div className="left">
           <div className="col-1">
             <div className="footer-logo">
-              <StaticImage src="../images/site-logo.svg" alt="footer-logo" />
+              <Link to="/" onClick={closeMenu}>
+                          <img src={logo} alt="site logo" />
+                        </Link>
             </div>
             <div className="text-wrap">
               <p>
@@ -105,6 +115,7 @@ const Footer = () => {
                 </svg>
                 </span>Email here</a>
               </li> */}
+              
               <li>
                 <a href="callto:_918249321325"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10.2924 7.13036C10.0581 4.43387 7.24669 3.11079 7.12771 3.05679C7.01648 3.00447 6.89183 2.98775 6.77076 3.00892C3.52514 3.54773 3.03694 5.43785 3.01732 5.5164C2.99061 5.62586 2.99486 5.74059 3.02958 5.84778C6.90078 17.866 14.9462 20.0936 17.5907 20.8264C17.7944 20.8828 17.9624 20.9282 18.09 20.97C18.2356 21.0175 18.3937 21.0083 18.5328 20.9442C18.6137 20.9074 20.5248 20.0065 20.9922 17.0682C21.0129 16.9399 20.9923 16.8084 20.9333 16.6926C20.8916 16.6116 19.8919 14.708 17.1197 14.0354C17.0257 14.0114 16.9272 14.0105 16.8328 14.033C16.7383 14.0554 16.6507 14.1005 16.5776 14.1643C15.703 14.9118 14.4948 15.7083 13.9735 15.7905C10.4788 14.0808 8.52728 10.8001 8.45368 10.1779C8.41075 9.82807 9.21173 8.5995 10.1329 7.60044C10.1908 7.53756 10.2349 7.46325 10.2624 7.38229C10.2898 7.30133 10.3001 7.21551 10.2924 7.13036Z" fill="#5F8F7A" />
