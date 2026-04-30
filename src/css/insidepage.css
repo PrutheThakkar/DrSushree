@@ -70,7 +70,7 @@
 .expertise-list-header {
   position: fixed;
   z-index: 99;
-  width: 50%;
+  width: 75%;
   height: 70px;
   left: 50%;
   transform: translateX(-50%);
@@ -135,7 +135,7 @@
   pointer-events: auto;
 }
 .expertise-list-header ul li {
-  width: 24%;
+  width: 19%;
   margin: 0 2px;
   background: rgba(143, 168, 181, 0.32);
   backdrop-filter: blur(18px);
@@ -147,7 +147,7 @@
   transition: all 1s;
 }
 .expertise-list-header ul li a {
-  font-size: 18px;
+  font-size: 15px;
   padding: 0;
   width: 100%;
   display: block;
@@ -162,3 +162,9 @@
 .expertise-list-header ul li:hover a {
   color: #fff;
 }/*# sourceMappingURL=insidepage.css.map */
+
+
+.Infertilitypage .expertise-list-wrap .expertise-list li:first-child{
+  display: none;
+
+}

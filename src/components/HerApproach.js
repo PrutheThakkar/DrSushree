@@ -33,8 +33,19 @@ const HerApproach = ({ data }) => {
                 <div className="her-list__inner">
                   <span className="her-list__marker"></span>
                   <div className="her-list__text">
-                    <h3 className="her-list__name">{item?.herApproachTitle}</h3>
-                    <p>{item?.herApproachSubtitle}</p>
+                   <h3
+                          className="her-list__name"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.herApproachTitle,
+                          }}
+                        />
+                    
+                    <p
+                        
+                          dangerouslySetInnerHTML={{
+                            __html: item?.herApproachSubtitle,
+                          }}
+                        />
                   </div>
                 </div>
               </li>

@@ -73,44 +73,44 @@ const ExpertisePageTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <div className="expertise-list-header">
-  <div className="container">
-    <div className="btn-wrapper">
-      <a className="btn expertise-toggle-btn" href="#">
-        {page?.title || "Expertise"}
-      </a>
-    </div>
+      <div className={`expertise-list-header ${page?.databaseId === 169 ? "Infertilitypage" : ""}`}>
+        <div className="container">
+          <div className="btn-wrapper">
+            <a className="btn expertise-toggle-btn" href="#">
+              {page?.title || "Expertise"}
+            </a>
+          </div>
 
-    <div className="expertise-list-wrap">
-      <button
-        type="button"
-        className="expertise-close-btn"
-        aria-label="Close expertise list"
-      >
-      </button>
+          <div className="expertise-list-wrap ">
+            <button
+              type="button"
+              className="expertise-close-btn"
+              aria-label="Close expertise list"
+            >
+            </button>
 
-      <ul className="expertise-list">
-        {expertiseSections.map((item, index) => {
-          const sectionId = slugify(
-            item?.expertiseTitle || `section-${index + 1}`
-          );
+            <ul className="expertise-list">
+              {expertiseSections.map((item, index) => {
+                const sectionId = slugify(
+                  item?.expertiseTitle || `section-${index + 1}`
+                );
 
-          return (
-            <li key={sectionId}>
-              <a className="btn" href={`#${sectionId}`}>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: item?.expertiseTitle || "",
-                  }}
-                />
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  </div>
-</div>
+                return (
+                  <li key={sectionId}>
+                    <a className="btn" href={`#${sectionId}`}>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: item?.expertiseTitle || "",
+                        }}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <section className="inner-banner-section">
         <div className="container">
@@ -165,11 +165,9 @@ const ExpertisePageTemplate = ({ data }) => {
                 <li id={sectionId} key={sectionId}>
                   <div className="title-wrap">
                     <h2 className="title">
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: item?.expertiseTitle || "",
-                        }}
-                      />
+                      {item?.expertiseTitle }
+                     
+
                       {item?.expertiseSubtitle && (
                         <span
                           className="sub-title"

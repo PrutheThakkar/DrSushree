@@ -89,8 +89,21 @@ const Gynaecology = ({ data }) => {
                 <div className="procedure-list__inner">
                   <span className="procedure-list__marker"></span>
                   <div className="procedure-list__text">
-                    <h3 className="procedure-list__name">{item?.title}</h3>
-                    <p className="procedure-list__desc">{item?.paragraph}</p>
+                  
+
+                    <h3
+                          className="procedure-list__name"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.title,
+                          }}
+                        />
+                    
+                    <p
+                        className="procedure-list__desc"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.paragraph,
+                          }}
+                        />
                   </div>
                 </div>
               </li>

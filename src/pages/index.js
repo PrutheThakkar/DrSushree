@@ -158,12 +158,9 @@ const IndexPage = ({ data }) => {
           )}
         </div>
 
-        {womensHealthcareParagraph && (
-          <p dangerouslySetInnerHTML={{ __html: womensHealthcareParagraph }} />
-        )}
 
         {womensHealthcareBottomPara && (
-          <p dangerouslySetInnerHTML={{ __html: womensHealthcareBottomPara }} />
+          <span dangerouslySetInnerHTML={{ __html: womensHealthcareBottomPara }} />
         )}
       </section>
 
