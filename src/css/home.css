@@ -77,7 +77,7 @@
 }
 @media (max-width: 767px) {
   .banner-section .div-wrapper {
-    top: 32%;
+    top: 60%;
   }
 }
 .banner-section .div-wrapper .btn-wrapper {
@@ -543,12 +543,22 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap .wrap {
   padding: 25px 41px 25px 40px;
 }
+@media (max-width:767px) {
+  .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap .wrap {
+  padding: 0;
+}
+}
 .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide.swiper-slide-active .text-wrap {
   bottom: 0;
   transition-delay: 0.8s;
 }
 .gynaecology-section .gynaecology-mob-swiper {
   /* Pagination container — the pill bar */
+}
+@media (max-width:767px) {
+  .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap p{
+  display: none;
+  }
 }
 .gynaecology-section .gynaecology-mob-swiper .swiper-pagination {
   display: flex !important;
@@ -974,6 +984,11 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   align-items: center;
   margin: 0 auto;
 }
+@media (max-width:767px) {
+  .Her-Approach .her-approach__content {
+  flex-direction: column-reverse;
+}
+}
 
 .her-list {
   list-style: none;
@@ -985,6 +1000,12 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   gap: 8px;
   width: 50%;
   padding-right: 50px;
+}
+@media (max-width:767px) {
+  .her-list {
+    width: 100%;
+    padding-right: 0;
+  }
 }
 .her-list__item {
   border-radius: 8px;
@@ -1029,6 +1050,13 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   flex: 1;
   width: 50%;
 }
+@media (max-width:767px) {
+  .her-images {
+    width: 100%;
+    margin-bottom: 30px;
+    padding-right: 0;
+  }
+}
 .her-images__frame {
   position: relative;
   width: 100%;
@@ -1036,6 +1064,11 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   border-radius: 16px;
   overflow: hidden;
   height: 533px;
+}
+@media (max-width:767px) {
+  .her-images__frame {
+    height: 300px;
+  }
 }
 .her-images__img-wrap {
   position: absolute;
