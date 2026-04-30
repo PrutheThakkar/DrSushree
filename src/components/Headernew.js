@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "gatsby";
-import logo from "../images/logo-new.svg";
+import logo from "../images/logo-new-1.svg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

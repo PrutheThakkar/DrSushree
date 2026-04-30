@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
-import logo from "../images/logo-new.svg";
+import logo from "../images/logo-new-1.svg";
 
 const Footer = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
