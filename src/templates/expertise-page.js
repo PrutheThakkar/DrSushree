@@ -24,52 +24,65 @@ const ExpertisePageTemplate = ({ data }) => {
 
   const expertiseSections = commonPages?.expertiseSection || [];
 
-  useEffect(() => {
-    const toggleBtn = document.querySelector(".expertise-toggle-btn");
-    const list = document.querySelector(".expertise-list");
-    const btnWrapper = document.querySelector(
-      ".expertise-list-header .btn-wrapper"
-    );
+ useEffect(() => {
+  const toggleBtn = document.querySelector(".expertise-toggle-btn");
+  const closeBtn = document.querySelector(".expertise-close-btn");
+  const list = document.querySelector(".expertise-list");
+  const btnWrapper = document.querySelector(
+    ".expertise-list-header .btn-wrapper"
+  );
 
-    const handleToggle = (e) => {
-      e.preventDefault();
-      if (btnWrapper) btnWrapper.classList.add("hidden");
-      setTimeout(() => {
-        if (list) list.classList.add("open");
-      }, 80);
-    };
+  const closeList = () => {
+    if (list) list.classList.remove("open");
 
-    const anchorLinks = document.querySelectorAll(
-      '.expertise-list a[href^="#"]'
-    );
+    setTimeout(() => {
+      if (btnWrapper) btnWrapper.classList.remove("hidden");
+    }, 250);
+  };
 
-    const handleAnchorClick = (e) => {
-      e.preventDefault();
-      const href = e.currentTarget.getAttribute("href");
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    };
+  const handleToggle = (e) => {
+    e.preventDefault();
 
-    if (toggleBtn) {
-      toggleBtn.addEventListener("click", handleToggle);
+    if (btnWrapper) btnWrapper.classList.add("hidden");
+
+    setTimeout(() => {
+      if (list) list.classList.add("open");
+    }, 80);
+  };
+
+  const anchorLinks = document.querySelectorAll(
+    '.expertise-list a[href^="#"]'
+  );
+
+  const handleAnchorClick = (e) => {
+    e.preventDefault();
+
+    const href = e.currentTarget.getAttribute("href");
+    const target = document.querySelector(href);
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
+    closeList();
+  };
+
+  if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
+  if (closeBtn) closeBtn.addEventListener("click", closeList);
+
+  anchorLinks.forEach((link) => {
+    link.addEventListener("click", handleAnchorClick);
+  });
+
+  return () => {
+    if (toggleBtn) toggleBtn.removeEventListener("click", handleToggle);
+    if (closeBtn) closeBtn.removeEventListener("click", closeList);
+
     anchorLinks.forEach((link) => {
-      link.addEventListener("click", handleAnchorClick);
+      link.removeEventListener("click", handleAnchorClick);
     });
-
-    return () => {
-      if (toggleBtn) {
-        toggleBtn.removeEventListener("click", handleToggle);
-      }
-
-      anchorLinks.forEach((link) => {
-        link.removeEventListener("click", handleAnchorClick);
-      });
-    };
-  }, []);
+  };
+}, []);
 
   return (
     <Layout>
