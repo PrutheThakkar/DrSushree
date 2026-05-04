@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-const WEBSITE_URL = process.env.GATSBY_WEBSITE_URL;
-const CF7_FORM_ID = process.env.GATSBY_CF7_FORM_ID || "60";
+// const WEBSITE_URL = process.env.GATSBY_WEBSITE_URL;
+// const CF7_FORM_ID = process.env.GATSBY_CF7_FORM_ID || "60";
 
 const AppointmentForm = () => {
   const [formMessage, setFormMessage] = useState("");
@@ -19,84 +18,44 @@ const AppointmentForm = () => {
     message: Yup.string().required("Message is required"),
   });
 
-  const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
-    try {
-      setFormMessage("");
+const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
+  try {
+    setFormMessage("");
 
-      if (!WEBSITE_URL) {
-        setFormMessage("Missing GATSBY_WEBSITE_URL in .env");
-        setSubmitting(false);
-        return;
-      }
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phone: values.phone,
+        email: values.email,
+        message: values.message,
+      }),
+    });
 
-      const bodyFormData = new FormData();
+    const data = await response.json();
 
-      // These names must match your Contact Form 7 field names exactly
-      bodyFormData.set("first-name", values.firstName);
-      bodyFormData.set("last-name", values.lastName);
-      bodyFormData.set("phone", values.phone);
-      bodyFormData.set("email", values.email);
-      bodyFormData.set("message", values.message);
-
-      // IMPORTANT: CF7 unit tag
-      bodyFormData.set("_wpcf7_unit_tag", `wpcf7-f${CF7_FORM_ID}-o1`);
-
-      const response = await axios.post(
-        `${WEBSITE_URL}/wp-json/contact-form-7/v1/contact-forms/${CF7_FORM_ID}/feedback`,
-        bodyFormData,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-
-      console.log("CF7 response:", response.data);
-
-      if (response?.data?.status === "mail_sent") {
-        try {
-          await fetch("/api/contact", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstName: values.firstName,
-              lastName: values.lastName,
-              phone: values.phone,
-              email: values.email,
-              message: values.message,
-            }),
-          });
-        } catch (n8nError) {
-          console.error("n8n error:", n8nError);
-        }
-
-        resetForm();
-        setFormMessage(
-          "Thank you! Your message has been sent. We'll get back to you shortly."
-        );
-        setSubmitting(false);
-        return;
-      }
-
-      setFormMessage(
-        response?.data?.message ||
-          "There was an error trying to send your message."
-      );
-      setSubmitting(false);
-    } catch (error) {
-      console.error("CF7 submit error:", error);
-      console.error("CF7 submit error response:", error?.response?.data);
-
-      setFormMessage(
-        error?.response?.data?.message ||
-          "There was an error trying to send your message. Please try again later."
-      );
-
-      setSubmitting(false);
+    if (!response.ok || !data.success) {
+      throw new Error(data?.message || "Something went wrong");
     }
-  };
+
+    resetForm();
+    setFormMessage(
+      "Thank you! Your message has been sent. We'll get back to you shortly."
+    );
+  } catch (error) {
+    console.error("Form submit error:", error);
+
+    setFormMessage(
+      "There was an error trying to send your message. Please try again later."
+    );
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <Formik

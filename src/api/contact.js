@@ -1,17 +1,31 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json({
+      success: false,
+      message: "Method not allowed",
+    });
   }
 
-  const { firstName, lastName, phone, email, message } = req.body;
-
   try {
-    const response = await fetch(
-      "https://pruthe.app.n8n.cloud/webhook-test/b31572ee-6a3f-4b46-8f1c-eda3de345b35",
-      
+    const body =
+      typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+
+    const { firstName, lastName, phone, email, message } = body;
+
+    if (!firstName || !lastName || !phone || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required form fields",
+      });
+    }
+
+    const n8nResponse = await fetch(
+      "https://pruthe.app.n8n.cloud/webhook/b31572ee-6a3f-4b46-8f1c-eda3de345b35",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           firstName,
           lastName,
@@ -24,21 +38,27 @@ export default async function handler(req, res) {
       }
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("n8n response error:", errorText);
+    const n8nText = await n8nResponse.text();
+
+    if (!n8nResponse.ok) {
+      console.error("n8n error:", n8nResponse.status, n8nText);
+
       return res.status(500).json({
         success: false,
         message: "n8n webhook failed",
       });
     }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({
+      success: true,
+      message: "Message sent successfully",
+    });
   } catch (error) {
-    console.error("n8n error:", error);
+    console.error("contact api error:", error);
+
     return res.status(500).json({
       success: false,
-      message: "Server error while sending data to n8n",
+      message: "Server error while sending data",
     });
   }
 }
