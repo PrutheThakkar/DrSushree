@@ -36,13 +36,18 @@ const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
       }),
     });
 
-    const data = await response.json();
+    const data = await response.json().catch(() => ({}));
+
+    console.log("API response:", data);
 
     if (!response.ok || !data.success) {
-      throw new Error(data?.message || "Something went wrong");
+      throw new Error(
+        data?.details || data?.message || "Something went wrong"
+      );
     }
 
     resetForm();
+
     setFormMessage(
       "Thank you! Your message has been sent. We'll get back to you shortly."
     );
@@ -50,7 +55,8 @@ const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
     console.error("Form submit error:", error);
 
     setFormMessage(
-      "There was an error trying to send your message. Please try again later."
+      error?.message ||
+        "There was an error trying to send your message. Please try again later."
     );
   } finally {
     setSubmitting(false);
