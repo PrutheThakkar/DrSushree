@@ -3,6 +3,7 @@ import axios from "axios";
 const N8N_WEBHOOK_URL =
   "https://pruthe.app.n8n.cloud/webhook/cdd310c1-cc2e-4112-bad5-d2070efbadd7";
 
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -33,13 +34,14 @@ export default async function handler(req, res) {
       email,
       message,
       submittedAt: new Date().toISOString(),
-      source: "https://drsushree.studiosentientdemo.com",
+      source: "drsushree-contact-form",
     };
 
     const n8nResponse = await axios.post(N8N_WEBHOOK_URL, payload, {
       headers: {
         "Content-Type": "application/json",
       },
+      timeout: 15000,
       validateStatus: () => true,
     });
 
@@ -50,7 +52,10 @@ export default async function handler(req, res) {
       return res.status(502).json({
         success: false,
         message: "n8n webhook failed",
-        details: n8nResponse.data,
+        details:
+          typeof n8nResponse.data === "string"
+            ? n8nResponse.data
+            : JSON.stringify(n8nResponse.data),
       });
     }
 

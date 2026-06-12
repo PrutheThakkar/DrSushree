@@ -41,9 +41,11 @@ const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
     console.log("API response:", data);
 
     if (!response.ok || !data.success) {
-      throw new Error(
-        data?.details || data?.message || "Something went wrong"
-      );
+    throw new Error(
+  typeof data?.details === "object"
+    ? JSON.stringify(data.details)
+    : data?.details || data?.message || "Something went wrong"
+);
     }
 
     resetForm();
