@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const N8N_WEBHOOK_URL =
-  "https://pruthe.app.n8n.cloud/webhook/b31572ee-6a3f-4b46-8f1c-eda3de345b35";
+  "https://pruthe.app.n8n.cloud/webhook/cdd310c1-cc2e-4112-bad5-d2070efbadd7";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
