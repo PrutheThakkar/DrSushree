@@ -129,6 +129,7 @@ const Gynaecology = ({ data }) => {
                         alt={imageAlt || item?.title || "Gynaecology"}
                         width={600}
                         height={400}
+                        loading="lazy"
                       />
                     )}
                   </div>

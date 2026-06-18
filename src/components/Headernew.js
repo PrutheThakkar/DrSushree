@@ -40,7 +40,7 @@ const Header = () => {
       <div className="container wrapper">
         <div className="logo">
           <Link to="/" onClick={closeMenu}>
-            <img src={logo} alt="site logo" />
+            <img src={logo} alt="site logo" loading="lazy" />
           </Link>
         </div>
 
@@ -64,44 +64,77 @@ const Header = () => {
           id="menuList"
         >
           <li className="menu-item">
-            <Link to="/about/" onClick={closeMenu}>
+            <Link
+              to="/about/"
+              activeClassName="active"
+              onClick={closeMenu}
+            >
               About
             </Link>
           </li>
 
           <li className="menu-item">
-            <Link to="/obstetrics/" onClick={closeMenu}>
+            <Link
+              to="/obstetrics/"
+              activeClassName="active"
+              partiallyActive={true}
+              onClick={closeMenu}
+            >
               Obstetrics
             </Link>
           </li>
 
           <li className="menu-item">
-            <Link to="/gynaecology/" onClick={closeMenu}>
+            <Link
+              to="/gynaecology/"
+              activeClassName="active"
+              partiallyActive={true}
+              onClick={closeMenu}
+            >
               Gynaecology
             </Link>
           </li>
 
           <li className="menu-item">
-            <Link to="/infertility/" onClick={closeMenu}>
+            <Link
+              to="/infertility/"
+              activeClassName="active"
+              partiallyActive={true}
+              onClick={closeMenu}
+            >
               Infertility
             </Link>
           </li>
 
           <li className="menu-item">
-            <Link to="/faq/" onClick={closeMenu}>
+            <Link
+              to="/faq/"
+              activeClassName="active"
+              onClick={closeMenu}
+            >
               FAQ
             </Link>
           </li>
 
           <li className="menu-item">
-            <Link to="/blog/" onClick={closeMenu}>
+            <Link
+              to="/blog/"
+              activeClassName="active"
+              partiallyActive={true}
+              onClick={closeMenu}
+            >
               Blogs
             </Link>
           </li>
 
           <li className="menu-item contact">
             <div className="btn-wrapper">
-              <Link className="btn" to="/contact/" onClick={closeMenu}>
+              <Link
+                className="btn"
+                to="/contact/"
+                activeClassName="active"
+                onClick={closeMenu}
+              >
                 Contact
               </Link>
             </div>

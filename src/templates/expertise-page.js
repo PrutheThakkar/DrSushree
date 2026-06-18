@@ -18,75 +18,80 @@ const ExpertisePageTemplate = ({ data }) => {
   const headerDeskImage = getImage(
     commonPages?.pageHeaderImageDesk?.node?.gatsbyImage
   );
+
   const headerMobileImage = getImage(
     commonPages?.pageHeaderImageMobile?.node?.gatsbyImage
   );
 
   const expertiseSections = commonPages?.expertiseSection || [];
 
- useEffect(() => {
-  const toggleBtn = document.querySelector(".expertise-toggle-btn");
-  const closeBtn = document.querySelector(".expertise-close-btn");
-  const list = document.querySelector(".expertise-list");
-  const btnWrapper = document.querySelector(
-    ".expertise-list-header .btn-wrapper"
-  );
+  useEffect(() => {
+    const toggleBtn = document.querySelector(".expertise-toggle-btn");
+    const closeBtn = document.querySelector(".expertise-close-btn");
+    const list = document.querySelector(".expertise-list");
+    const btnWrapper = document.querySelector(
+      ".expertise-list-header .btn-wrapper"
+    );
 
-  const closeList = () => {
-    if (list) list.classList.remove("open");
+    const closeList = () => {
+      if (list) list.classList.remove("open");
 
-    setTimeout(() => {
-      if (btnWrapper) btnWrapper.classList.remove("hidden");
-    }, 250);
-  };
+      setTimeout(() => {
+        if (btnWrapper) btnWrapper.classList.remove("hidden");
+      }, 250);
+    };
 
-  const handleToggle = (e) => {
-    e.preventDefault();
+    const handleToggle = (e) => {
+      e.preventDefault();
 
-    if (btnWrapper) btnWrapper.classList.add("hidden");
+      if (btnWrapper) btnWrapper.classList.add("hidden");
 
-    setTimeout(() => {
-      if (list) list.classList.add("open");
-    }, 80);
-  };
+      setTimeout(() => {
+        if (list) list.classList.add("open");
+      }, 80);
+    };
 
-  const anchorLinks = document.querySelectorAll(
-    '.expertise-list a[href^="#"]'
-  );
+    const anchorLinks = document.querySelectorAll(
+      '.expertise-list a[href^="#"]'
+    );
 
-  const handleAnchorClick = (e) => {
-    e.preventDefault();
+    const handleAnchorClick = (e) => {
+      e.preventDefault();
 
-    const href = e.currentTarget.getAttribute("href");
-    const target = document.querySelector(href);
+      const href = e.currentTarget.getAttribute("href");
+      const target = document.querySelector(href);
 
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
 
-    closeList();
-  };
+      closeList();
+    };
 
-  if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
-  if (closeBtn) closeBtn.addEventListener("click", closeList);
-
-  anchorLinks.forEach((link) => {
-    link.addEventListener("click", handleAnchorClick);
-  });
-
-  return () => {
-    if (toggleBtn) toggleBtn.removeEventListener("click", handleToggle);
-    if (closeBtn) closeBtn.removeEventListener("click", closeList);
+    if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
+    if (closeBtn) closeBtn.addEventListener("click", closeList);
 
     anchorLinks.forEach((link) => {
-      link.removeEventListener("click", handleAnchorClick);
+      link.addEventListener("click", handleAnchorClick);
     });
-  };
-}, []);
+
+    return () => {
+      if (toggleBtn) toggleBtn.removeEventListener("click", handleToggle);
+      if (closeBtn) closeBtn.removeEventListener("click", closeList);
+
+      anchorLinks.forEach((link) => {
+        link.removeEventListener("click", handleAnchorClick);
+      });
+    };
+  }, []);
 
   return (
     <Layout>
-      <div className={`expertise-list-header ${page?.databaseId === 169 ? "Infertilitypage" : ""}`}>
+      <div
+        className={`expertise-list-header ${
+          page?.databaseId === 169 ? "Infertilitypage" : ""
+        }`}
+      >
         <div className="container">
           <div className="btn-wrapper">
             <a className="btn expertise-toggle-btn" href="#">
@@ -94,13 +99,12 @@ const ExpertisePageTemplate = ({ data }) => {
             </a>
           </div>
 
-          <div className="expertise-list-wrap ">
+          <div className="expertise-list-wrap">
             <button
               type="button"
               className="expertise-close-btn"
               aria-label="Close expertise list"
-            >
-            </button>
+            ></button>
 
             <ul className="expertise-list">
               {expertiseSections.map((item, index) => {
@@ -129,7 +133,7 @@ const ExpertisePageTemplate = ({ data }) => {
         <div className="container">
           <div className="div-wrapper">
             {page?.title && (
-              <h1 dangerouslySetInnerHTML={{ __html: page.title }} />
+              <h1 dangerouslySetInnerHTML={{ __html: commonPages.pageTitle}} />
             )}
           </div>
 
@@ -143,7 +147,7 @@ const ExpertisePageTemplate = ({ data }) => {
                   "Header mobile image"
                 }
                 className="hero-img hero-img--mobile"
-                loading="eager"
+                loading="lazy"
               />
             )}
 
@@ -156,7 +160,7 @@ const ExpertisePageTemplate = ({ data }) => {
                   "Header desktop image"
                 }
                 className="hero-img hero-img--desktop"
-                loading="eager"
+                loading="lazy"
               />
             )}
           </div>
@@ -170,6 +174,7 @@ const ExpertisePageTemplate = ({ data }) => {
               const sectionId = slugify(
                 item?.expertiseTitle || `section-${index + 1}`
               );
+
               const sectionImage = getImage(
                 item?.expertiseImage?.node?.gatsbyImage
               );
@@ -177,19 +182,20 @@ const ExpertisePageTemplate = ({ data }) => {
               return (
                 <li id={sectionId} key={sectionId}>
                   <div className="title-wrap">
-                    <h2 className="title">
-                      {item?.expertiseTitle }
-                     
+                    {item?.expertiseTitle && (
+                      <h2 className="title">
+                        {item.expertiseTitle}
 
-                      {item?.expertiseSubtitle && (
-                        <span
-                          className="sub-title"
-                          dangerouslySetInnerHTML={{
-                            __html: item.expertiseSubtitle,
-                          }}
-                        />
-                      )}
-                    </h2>
+                        {item?.expertiseSubtitle && (
+                          <span
+                            className="sub-title"
+                            dangerouslySetInnerHTML={{
+                              __html: item.expertiseSubtitle,
+                            }}
+                          />
+                        )}
+                      </h2>
+                    )}
                   </div>
 
                   {sectionImage && (
@@ -201,6 +207,7 @@ const ExpertisePageTemplate = ({ data }) => {
                           item?.expertiseTitle ||
                           "Section image"
                         }
+                        loading="lazy"
                       />
                     </div>
                   )}
@@ -232,12 +239,13 @@ export const query = graphql`
         title
         databaseId
         commonPages {
+        pageTitle
           pageHeaderImageDesk {
             node {
               altText
               gatsbyImage(
                 width: 1920
-                height: 1200
+                height: 650
                 layout: CONSTRAINED
                 placeholder: BLURRED
                 quality: 100
@@ -248,8 +256,8 @@ export const query = graphql`
             node {
               altText
               gatsbyImage(
-                width: 768
-                height: 900
+                width: 767
+                height: 367
                 layout: CONSTRAINED
                 placeholder: BLURRED
                 quality: 100

@@ -67,7 +67,8 @@ export const initHomeAnimations = () => {
     });
 
     gsap.set(".banner-section .hero-img", {
-      scale: 1.06,
+      scale: 1.2,
+      duration: 2,
     });
 
     gsap.set(".banner-section .btn-wrapper .btn", {

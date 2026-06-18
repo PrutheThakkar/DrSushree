@@ -75,6 +75,7 @@ const HerApproach = ({ data }) => {
                         image={image}
                         alt={imageAlt}
                         className="her-images__img"
+                        loading="lazy"
                       />
                     )}
                   </div>

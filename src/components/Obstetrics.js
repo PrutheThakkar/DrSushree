@@ -34,10 +34,10 @@ const Obstetrics = ({ data }) => {
       fadeEffect: {
         crossFade: true,
       },
-      // autoplay: {
-      //   delay: 3500,
-      //   disableOnInteraction: false,
-      // },
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: paginationRef.current,
         clickable: true,
@@ -80,6 +80,7 @@ const Obstetrics = ({ data }) => {
                         image={slideImage}
                         alt={slideAlt || slide?.slideTitle || "Obstetrics"}
                         className="obstetrics-slide-image"
+                        loading="lazy"
                       />
                     )}
                   </div>

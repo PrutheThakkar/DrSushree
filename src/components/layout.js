@@ -1,8 +1,10 @@
+import React, { useEffect } from "react"
+import Lenis from "lenis"
+import AOS from "aos"
+import "aos/dist/aos.css"
 
-import React, { useEffect } from 'react'
-import Lenis from 'lenis'
-import Header from './Headernew'
-import Footer from './Footer'
+import Header from "./Headernew"
+import Footer from "./Footer"
 
 import "../css/common.css"
 import "../css/home.css"
@@ -14,28 +16,39 @@ import "../css/insidepage.css"
 import "../css/about.css"
 
 const Layout = ({ children }) => {
-
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    if (typeof window === "undefined") return
+
     const lenis = new Lenis({
-      duration: 1.2,          // scroll animation duration (seconds)
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // ease-out expo
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,     // disable on touch devices (recommended)
+      duration: 1.2,
+      smoothWheel: true,
+      smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     })
 
-    // RAF loop — drives the Lenis animation
     let rafId
-    const raf = (time) => {
+
+    const raf = time => {
       lenis.raf(time)
       rafId = requestAnimationFrame(raf)
     }
+
     rafId = requestAnimationFrame(raf)
 
-    // Cleanup on unmount
+    AOS.init({
+      duration: 900,
+      easing: "ease-out",
+      once: true,
+      offset: 120,
+    })
+
+    window.AOS = AOS
+
+    setTimeout(() => {
+      AOS.refreshHard()
+    }, 500)
+
     return () => {
       cancelAnimationFrame(rafId)
       lenis.destroy()
@@ -43,11 +56,11 @@ const Layout = ({ children }) => {
   }, [])
 
   return (
-    <div>
+    <>
       <Header />
       <main>{children}</main>
       <Footer />
-    </div>
+    </>
   )
 }
 

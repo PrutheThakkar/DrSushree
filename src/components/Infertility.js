@@ -131,6 +131,7 @@ const Infertility = () => {
                 placeholder="blurred"
                 width={600}
                 height={400}
+                loading="lazy"
               />
             </div>
             {/* Slide 2 */}
@@ -141,6 +142,7 @@ const Infertility = () => {
                 placeholder="blurred"
                 width={600}
                 height={400}
+                loading="lazy"
               />
             </div>
             {/* Slide 3 */}
@@ -151,6 +153,7 @@ const Infertility = () => {
                 placeholder="blurred"
                 width={600}
                 height={400}
+                loading="lazy"
               />
             </div>
             {/* Slide 4 */}
@@ -161,6 +164,7 @@ const Infertility = () => {
                 placeholder="blurred"
                 width={600}
                 height={400}
+                loading="lazy"
               />
             </div>
           </div>

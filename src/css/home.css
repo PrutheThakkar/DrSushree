@@ -118,7 +118,7 @@
        object-fit: cover;
   }
 }
-
+/* 
 .Womens-Healthcare .img-wrap {
   margin-bottom: 50px;
   height: 839px;
@@ -184,7 +184,60 @@
   .Womens-Healthcare p {
     font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
   }
+} */
+
+
+/* Womens-Healthcare start new*/
+
+.Womens-Healthcare .Womens-Healthcare-wrapper{
+display: flex;
+align-items: center;
 }
+.Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
+width: 40%;
+height: clamp(360px, 70vh, 562px);
+}
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
+width: 60%;
+padding-left: 80px;
+}
+@media (max-width:1000px) {
+  .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
+width: 60%;
+
+} 
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
+  width: 40%;
+  
+  }
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
+  padding-left: 30px;
+  }
+}
+@media (max-width:767px) {
+  .Womens-Healthcare .Womens-Healthcare-wrapper{
+flex-direction: column;
+}
+   .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
+width: 100%;
+margin-bottom: 40px;
+height: 400px;
+} 
+
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
+  width: 100%;
+  padding-left: 0;
+  }
+}
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap h2{
+text-align: left;
+margin-bottom: 20px;
+}
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap p{
+font-size: clamp(16px, 1.8vw, 26px);
+}
+
+/* Womens-Healthcare ends new*/
 
 .care-stages-section {
   position: relative;
@@ -254,6 +307,7 @@
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: all 0.8s;
 }
 .care-card:hover {
   box-shadow: 0 8px 36px rgba(60, 107, 87, 0.18);
@@ -296,6 +350,7 @@
 }
 .care-card:hover .care-card__img-wrap img {
   transform: scale(1.04);
+  transition: all 1s;
 }
 .care-card__body {
   padding: 20px 22px 24px;

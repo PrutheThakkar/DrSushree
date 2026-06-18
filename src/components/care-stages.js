@@ -319,6 +319,7 @@ const CareStages = ({ data }) => {
                         height={600}
                         width={500}
                         className="care-card__img"
+                        loading="lazy"
                       />
                     )}
                   </div>

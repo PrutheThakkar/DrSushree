@@ -282,8 +282,8 @@ export const query = graphql`
                 gatsbyImage(
                   layout: CONSTRAINED
                   quality: 90
-                  width: 10
-                  height: 10
+                  width: 767
+                  height: 367
                 )
               }
             }
@@ -295,7 +295,7 @@ export const query = graphql`
                   layout: CONSTRAINED
                   quality: 90
                   width: 1920
-                  height: 1020
+                  height: 650
                 )
               }
             }

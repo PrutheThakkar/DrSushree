@@ -44,6 +44,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                   width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -60,6 +61,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                   width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -76,6 +78,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                  width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -92,6 +95,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                   width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -108,6 +112,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                    width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -124,6 +129,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                   width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">
@@ -140,6 +146,7 @@ const ComprehensiveHealthCare = () => {
                   placeholder="blurred"
                   width={835}
                   height={533}
+                  loading="lazy"
                 />
               </div>
               <div className="text-wrap">

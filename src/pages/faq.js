@@ -23,13 +23,23 @@ const FaqPage = ({ data }) => {
   const infertilityTitle = faqPage?.infertilityTitle || "";
   const infertilityList = faqPage?.infertilityList || [];
 
-  // ✅ FIXED: using correct field names from your GraphQL schema
   const headerMobileImage = getImage(
     faqPage?.pageBannerImageMob?.node?.gatsbyImage
   );
+
   const headerDeskImage = getImage(
     faqPage?.pageBannerImageDesk?.node?.gatsbyImage
   );
+
+  const headerMobileAlt =
+    faqPage?.pageBannerImageMob?.node?.altText ||
+    pageTitle ||
+    "FAQ banner mobile image";
+
+  const headerDeskAlt =
+    faqPage?.pageBannerImageDesk?.node?.altText ||
+    pageTitle ||
+    "FAQ banner desktop image";
 
   const [openItems, setOpenItems] = useState({
     general: 0,
@@ -88,75 +98,37 @@ const FaqPage = ({ data }) => {
     <Layout>
       {/* ─── Banner Section ─── */}
       <section className="inner-banner-section">
-      
+        <div className="container">
           <div className="div-wrapper">
             {pageTitle && (
               <h1 dangerouslySetInnerHTML={{ __html: pageTitle }} />
             )}
           </div>
 
-          {/*
-            ✅ FIXED: img-wrap has a real minHeight so the FULL_WIDTH
-            GatsbyImage has a sized parent. Your commons.css sets
-            height:100% on .img-wrap which collapses when the parent
-            has no explicit height — the inline minHeight fixes that.
-          */}
-          <div
-            className="img-wrap"
-            style={{
-              position: "relative",
-              width: "100%",
-              minHeight: "1020px",
-              overflow: "hidden",
-            }}
-          >
-            {/* Mobile image — shown below 768px via CSS */}
+          <div className="img-wrap">
             {headerMobileImage && (
-              <div
-                className="hero-img-wrapper hero-img-wrapper--mobile"
-                style={{ position: "absolute", inset: 0 }}
-              >
-                <GatsbyImage
-                  image={headerMobileImage}
-                  alt={
-                    faqPage?.pageBannerImageMob?.node?.altText ||
-                    pageTitle ||
-                    "Header mobile image"
-                  }
-                  className="hero-img hero-img--mobile"
-                  loading="eager"
-                  style={{ width: "100%", height: "100%" }}
-                  imgStyle={{ objectFit: "cover", objectPosition: "center" }}
-                />
-              </div>
+              <GatsbyImage
+                image={headerMobileImage}
+                alt={headerMobileAlt}
+                className="hero-img hero-img--mobile"
+                loading="eager"
+              />
             )}
 
-            {/* Desktop image — shown above 768px via CSS */}
             {headerDeskImage && (
-              <div
-                className="hero-img-wrapper hero-img-wrapper--desktop"
-                style={{ position: "absolute", inset: 0 }}
-              >
-                <GatsbyImage
-                  image={headerDeskImage}
-                  alt={
-                    faqPage?.pageBannerImageDesk?.node?.altText ||
-                    pageTitle ||
-                    "Header desktop image"
-                  }
-                  className="hero-img hero-img--desktop"
-                  loading="eager"
-                  style={{ width: "100%", height: "100%" }}
-                  imgStyle={{ objectFit: "cover", objectPosition: "center" }}
-                />
-              </div>
+              <GatsbyImage
+                image={headerDeskImage}
+                alt={headerDeskAlt}
+                className="hero-img hero-img--desktop"
+                loading="eager"
+              />
             )}
           </div>
-      
+        </div>
       </section>
 
       {/* ─── FAQ Section ─── */}
-      <section className="faq-section">
+      <section className="faq-section faq-page">
         <div className="container">
           {(sectionTitle || sectionSubtitle) && (
             <div className="title-wrap">
@@ -181,6 +153,7 @@ const FaqPage = ({ data }) => {
                   <div className="faq-list">
                     {section.list.map((item, index) => {
                       const isActive = openItems[section.key] === index;
+
                       return (
                         <div
                           className={`faq-item ${isActive ? "active" : ""}`}
@@ -218,9 +191,6 @@ const FaqPage = ({ data }) => {
   );
 };
 
-// ✅ FIXED: correct field names (pageBannerImageDesk / pageBannerImageMob)
-//    both nested inside faqPage, not commonPages.
-//    Also using real dimensions instead of 10x10.
 export const query = graphql`
   query FaqPageQuery {
     allWpPage(filter: { databaseId: { eq: 172 } }) {
@@ -257,7 +227,7 @@ export const query = graphql`
                   layout: FULL_WIDTH
                   quality: 90
                   width: 1920
-                  height: 1080
+                  height: 650
                 )
               }
             }
@@ -268,7 +238,7 @@ export const query = graphql`
                   layout: FULL_WIDTH
                   quality: 90
                   width: 767
-                  height: 767
+                  height: 367
                 )
               }
             }

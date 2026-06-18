@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link, graphql } from "gatsby";
 import Swiper from "swiper";
@@ -11,9 +11,14 @@ import Gynaecology from "../components/Gynaecology";
 import HerApproach from "../components/HerApproach";
 import CareStages from "../components/care-stages";
 import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim";
-
+import preloaderLogo from "../images/sushree-preloader-logo.svg";
 
 const IndexPage = ({ data }) => {
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  // const [loaderProgress, setLoaderProgress] = useState(0);
+  const [isLoaderDone, setIsLoaderDone] = useState(false);
+  const [isAnimationReady, setIsAnimationReady] = useState(false);
+  const [loaderProgress, setLoaderProgress] = useState(0);
   const homePage = data?.allWpPage?.edges?.[0]?.node?.homePage;
 
   const homePageTitle = homePage?.homePageTitle;
@@ -50,10 +55,10 @@ const IndexPage = ({ data }) => {
   };
 
   const careStagesData = {
-  careAcrossTitle: homePage?.careAcrossTitle,
-  careAcrossPara: homePage?.careAcrossPara,
-  careAcrossHorizontalSlider: homePage?.careAcrossHorizontalSlider || [],
-};
+    careAcrossTitle: homePage?.careAcrossTitle,
+    careAcrossPara: homePage?.careAcrossPara,
+    careAcrossHorizontalSlider: homePage?.careAcrossHorizontalSlider || [],
+  };
 
   const benefitsTitle = homePage?.benefitsOfLaparoscopicTitle;
   const benefitsItems = homePage?.benefitsOfLaparoscopicSubtitle || [];
@@ -86,155 +91,255 @@ const IndexPage = ({ data }) => {
     };
   }, []);
 
+  useEffect(() => {
+    let progressTimer;
+
+    const startProgress = () => {
+      progressTimer = setInterval(() => {
+        setLoaderProgress((prev) => {
+          if (prev >= 90) return prev;
+          return prev + 4;
+        });
+      }, 100);
+    };
+
+    const finishLoader = () => {
+      setLoaderProgress(100);
+
+      setTimeout(() => {
+        setIsLoaderDone(true);
+      }, 500);
+    };
+
+    startProgress();
+
+    if (typeof window !== "undefined") {
+      if (document.readyState === "complete") {
+        setTimeout(finishLoader, 900);
+      } else {
+        window.addEventListener("load", finishLoader);
+      }
+    }
+
+    const fallbackTimer = setTimeout(() => {
+      finishLoader();
+    }, 5000);
+
+    return () => {
+      clearInterval(progressTimer);
+      clearTimeout(fallbackTimer);
+
+      if (typeof window !== "undefined") {
+        window.removeEventListener("load", finishLoader);
+      }
+    };
+  }, []);
+
   useLayoutEffect(() => {
-  if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
+    if (!isLoaderDone) return;
 
-  initHomeAnimations();
+    initHomeAnimations();
 
-  return () => {
-    destroyHomeAnimations();
-  };
-}, []);
+    requestAnimationFrame(() => {
+      setIsAnimationReady(true);
+    });
+
+    return () => {
+      destroyHomeAnimations();
+    };
+  }, [isLoaderDone]);
 
   return (
+
     <Layout>
-      <section className="banner-section">
-        <div className="container">
-          <div className="div-wrapper">
-            <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
-            <div className="btn-wrapper">
-              <Link className="btn" to="/contact">
-                Book An Appointment
-              </Link>
+
+      {!isAnimationReady && (
+        <div className="site-preloader">
+          <div className="preloader-inner">
+            <div className="preloader-logo-fill">
+              <img
+                src={preloaderLogo}
+                alt="Dr. Sushree Patra Logo"
+                className="preloader-logo-base"
+              />
+
+              <div
+                className="preloader-logo-color"
+                style={{ height: `${loaderProgress}%` }}
+              >
+                <img
+                  src={preloaderLogo}
+                  alt=""
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+
+            <div className="preloader-name">Dr. Sushree Patra</div>
+
+            <div className="preloader-subtitle">
+              Obstetrician & Gynaecologist
+            </div>
+
+            <div className="preloader-count">
+              {loaderProgress}%
+            </div>
+
+            <div className="preloader-bar">
+              <span style={{ width: `${loaderProgress}%` }}></span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className={`page-content ${isAnimationReady ? "page-loaded" : ""}`}>
+
+        <section className="banner-section">
+          <div className="container">
+            <div className="div-wrapper">
+              <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
+              <div className="btn-wrapper">
+                <Link className="btn" to="/contact">
+                  Book An Appointment
+                </Link>
+              </div>
+            </div>
+
+            <div className="img-wrap">
+              {mobImage && (
+                <GatsbyImage
+                  image={mobImage}
+                  alt={mobImageAlt || "Personalised"}
+                  className="hero-img hero-img--mobile"
+                  loading="eager"
+
+                />
+              )}
+
+              {deskImage && (
+                <GatsbyImage
+                  image={deskImage}
+                  alt={deskImageAlt || "Personalised"}
+                  className="hero-img hero-img--tablet"
+                  loading="eager"
+                />
+              )}
+
+              {deskImage && (
+                <GatsbyImage
+                  image={deskImage}
+                  alt={deskImageAlt || "Personalised"}
+                  className="hero-img hero-img--desktop"
+                  loading="eager"
+                />
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="Womens-Healthcare">
+          <div className="container">
+            <div className="title-wrap">
+              <h2 className="title">
+                {womensHealthcareTitle}
+                <span className="sub-title">{womensHealthcareParagraph}</span>
+              </h2>
+            </div>
+
+            <div className="Womens-Healthcare-wrapper">
+              <div className="img-wrap">
+                {womensHealthcareImage && (
+                  <GatsbyImage
+                    image={womensHealthcareImage}
+                    alt={womensHealthcareImageAlt || "Women's Healthcare"}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+
+
+              {womensHealthcareBottomPara && (
+                <div data-aos="fade-up" className="text-wrap" dangerouslySetInnerHTML={{ __html: womensHealthcareBottomPara }} />
+              )}
             </div>
           </div>
 
-          <div className="img-wrap">
-            {mobImage && (
-              <GatsbyImage
-                image={mobImage}
-                alt={mobImageAlt || "Personalised"}
-                className="hero-img hero-img--mobile"
-                loading="eager"
-              />
-            )}
+        </section>
 
-            {deskImage && (
-              <GatsbyImage
-                image={deskImage}
-                alt={deskImageAlt || "Personalised"}
-                className="hero-img hero-img--tablet"
-                loading="eager"
-              />
-            )}
+        <CareStages data={careStagesData} />
 
-            {deskImage && (
-              <GatsbyImage
-                image={deskImage}
-                alt={deskImageAlt || "Personalised"}
-                className="hero-img hero-img--desktop"
-                loading="eager"
-              />
-            )}
+        <Obstetrics data={obstetricsData} />
+
+        <Gynaecology data={gynaecologyData} />
+
+        <section className="Benefits-laparoscopic">
+          <div className="container">
+            <h2>{benefitsTitle}</h2>
+
+            <ul className="benef-wrapp">
+              {benefitsItems.map((item, index) => {
+                const image = getImage(item?.benefitsImage?.node?.gatsbyImage);
+                const imageAlt = item?.benefitsImage?.node?.altText;
+
+                return (
+                  <li key={index}>
+                    <div className="img-wrap">
+                      {image && (
+                        <GatsbyImage
+                          image={image}
+                          alt={imageAlt || item?.benefitsTitle || "Benefit"}
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
+
+                    <div className="text-wrap">
+                      <h3>{item?.benefitsTitle}</h3>
+                      <p>{item?.benefitsSubtitle}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="Womens-Healthcare">
-      
-        <div className="title-wrap">
-            <h2 className="title">
-              {womensHealthcareTitle}
-              <span className="sub-title">{womensHealthcareParagraph}</span>
-            </h2>
-          </div>
+        <section className="Infertility">
+          <div className="container">
+            <div className="title-wrap">
+              <h2 className="title">
+                {infertilityTitle}
+                <span className="sub-title">{infertilitySubtitle}</span>
+              </h2>
+            </div>
 
-        <div className="img-wrap">
-          {womensHealthcareImage && (
-            <GatsbyImage
-              image={womensHealthcareImage}
-              alt={womensHealthcareImageAlt || "Women's Healthcare"}
-            />
-          )}
-        </div>
-
-
-        {womensHealthcareBottomPara && (
-          <span dangerouslySetInnerHTML={{ __html: womensHealthcareBottomPara }} />
-        )}
-      </section>
-
-      <CareStages data={careStagesData} />
-
-      <Obstetrics data={obstetricsData} />
- 
-      <Gynaecology data={gynaecologyData} />
-
-      <section className="Benefits-laparoscopic">
-        <div className="container">
-          <h2>{benefitsTitle}</h2>
-
-          <ul className="benef-wrapp">
-            {benefitsItems.map((item, index) => {
-              const image = getImage(item?.benefitsImage?.node?.gatsbyImage);
-              const imageAlt = item?.benefitsImage?.node?.altText;
-
-              return (
+            <ul className="infertility-wrapper">
+              {infertilityListnew.map((item, index) => (
                 <li key={index}>
-                  <div className="img-wrap">
-                    {image && (
-                      <GatsbyImage
-                        image={image}
-                        alt={imageAlt || item?.benefitsTitle || "Benefit"}
-                      />
+                  <div className="wrap">
+                    {item?.title && (
+                      <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
+                    )}
+                    {item?.subtitle && (
+                      <p dangerouslySetInnerHTML={{ __html: item.subtitle }} />
                     )}
                   </div>
-
-                  <div className="text-wrap">
-                    <h3>{item?.benefitsTitle}</h3>
-                    <p>{item?.benefitsSubtitle}</p>
-                  </div>
                 </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
+              ))}
+            </ul>
 
-      <section className="Infertility">
-        <div className="container">
-          <div className="title-wrap">
-            <h2 className="title">
-              {infertilityTitle}
-              <span className="sub-title">{infertilitySubtitle}</span>
-            </h2>
+            {infertilityPara && (
+              <p
+                className="content"
+                dangerouslySetInnerHTML={{ __html: infertilityPara }}
+              />
+            )}
           </div>
+        </section>
 
-          <ul className="infertility-wrapper">
-            {infertilityListnew.map((item, index) => (
-              <li key={index}>
-                <div className="wrap">
-                  {item?.title && (
-                    <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
-                  )}
-                  {item?.subtitle && (
-                    <p dangerouslySetInnerHTML={{ __html: item.subtitle }} />
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          {infertilityPara && (
-            <p
-              className="content"
-              dangerouslySetInnerHTML={{ __html: infertilityPara }}
-            />
-          )}
-        </div>
-      </section>
-
-      <HerApproach data={herApproachData} />
+        <HerApproach data={herApproachData} />
+      </div>
     </Layout>
   );
 };
@@ -274,8 +379,8 @@ export const query = graphql`
                 gatsbyImage(
                   layout: FULL_WIDTH
                   quality: 90
-                  width: 1920
-                  height: 839
+                  width: 562
+                  height: 562
                 )
                 mediaItemUrl
                 slug

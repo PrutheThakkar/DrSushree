@@ -7,7 +7,16 @@ const BlogPage = ({ data }) => {
   const posts = data?.allWpPost?.edges || [];
   const pageTitle = data?.wpPage?.title;
   const blogPage = data?.wpPage?.blogPage;
-  const headerDeskImage = getImage(blogPage?.blogBennerImgDeskNew?.node);
+
+  const blogBannerImage = getImage(
+    blogPage?.blogBennerImgDeskNew?.node?.gatsbyImage
+  );
+
+  const blogBannerImageAlt =
+    blogPage?.blogBennerImgDeskNew?.node?.altText ||
+    pageTitle ||
+    "Blog banner image";
+
   const blogPageTitle = blogPage?.blogPageTitleNew;
   const blogTopTitle = blogPage?.blogTopSectionTitleNew;
   const blogTopSubtitle = blogPage?.blogTopSectionSubtitleNew;
@@ -16,36 +25,23 @@ const BlogPage = ({ data }) => {
     <Layout>
       {/* ─── Header Banner Section ─── */}
       <section className="inner-banner-section">
-        <div className="div-wrapper">
-            {pageTitle && (
+        <div className="container">
+          <div className="div-wrapper">
+            {blogPageTitle && (
               <h1 dangerouslySetInnerHTML={{ __html: blogPageTitle }} />
             )}
-        </div>
+          </div>
 
-        <div
-          className="img-wrap"
-          style={{
-            position: "relative",
-            width: "100%",
-            minHeight: "1020px",
-            overflow: "hidden",
-          }}
-        >
-          {headerDeskImage && (
-            <div
-              className="hero-img-wrapper hero-img-wrapper--desktop"
-              style={{ position: "absolute", inset: 0 }}
-            >
+          <div className="img-wrap">
+            {blogBannerImage && (
               <GatsbyImage
-                image={headerDeskImage}
-                alt={pageTitle || "Header desktop image"}
+                image={blogBannerImage}
+                alt={blogBannerImageAlt}
                 className="hero-img hero-img--desktop"
                 loading="eager"
-                style={{ width: "100%", height: "100%" }}
-                imgStyle={{ objectFit: "cover", objectPosition: "center" }}
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
@@ -53,43 +49,60 @@ const BlogPage = ({ data }) => {
       <section className="blog-section">
         <div className="container">
           <div className="title-wrap">
-              <h2 className="title">
-                {blogTopTitle}
-                <span className="sub-title">{blogTopSubtitle}</span>
-              </h2>
-            </div>
+            <h2 className="title">
+              {blogTopTitle}
+              <span className="sub-title">{blogTopSubtitle}</span>
+            </h2>
+          </div>
 
-          {/* Loop through the posts */}
           <div className="blog-list">
             {posts.map(({ node }, index) => {
-              const headerDeskImage = getImage(node?.postnew?.postHeaderBannerDesk?.node?.gatsbyImage); // Corrected image query for desktop banner
-              const headerMobImage = getImage(node?.postnew?.postHeaderBannerMob?.node?.gatsbyImage); // Corrected image query for mobile banner
-              const imageAlt = node?.postnew?.postHeaderBannerDesk?.node?.altText || "Blog Banner Image"; // Get the alt text
+              const blogDeskImage = getImage(
+                node?.postnew?.postHeaderBannerDesk?.node?.gatsbyImage
+              );
+
+              const blogMobImage = getImage(
+                node?.postnew?.postHeaderBannerMob?.node?.gatsbyImage
+              );
+
+              const imageAlt =
+                node?.postnew?.postHeaderBannerDesk?.node?.altText ||
+                node?.title ||
+                "Blog Banner Image";
 
               return (
-                <Link to={`/blog/${node?.slug}`} className="blog-item-link" key={index}>
+                <Link
+                  to={`/blog/${node?.slug}`}
+                  className="blog-item-link"
+                  key={index}
+                >
                   <div className="blog-item">
                     <div className="blog-img-wrap">
-                      {/* Only render the image if it exists */}
-                      {headerDeskImage && (
+                      {blogDeskImage && (
                         <GatsbyImage
-                          image={headerDeskImage}
+                          image={blogDeskImage}
                           alt={imageAlt}
-                          className="blog-img"
-                          loading="eager"
+                          className="blog-img blog-img--desktop"
+                          loading="lazy"
                           style={{ width: "100%" }}
-                          imgStyle={{ objectFit: "cover", objectPosition: "center" }}
+                          imgStyle={{
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
                         />
                       )}
-                      {/* For mobile image */}
-                      {headerMobImage && (
+
+                      {blogMobImage && (
                         <GatsbyImage
-                          image={headerMobImage}
+                          image={blogMobImage}
                           alt={imageAlt}
-                          className="blog-img"
-                          loading="eager"
+                          className="blog-img blog-img--mobile"
+                          loading="lazy"
                           style={{ width: "100%" }}
-                          imgStyle={{ objectFit: "cover", objectPosition: "center" }}
+                          imgStyle={{
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
                         />
                       )}
                     </div>
@@ -108,81 +121,81 @@ const BlogPage = ({ data }) => {
   );
 };
 
-// GraphQL query to fetch the WordPress posts and banner images
 export const query = graphql`
- query BlogPageQuery {
-  allWpPost {
-    edges {
-      node {
-        title
-        uri
-        slug
-        content
-        featuredImage {
-          node {
-            altText
-            localFile {
-              childImageSharp {
-                gatsbyImageData(quality: 90, width: 600, height: 400)
+  query BlogPageQuery {
+    allWpPost {
+      edges {
+        node {
+          title
+          uri
+          slug
+          content
+          featuredImage {
+            node {
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 90, width: 600, height: 400)
+                }
+              }
+              slug
+              title
+              uri
+            }
+          }
+          postnew {
+            postHeaderBannerDesk {
+              node {
+                altText
+                mediaItemUrl
+                gatsbyImage(
+                  width: 1920
+                  height: 1020
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                  quality: 100
+                )
               }
             }
-            slug
-            title
-            uri
-          }
-        }
-        postnew {
-          postHeaderBannerDesk {
-            node {
-              altText
-              mediaItemUrl
-              gatsbyImage(
-                width: 1920
-                height: 1020
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                quality: 100
-              )
-            }
-          }
-          postHeaderBannerMob{
-            node {
-              altText
-              mediaItemUrl
-              gatsbyImage(
-                width: 800
-                height: 600
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                quality: 100
-              )
+            postHeaderBannerMob {
+              node {
+                altText
+                mediaItemUrl
+                gatsbyImage(
+                  width: 800
+                  height: 600
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                  quality: 100
+                )
+              }
             }
           }
         }
       }
     }
-  }
-  wpPage {
-    title
-    blogPage {
-      blogPageTitleNew
-      blogTopSectionTitleNew
-      blogTopSectionSubtitleNew
-      blogBennerImgDeskNew {
-        node {
-          altText
-          gatsbyImage(
-            width: 1920
-            height: 1020
-            layout: CONSTRAINED
-            placeholder: BLURRED
-            quality: 100
-          )
+
+    wpPage {
+      title
+      blogPage {
+        blogPageTitleNew
+        blogTopSectionTitleNew
+        blogTopSectionSubtitleNew
+        blogBennerImgDeskNew {
+          node {
+            altText
+            gatsbyImage(
+              width: 1920
+              height: 650
+              layout: CONSTRAINED
+              placeholder: BLURRED
+              quality: 100
+            )
+          }
         }
       }
     }
   }
-}
 `;
 
 export default BlogPage;

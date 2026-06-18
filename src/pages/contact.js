@@ -7,24 +7,30 @@ import AppointmentForm from "../components/AppointmentForm";
 const ContactPage = ({ data }) => {
   const contactPage = data?.allWpPage?.edges?.[0]?.node?.contact;
 
-  const contactPageTitle = contactPage?.contactPageTitle || "Contact";
+  const contactPageTitle =
+    contactPage?.pageTitle || contactPage?.contactPageTitle || "Contact";
+
   const contactPageSubtitle =
     contactPage?.contactPageSubtitle ||
     "We're here to help — book appointments or send questions";
+
   const email = contactPage?.email || "drsushreeappoinments@gmail.com";
   const phone = contactPage?.phone || "+91 8249321325";
+
   const clinicAddress =
     contactPage?.clinicAddress || "Wockhardt Hospitals, Mira Road";
 
   const contactBannerDesk = getImage(
     contactPage?.contactBannerDesk?.node?.gatsbyImage
   );
+
   const contactBannerDeskAlt =
     contactPage?.contactBannerDesk?.node?.altText || "Contact banner desktop";
 
   const contactBannerMob = getImage(
     contactPage?.contactBannerMob?.node?.gatsbyImage
   );
+
   const contactBannerMobAlt =
     contactPage?.contactBannerMob?.node?.altText || "Contact banner mobile";
 
@@ -33,7 +39,9 @@ const ContactPage = ({ data }) => {
       <section className="inner-banner-section">
         <div className="container">
           <div className="div-wrapper">
-            <h1>{contactPageTitle}</h1>
+            {contactPageTitle && (
+              <h1 dangerouslySetInnerHTML={{ __html: contactPageTitle }} />
+            )}
           </div>
 
           <div className="img-wrap">
@@ -75,28 +83,27 @@ const ContactPage = ({ data }) => {
             <div className="contact-info">
               <div className="info-block">
                 <h3>Clinic Address</h3>
-                <a target="_blank" href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KSfyAk1PsOc7MX9gPf6DZPcD&daddr=Wockhardt+Hospitals,+Institute+of+Medical+Science+and+Research,+Evershine+Rd,+near+Mira+Road+Railway+Station,+Naya+Nagar,+Mira+Road+East,+Mira+Bhayandar,+Maharashtra+401107">{clinicAddress}</a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KSfyAk1PsOc7MX9gPf6DZPcD&daddr=Wockhardt+Hospitals,+Institute+of+Medical+Science+and+Research,+Evershine+Rd,+near+Mira+Road+Railway+Station,+Naya+Nagar,+Mira+Road+East,+Mira+Bhayandar,+Maharashtra+401107"
+                >
+                  {clinicAddress}
+                </a>
               </div>
 
               <div className="info-block">
-                <h3>drsushreeappoinments@gmail.com</h3>
+                <h3>Email</h3>
                 <p>
-                  <a target="_blank" href={`mailto:${email}`}>{email}</a>
+                  <a href={`mailto:${email}`}>{email}</a>
                 </p>
               </div>
 
               <div className="info-block">
                 <h3>Phone</h3>
                 <p>
-                  <a  target="_blank" href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a>
+                  <a href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a>
                 </p>
-              </div>
-
-              <div className="map-wrap">
-                <GatsbyImage
-                  image={contactBannerDesk || contactBannerMob}
-                  alt="Clinic visual"
-                />
               </div>
             </div>
           </div>
@@ -112,6 +119,7 @@ export const query = graphql`
       edges {
         node {
           contact {
+            pageTitle
             contactPageTitle
             contactPageSubtitle
             email
