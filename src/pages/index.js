@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image";
 import { Link, graphql } from "gatsby";
 import Swiper from "swiper";
 import gsap from "gsap";
@@ -14,6 +14,8 @@ import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim";
 import preloaderLogo from "../images/sushree-preloader-logo.svg";
 
 const IndexPage = ({ data }) => {
+
+  
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   // const [loaderProgress, setLoaderProgress] = useState(0);
   const [isLoaderDone, setIsLoaderDone] = useState(false);
@@ -23,8 +25,17 @@ const IndexPage = ({ data }) => {
 
   const homePageTitle = homePage?.homePageTitle;
   const mobImage = getImage(homePage?.homePageMobImage?.node?.gatsbyImage);
-  const mobImageAlt = homePage?.homePageMobImage?.node?.altText;
   const deskImage = getImage(homePage?.homePageDeskImage?.node?.gatsbyImage);
+  const heroImage =
+  deskImage && mobImage
+    ? withArtDirection(deskImage, [
+        {
+          media: "(max-width: 767px)",
+          image: mobImage,
+        },
+      ])
+    : deskImage || mobImage;
+  const mobImageAlt = homePage?.homePageMobImage?.node?.altText;
   const deskImageAlt = homePage?.homePageDeskImage?.node?.altText;
 
   const womensHealthcareTitle = homePage?.womensHealthcareTitle;
@@ -207,7 +218,18 @@ const IndexPage = ({ data }) => {
             </div>
 
             <div className="img-wrap">
-              {mobImage && (
+
+              {heroImage && (
+  <GatsbyImage
+    image={heroImage}
+    alt={deskImageAlt || mobImageAlt || "Personalised care"}
+    className="hero-img"
+    loading="eager"
+    decoding="async"
+    fetchPriority="high"
+  />
+)}
+              {/* {mobImage && (
                 <GatsbyImage
                   image={mobImage}
                   alt={mobImageAlt || "Personalised"}
@@ -233,7 +255,7 @@ const IndexPage = ({ data }) => {
                   className="hero-img hero-img--desktop"
                   loading="eager"
                 />
-              )}
+              )} */}
             </div>
           </div>
         </section>

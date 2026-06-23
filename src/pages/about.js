@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 
 const AboutPage = ({ data }) => {
@@ -38,6 +38,18 @@ const AboutPage = ({ data }) => {
   const aboutHeaderImageDeskAlt =
     aboutPage?.aboutHeaderImageDesk?.node?.altText || "About banner desktop";
 
+  const aboutBannerImage =
+    aboutHeaderImageDesk && aboutHeaderImageMob
+      ? withArtDirection(aboutHeaderImageDesk, [
+        {
+          media: "(max-width: 767px)",
+          image: aboutHeaderImageMob,
+        },
+      ])
+      : aboutHeaderImageDesk || aboutHeaderImageMob;
+
+  const aboutBannerAlt =
+    aboutHeaderImageDeskAlt || aboutHeaderImageMobAlt || "About banner";
   return (
     <Layout>
       <section className="inner-banner-section">
@@ -51,7 +63,7 @@ const AboutPage = ({ data }) => {
           </div>
 
           <div className="img-wrap">
-            {aboutHeaderImageMob && (
+            {/* {aboutHeaderImageMob && (
               <GatsbyImage
                 image={aboutHeaderImageMob}
                 alt={aboutHeaderImageMobAlt}
@@ -67,7 +79,20 @@ const AboutPage = ({ data }) => {
                 className="hero-img hero-img--desktop"
                 loading="eager"
               />
-            )}
+            )} */}
+
+            <div className="img-wrap">
+              {aboutBannerImage && (
+                <GatsbyImage
+                  image={aboutBannerImage}
+                  alt={aboutBannerAlt}
+                  className="hero-img"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -77,7 +102,7 @@ const AboutPage = ({ data }) => {
           <div className="title-wrap">
             {aboutDrTitle && (
               <h2 className="title">
-               {aboutDrTitle}
+                {aboutDrTitle}
                 {aboutDrSubtitle && (
                   <span
                     className="sub-title"
@@ -139,7 +164,7 @@ const AboutPage = ({ data }) => {
           <div className="title-wrap">
             {comprehensiveTitle && (
               <h2 className="title">
-               {comprehensiveTitle}
+                {comprehensiveTitle}
                 {comprehensiveSubtitle && (
                   <span
                     className="sub-title"
@@ -191,8 +216,8 @@ const AboutPage = ({ data }) => {
           <div className="title-wrap">
             {beyondTheClinicTitle && (
               <h2 className="title">
-                 {beyondTheClinicTitle}
-               
+                {beyondTheClinicTitle}
+
                 {beyondTheClinicSubtitle && (
                   <span
                     className="sub-title"

@@ -1,6 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {
+  GatsbyImage,
+  getImage,
+  withArtDirection,
+} from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import AppointmentForm from "../components/AppointmentForm";
 
@@ -24,15 +28,24 @@ const ContactPage = ({ data }) => {
     contactPage?.contactBannerDesk?.node?.gatsbyImage
   );
 
-  const contactBannerDeskAlt =
-    contactPage?.contactBannerDesk?.node?.altText || "Contact banner desktop";
-
   const contactBannerMob = getImage(
     contactPage?.contactBannerMob?.node?.gatsbyImage
   );
 
-  const contactBannerMobAlt =
-    contactPage?.contactBannerMob?.node?.altText || "Contact banner mobile";
+  const contactBannerAlt =
+    contactPage?.contactBannerDesk?.node?.altText ||
+    contactPage?.contactBannerMob?.node?.altText ||
+    "Contact banner";
+
+  const contactBannerImage =
+    contactBannerDesk && contactBannerMob
+      ? withArtDirection(contactBannerDesk, [
+          {
+            media: "(max-width: 767px)",
+            image: contactBannerMob,
+          },
+        ])
+      : contactBannerDesk || contactBannerMob;
 
   return (
     <Layout>
@@ -45,21 +58,14 @@ const ContactPage = ({ data }) => {
           </div>
 
           <div className="img-wrap">
-            {contactBannerMob && (
+            {contactBannerImage && (
               <GatsbyImage
-                image={contactBannerMob}
-                alt={contactBannerMobAlt}
-                className="hero-img hero-img--mobile"
+                image={contactBannerImage}
+                alt={contactBannerAlt}
+                className="hero-img"
                 loading="eager"
-              />
-            )}
-
-            {contactBannerDesk && (
-              <GatsbyImage
-                image={contactBannerDesk}
-                alt={contactBannerDeskAlt}
-                className="hero-img hero-img--desktop"
-                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             )}
           </div>
@@ -130,18 +136,26 @@ export const query = graphql`
             contactBannerDesk {
               node {
                 altText
-                gatsbyImage(layout: FULL_WIDTH, quality: 90, width: 1920)
-                mediaItemUrl
-                slug
+                gatsbyImage(
+                  layout: FULL_WIDTH
+                  quality: 75
+                  width: 1600
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
 
             contactBannerMob {
               node {
                 altText
-                gatsbyImage(layout: FULL_WIDTH, quality: 90, width: 767)
-                mediaItemUrl
-                slug
+                gatsbyImage(
+                  layout: FULL_WIDTH
+                  quality: 75
+                  width: 767
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
           }

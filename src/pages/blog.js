@@ -1,7 +1,24 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {
+  GatsbyImage,
+  getImage,
+  withArtDirection,
+} from "gatsby-plugin-image";
 import Layout from "../components/layout";
+
+const getResponsiveImage = (desktopImage, mobileImage) => {
+  if (desktopImage && mobileImage) {
+    return withArtDirection(desktopImage, [
+      {
+        media: "(max-width: 767px)",
+        image: mobileImage,
+      },
+    ]);
+  }
+
+  return desktopImage || mobileImage;
+};
 
 const BlogPage = ({ data }) => {
   const posts = data?.allWpPost?.edges || [];
@@ -23,7 +40,6 @@ const BlogPage = ({ data }) => {
 
   return (
     <Layout>
-      {/* ─── Header Banner Section ─── */}
       <section className="inner-banner-section">
         <div className="container">
           <div className="div-wrapper">
@@ -37,15 +53,16 @@ const BlogPage = ({ data }) => {
               <GatsbyImage
                 image={blogBannerImage}
                 alt={blogBannerImageAlt}
-                className="hero-img hero-img--desktop"
+                className="hero-img"
                 loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             )}
           </div>
         </div>
       </section>
 
-      {/* ─── Blog Section ─── */}
       <section className="blog-section">
         <div className="container">
           <div className="title-wrap">
@@ -65,39 +82,29 @@ const BlogPage = ({ data }) => {
                 node?.postnew?.postHeaderBannerMob?.node?.gatsbyImage
               );
 
+              const blogImage = getResponsiveImage(blogDeskImage, blogMobImage);
+
               const imageAlt =
                 node?.postnew?.postHeaderBannerDesk?.node?.altText ||
+                node?.postnew?.postHeaderBannerMob?.node?.altText ||
                 node?.title ||
-                "Blog Banner Image";
+                "Blog image";
 
               return (
                 <Link
                   to={`/blog/${node?.slug}`}
                   className="blog-item-link"
-                  key={index}
+                  key={node?.slug || index}
                 >
                   <div className="blog-item">
                     <div className="blog-img-wrap">
-                      {blogDeskImage && (
+                      {blogImage && (
                         <GatsbyImage
-                          image={blogDeskImage}
+                          image={blogImage}
                           alt={imageAlt}
-                          className="blog-img blog-img--desktop"
+                          className="blog-img"
                           loading="lazy"
-                          style={{ width: "100%" }}
-                          imgStyle={{
-                            objectFit: "cover",
-                            objectPosition: "center",
-                          }}
-                        />
-                      )}
-
-                      {blogMobImage && (
-                        <GatsbyImage
-                          image={blogMobImage}
-                          alt={imageAlt}
-                          className="blog-img blog-img--mobile"
-                          loading="lazy"
+                          decoding="async"
                           style={{ width: "100%" }}
                           imgStyle={{
                             objectFit: "cover",
@@ -127,46 +134,31 @@ export const query = graphql`
       edges {
         node {
           title
-          uri
           slug
-          content
-          featuredImage {
-            node {
-              altText
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(quality: 90, width: 600, height: 400)
-                }
-              }
-              slug
-              title
-              uri
-            }
-          }
           postnew {
             postHeaderBannerDesk {
               node {
                 altText
-                mediaItemUrl
                 gatsbyImage(
-                  width: 1920
-                  height: 1020
+                  width: 720
+                  height: 383
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality: 100
+                  quality: 72
+                  formats: [AUTO, WEBP, AVIF]
                 )
               }
             }
             postHeaderBannerMob {
               node {
                 altText
-                mediaItemUrl
                 gatsbyImage(
-                  width: 800
-                  height: 600
+                  width: 640
+                  height: 480
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality: 100
+                  quality: 72
+                  formats: [AUTO, WEBP, AVIF]
                 )
               }
             }
@@ -185,11 +177,12 @@ export const query = graphql`
           node {
             altText
             gatsbyImage(
-              width: 1920
-              height: 650
-              layout: CONSTRAINED
+              width: 1600
+              height: 542
+              layout: FULL_WIDTH
               placeholder: BLURRED
-              quality: 100
+              quality: 75
+              formats: [AUTO, WEBP, AVIF]
             )
           }
         }

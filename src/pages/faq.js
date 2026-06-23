@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {
+  GatsbyImage,
+  getImage,
+  withArtDirection,
+} from "gatsby-plugin-image";
 import Layout from "../components/layout";
 
 const FaqPage = ({ data }) => {
@@ -31,15 +35,21 @@ const FaqPage = ({ data }) => {
     faqPage?.pageBannerImageDesk?.node?.gatsbyImage
   );
 
-  const headerMobileAlt =
+  const headerAlt =
+    faqPage?.pageBannerImageDesk?.node?.altText ||
     faqPage?.pageBannerImageMob?.node?.altText ||
     pageTitle ||
-    "FAQ banner mobile image";
+    "FAQ banner image";
 
-  const headerDeskAlt =
-    faqPage?.pageBannerImageDesk?.node?.altText ||
-    pageTitle ||
-    "FAQ banner desktop image";
+  const headerBannerImage =
+    headerDeskImage && headerMobileImage
+      ? withArtDirection(headerDeskImage, [
+          {
+            media: "(max-width: 767px)",
+            image: headerMobileImage,
+          },
+        ])
+      : headerDeskImage || headerMobileImage;
 
   const [openItems, setOpenItems] = useState({
     general: 0,
@@ -96,7 +106,6 @@ const FaqPage = ({ data }) => {
 
   return (
     <Layout>
-      {/* ─── Banner Section ─── */}
       <section className="inner-banner-section">
         <div className="container">
           <div className="div-wrapper">
@@ -106,28 +115,20 @@ const FaqPage = ({ data }) => {
           </div>
 
           <div className="img-wrap">
-            {headerMobileImage && (
+            {headerBannerImage && (
               <GatsbyImage
-                image={headerMobileImage}
-                alt={headerMobileAlt}
-                className="hero-img hero-img--mobile"
+                image={headerBannerImage}
+                alt={headerAlt}
+                className="hero-img"
                 loading="eager"
-              />
-            )}
-
-            {headerDeskImage && (
-              <GatsbyImage
-                image={headerDeskImage}
-                alt={headerDeskAlt}
-                className="hero-img hero-img--desktop"
-                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
             )}
           </div>
         </div>
       </section>
 
-      {/* ─── FAQ Section ─── */}
       <section className="faq-section faq-page">
         <div className="container">
           {(sectionTitle || sectionSubtitle) && (
@@ -163,6 +164,7 @@ const FaqPage = ({ data }) => {
                             className="faq-question"
                             type="button"
                             onClick={() => toggleFaq(section.key, index)}
+                            aria-expanded={isActive}
                           >
                             <h3>{item.question}</h3>
                             <p className="faq-icon"></p>
@@ -225,9 +227,11 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: FULL_WIDTH
-                  quality: 90
-                  width: 1920
-                  height: 650
+                  quality: 75
+                  width: 1600
+                  height: 542
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
                 )
               }
             }
@@ -236,9 +240,11 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: FULL_WIDTH
-                  quality: 90
+                  quality: 75
                   width: 767
                   height: 367
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
                 )
               }
             }
