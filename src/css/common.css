@@ -399,7 +399,12 @@ section {
 p {
   line-height: 1.5em;
   margin-bottom: clamp(0.625rem, -0.9161rem + 1.8051vw, 1.25rem);
-  font-size: clamp(0.875rem, 0.2586rem + 0.722vw, 1.125rem);
+  font-size: clamp(1.05rem, 0.2586rem + 0.722vw, 1.125rem);
+}
+@media (max-width:767px) {
+  p {
+    font-size: 14px;
+  }
 }
 
 a {

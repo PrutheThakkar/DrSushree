@@ -234,7 +234,7 @@ text-align: left;
 margin-bottom: 20px;
 }
 .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap p{
-font-size: clamp(16px, 1.8vw, 26px);
+font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
 }
 
 /* Womens-Healthcare ends new*/
