@@ -138,7 +138,7 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: FULL_WIDTH
-                  quality: 75
+                  quality: 100
                   width: 1600
                   placeholder: BLURRED
                   formats: [AUTO, WEBP, AVIF]
@@ -151,7 +151,7 @@ export const query = graphql`
                 altText
                 gatsbyImage(
                   layout: FULL_WIDTH
-                  quality: 75
+                  quality: 100
                   width: 767
                   placeholder: BLURRED
                   formats: [AUTO, WEBP, AVIF]

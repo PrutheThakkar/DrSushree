@@ -144,7 +144,7 @@ export const query = graphql`
                   height: 383
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality: 72
+                  quality: 100
                   formats: [AUTO, WEBP, AVIF]
                 )
               }
@@ -157,7 +157,7 @@ export const query = graphql`
                   height: 480
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality: 72
+                  quality:100
                   formats: [AUTO, WEBP, AVIF]
                 )
               }
