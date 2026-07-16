@@ -1211,6 +1211,12 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
     justify-content: center;
   }
 }
+@media (max-width: 767px) {
+  .Infertility .infertility-wrapper li {
+    margin-bottom: 50px;
+    justify-content: center;
+  }
+}
 .Infertility .infertility-wrapper li .wrap {
   width: 32%;
   margin-left: 15%;

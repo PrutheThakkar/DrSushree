@@ -47,3 +47,57 @@
     bottom: 8px;
 }
 
+
+
+.banner-section h1{
+    color: #5F8F7A;
+}
+.banner-section p.sub-text{
+    font-size: 24px;
+    font-family: "NotoSerifEthiopic-Regular";
+    margin-top: 10px;
+}
+@media (max-width:1920px) {
+   .banner-section p.sub-text{
+    font-size: 22px;
+    font-family: "NotoSerifEthiopic-Regular";
+    margin-top: 10px;
+} 
+}
+@media (max-width:1680px) {
+   .banner-section p.sub-text{
+    font-size: 20px;
+    font-family: "NotoSerifEthiopic-Regular";
+    margin-top: 10px;
+} 
+}
+@media (max-width:1440px) {
+   .banner-section p.sub-text{
+    font-size: 18px;
+    font-family: "NotoSerifEthiopic-Regular";
+    margin-top: 10px;
+} 
+}
+@media (max-width:1280px) {
+   .banner-section p.sub-text{
+    font-size: 16px;
+    font-family: "NotoSerifEthiopic-Regular";
+    margin-top: 10px;
+} 
+   .banner-section p.sub-text br{
+   display: none;
+} 
+}
+
+@media (max-width: 767px) {
+    .banner-section {
+        height: 500px;
+        padding-bottom: 100px;
+    }
+}
+@media (max-width:767px) {
+    
+    .banner-section .div-wrapper{
+    top: 72%;
+    }
+}

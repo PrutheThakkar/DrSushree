@@ -15,7 +15,7 @@ import preloaderLogo from "../images/sushree-preloader-logo.svg";
 
 const IndexPage = ({ data }) => {
 
-  
+
   const [isPageLoaded, setIsPageLoaded] = useState(false);
   // const [loaderProgress, setLoaderProgress] = useState(0);
   const [isLoaderDone, setIsLoaderDone] = useState(false);
@@ -27,14 +27,14 @@ const IndexPage = ({ data }) => {
   const mobImage = getImage(homePage?.homePageMobImage?.node?.gatsbyImage);
   const deskImage = getImage(homePage?.homePageDeskImage?.node?.gatsbyImage);
   const heroImage =
-  deskImage && mobImage
-    ? withArtDirection(deskImage, [
+    deskImage && mobImage
+      ? withArtDirection(deskImage, [
         {
           media: "(max-width: 767px)",
           image: mobImage,
         },
       ])
-    : deskImage || mobImage;
+      : deskImage || mobImage;
   const mobImageAlt = homePage?.homePageMobImage?.node?.altText;
   const deskImageAlt = homePage?.homePageDeskImage?.node?.altText;
 
@@ -210,6 +210,8 @@ const IndexPage = ({ data }) => {
           <div className="container">
             <div className="div-wrapper">
               <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
+              <p className="sub-text">This Fibroids Awareness Month, focus more on fibroids & discover <br />
+                comprehensive care for a woman's health</p>
               <div className="btn-wrapper">
                 <Link className="btn" to="/contact">
                   Book An Appointment
@@ -220,15 +222,15 @@ const IndexPage = ({ data }) => {
             <div className="img-wrap">
 
               {heroImage && (
-  <GatsbyImage
-    image={heroImage}
-    alt={deskImageAlt || mobImageAlt || "Personalised care"}
-    className="hero-img"
-    loading="eager"
-    decoding="async"
-    fetchPriority="high"
-  />
-)}
+                <GatsbyImage
+                  image={heroImage}
+                  alt={deskImageAlt || mobImageAlt || "Personalised care"}
+                  className="hero-img"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              )}
               {/* {mobImage && (
                 <GatsbyImage
                   image={mobImage}
