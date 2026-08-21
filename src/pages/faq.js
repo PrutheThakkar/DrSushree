@@ -1,45 +1,42 @@
-import React, { useState } from "react";
-import { graphql } from "gatsby";
-import {
-  GatsbyImage,
-  getImage,
-  withArtDirection,
-} from "gatsby-plugin-image";
-import Layout from "../components/layout";
+import React, { useState } from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 const FaqPage = ({ data }) => {
-  const pageNode = data?.allWpPage?.edges?.[0]?.node;
-  const faqPage = pageNode?.faqPage;
+  const pageNode = data?.allWpPage?.edges?.[0]?.node
+  const faqPage = pageNode?.faqPage
 
-  const pageTitle = faqPage?.pageTitle || "";
-  const sectionTitle = faqPage?.sectionTitle || "";
-  const sectionSubtitle = faqPage?.sectionSubtitle || "";
+  const pageTitle = faqPage?.pageTitle || ""
+  const sectionTitle = faqPage?.sectionTitle || ""
+  const sectionSubtitle = faqPage?.sectionSubtitle || ""
 
-  const faqTitle = faqPage?.faqTitle || "";
-  const faqList = faqPage?.faqList || [];
+  const faqTitle = faqPage?.faqTitle || ""
+  const faqList = faqPage?.faqList || []
 
-  const laparoscopicTitle = faqPage?.laparoscopicTitle || "";
-  const laparoscopicList = faqPage?.laparoscopicList || [];
+  const laparoscopicTitle = faqPage?.laparoscopicTitle || ""
+  const laparoscopicList = faqPage?.laparoscopicList || []
 
-  const obstetricsTitle = faqPage?.obstetricsTitle || "";
-  const obstetricsList = faqPage?.obstetricsList || [];
+  const obstetricsTitle = faqPage?.obstetricsTitle || ""
+  const obstetricsList = faqPage?.obstetricsList || []
 
-  const infertilityTitle = faqPage?.infertilityTitle || "";
-  const infertilityList = faqPage?.infertilityList || [];
+  const infertilityTitle = faqPage?.infertilityTitle || ""
+  const infertilityList = faqPage?.infertilityList || []
 
   const headerMobileImage = getImage(
     faqPage?.pageBannerImageMob?.node?.gatsbyImage
-  );
+  )
 
   const headerDeskImage = getImage(
     faqPage?.pageBannerImageDesk?.node?.gatsbyImage
-  );
+  )
 
   const headerAlt =
     faqPage?.pageBannerImageDesk?.node?.altText ||
     faqPage?.pageBannerImageMob?.node?.altText ||
     pageTitle ||
-    "FAQ banner image";
+    "FAQ banner image"
 
   const headerBannerImage =
     headerDeskImage && headerMobileImage
@@ -49,28 +46,28 @@ const FaqPage = ({ data }) => {
             image: headerMobileImage,
           },
         ])
-      : headerDeskImage || headerMobileImage;
+      : headerDeskImage || headerMobileImage
 
   const [openItems, setOpenItems] = useState({
     general: 0,
     laparoscopic: 0,
     obstetrics: 0,
     infertility: 0,
-  });
+  })
 
   const toggleFaq = (sectionKey, index) => {
-    setOpenItems((prev) => ({
+    setOpenItems(prev => ({
       ...prev,
       [sectionKey]: prev[sectionKey] === index ? null : index,
-    }));
-  };
+    }))
+  }
 
   const faqSections = [
     {
       key: "general",
       className: "General",
       title: faqTitle,
-      list: faqList.map((item) => ({
+      list: faqList.map(item => ({
         question: item?.question,
         answer: item?.answers,
       })),
@@ -79,7 +76,7 @@ const FaqPage = ({ data }) => {
       key: "laparoscopic",
       className: "Laparoscopic",
       title: laparoscopicTitle,
-      list: laparoscopicList.map((item) => ({
+      list: laparoscopicList.map(item => ({
         question: item?.questions,
         answer: item?.answers,
       })),
@@ -88,7 +85,7 @@ const FaqPage = ({ data }) => {
       key: "obstetrics",
       className: "Obstetrics",
       title: obstetricsTitle,
-      list: obstetricsList.map((item) => ({
+      list: obstetricsList.map(item => ({
         question: item?.questions,
         answer: item?.answers,
       })),
@@ -97,12 +94,12 @@ const FaqPage = ({ data }) => {
       key: "infertility",
       className: "Infertility",
       title: infertilityTitle,
-      list: infertilityList.map((item) => ({
+      list: infertilityList.map(item => ({
         question: item?.questions,
         answer: item?.answers,
       })),
     },
-  ];
+  ]
 
   return (
     <Layout>
@@ -141,7 +138,7 @@ const FaqPage = ({ data }) => {
           )}
 
           {faqSections.map(
-            (section) =>
+            section =>
               section.list.length > 0 && (
                 <div
                   className={`${section.className} sub-section`}
@@ -153,7 +150,7 @@ const FaqPage = ({ data }) => {
 
                   <div className="faq-list">
                     {section.list.map((item, index) => {
-                      const isActive = openItems[section.key] === index;
+                      const isActive = openItems[section.key] === index
 
                       return (
                         <div
@@ -181,7 +178,7 @@ const FaqPage = ({ data }) => {
                             />
                           </div>
                         </div>
-                      );
+                      )
                     })}
                   </div>
                 </div>
@@ -190,8 +187,8 @@ const FaqPage = ({ data }) => {
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query FaqPageQuery {
@@ -253,6 +250,14 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default FaqPage;
+export default FaqPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Frequently Asked Questions"
+    pathname={location.pathname}
+    description="Answers to common questions about gynaecology, laparoscopic surgery, obstetrics, pregnancy and infertility care."
+  />
+)

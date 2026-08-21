@@ -1,41 +1,38 @@
-import React from "react";
-import { graphql } from "gatsby";
-import {
-  GatsbyImage,
-  getImage,
-  withArtDirection,
-} from "gatsby-plugin-image";
-import Layout from "../components/layout";
-import AppointmentForm from "../components/AppointmentForm";
+import React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import AppointmentForm from "../components/AppointmentForm"
+import Seo from "../components/seo"
 
 const ContactPage = ({ data }) => {
-  const contactPage = data?.allWpPage?.edges?.[0]?.node?.contact;
+  const contactPage = data?.allWpPage?.edges?.[0]?.node?.contact
 
   const contactPageTitle =
-    contactPage?.pageTitle || contactPage?.contactPageTitle || "Contact";
+    contactPage?.pageTitle || contactPage?.contactPageTitle || "Contact"
 
   const contactPageSubtitle =
     contactPage?.contactPageSubtitle ||
-    "We're here to help — book appointments or send questions";
+    "We're here to help — book appointments or send questions"
 
-  const email = contactPage?.email || "drsushreeappoinments@gmail.com";
-  const phone = contactPage?.phone || "+91 8249321325";
+  const email = contactPage?.email || "drsushreeappoinments@gmail.com"
+  const phone = contactPage?.phone || "+91 8249321325"
 
   const clinicAddress =
-    contactPage?.clinicAddress || "Wockhardt Hospitals, Mira Road";
+    contactPage?.clinicAddress || "Wockhardt Hospitals, Mira Road"
 
   const contactBannerDesk = getImage(
     contactPage?.contactBannerDesk?.node?.gatsbyImage
-  );
+  )
 
   const contactBannerMob = getImage(
     contactPage?.contactBannerMob?.node?.gatsbyImage
-  );
+  )
 
   const contactBannerAlt =
     contactPage?.contactBannerDesk?.node?.altText ||
     contactPage?.contactBannerMob?.node?.altText ||
-    "Contact banner";
+    "Contact banner"
 
   const contactBannerImage =
     contactBannerDesk && contactBannerMob
@@ -45,7 +42,7 @@ const ContactPage = ({ data }) => {
             image: contactBannerMob,
           },
         ])
-      : contactBannerDesk || contactBannerMob;
+      : contactBannerDesk || contactBannerMob
 
   return (
     <Layout>
@@ -116,8 +113,8 @@ const ContactPage = ({ data }) => {
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query ContactPageQuery {
@@ -163,6 +160,14 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default ContactPage;
+export default ContactPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Contact & Appointments"
+    pathname={location.pathname}
+    description="Contact Dr. Sushree Patra's clinic to ask a question or book an obstetrics and gynaecology appointment."
+  />
+)

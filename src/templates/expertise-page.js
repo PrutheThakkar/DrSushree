@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Layout from "../components/layout";
+import React, { useEffect } from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 const slugify = (text = "") =>
   text
@@ -9,81 +10,81 @@ const slugify = (text = "") =>
     .replace(/&/g, "and")
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
-    .replace(/\s+/g, "-");
+    .replace(/\s+/g, "-")
 
 const ExpertisePageTemplate = ({ data }) => {
-  const page = data?.allWpPage?.nodes?.[0];
-  const commonPages = page?.commonPages;
+  const page = data?.allWpPage?.nodes?.[0]
+  const commonPages = page?.commonPages
 
   const headerDeskImage = getImage(
     commonPages?.pageHeaderImageDesk?.node?.gatsbyImage
-  );
+  )
 
   const headerMobileImage = getImage(
     commonPages?.pageHeaderImageMobile?.node?.gatsbyImage
-  );
+  )
 
-  const expertiseSections = commonPages?.expertiseSection || [];
+  const expertiseSections = commonPages?.expertiseSection || []
 
   useEffect(() => {
-    const toggleBtn = document.querySelector(".expertise-toggle-btn");
-    const closeBtn = document.querySelector(".expertise-close-btn");
-    const list = document.querySelector(".expertise-list");
+    const toggleBtn = document.querySelector(".expertise-toggle-btn")
+    const closeBtn = document.querySelector(".expertise-close-btn")
+    const list = document.querySelector(".expertise-list")
     const btnWrapper = document.querySelector(
       ".expertise-list-header .btn-wrapper"
-    );
+    )
 
     const closeList = () => {
-      if (list) list.classList.remove("open");
+      if (list) list.classList.remove("open")
 
       setTimeout(() => {
-        if (btnWrapper) btnWrapper.classList.remove("hidden");
-      }, 250);
-    };
+        if (btnWrapper) btnWrapper.classList.remove("hidden")
+      }, 250)
+    }
 
-    const handleToggle = (e) => {
-      e.preventDefault();
+    const handleToggle = e => {
+      e.preventDefault()
 
-      if (btnWrapper) btnWrapper.classList.add("hidden");
+      if (btnWrapper) btnWrapper.classList.add("hidden")
 
       setTimeout(() => {
-        if (list) list.classList.add("open");
-      }, 80);
-    };
+        if (list) list.classList.add("open")
+      }, 80)
+    }
 
     const anchorLinks = document.querySelectorAll(
       '.expertise-list a[href^="#"]'
-    );
+    )
 
-    const handleAnchorClick = (e) => {
-      e.preventDefault();
+    const handleAnchorClick = e => {
+      e.preventDefault()
 
-      const href = e.currentTarget.getAttribute("href");
-      const target = document.querySelector(href);
+      const href = e.currentTarget.getAttribute("href")
+      const target = document.querySelector(href)
 
       if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.scrollIntoView({ behavior: "smooth", block: "center" })
       }
 
-      closeList();
-    };
+      closeList()
+    }
 
-    if (toggleBtn) toggleBtn.addEventListener("click", handleToggle);
-    if (closeBtn) closeBtn.addEventListener("click", closeList);
+    if (toggleBtn) toggleBtn.addEventListener("click", handleToggle)
+    if (closeBtn) closeBtn.addEventListener("click", closeList)
 
-    anchorLinks.forEach((link) => {
-      link.addEventListener("click", handleAnchorClick);
-    });
+    anchorLinks.forEach(link => {
+      link.addEventListener("click", handleAnchorClick)
+    })
 
     return () => {
-      if (toggleBtn) toggleBtn.removeEventListener("click", handleToggle);
-      if (closeBtn) closeBtn.removeEventListener("click", closeList);
+      if (toggleBtn) toggleBtn.removeEventListener("click", handleToggle)
+      if (closeBtn) closeBtn.removeEventListener("click", closeList)
 
-      anchorLinks.forEach((link) => {
-        link.removeEventListener("click", handleAnchorClick);
-      });
-    };
-  }, []);
+      anchorLinks.forEach(link => {
+        link.removeEventListener("click", handleAnchorClick)
+      })
+    }
+  }, [])
 
   return (
     <Layout>
@@ -110,7 +111,7 @@ const ExpertisePageTemplate = ({ data }) => {
               {expertiseSections.map((item, index) => {
                 const sectionId = slugify(
                   item?.expertiseTitle || `section-${index + 1}`
-                );
+                )
 
                 return (
                   <li key={sectionId}>
@@ -122,7 +123,7 @@ const ExpertisePageTemplate = ({ data }) => {
                       />
                     </a>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -133,7 +134,7 @@ const ExpertisePageTemplate = ({ data }) => {
         <div className="container">
           <div className="div-wrapper">
             {page?.title && (
-              <h1 dangerouslySetInnerHTML={{ __html: commonPages.pageTitle}} />
+              <h1 dangerouslySetInnerHTML={{ __html: commonPages.pageTitle }} />
             )}
           </div>
 
@@ -173,11 +174,11 @@ const ExpertisePageTemplate = ({ data }) => {
             {expertiseSections.map((item, index) => {
               const sectionId = slugify(
                 item?.expertiseTitle || `section-${index + 1}`
-              );
+              )
 
               const sectionImage = getImage(
                 item?.expertiseImage?.node?.gatsbyImage
-              );
+              )
 
               return (
                 <li id={sectionId} key={sectionId}>
@@ -221,16 +222,27 @@ const ExpertisePageTemplate = ({ data }) => {
                     />
                   )}
                 </li>
-              );
+              )
             })}
           </ul>
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
-export default ExpertisePageTemplate;
+export default ExpertisePageTemplate
+
+export const Head = ({ data, location }) => {
+  const title = data?.allWpPage?.nodes?.[0]?.title || "Expertise"
+  return (
+    <Seo
+      title={title}
+      pathname={location.pathname}
+      description={`Learn about Dr. Sushree Patra's ${title.toLowerCase()} services, treatment options and patient-centred approach.`}
+    />
+  )
+}
 
 export const query = graphql`
   query ExpertisePageTemplate($pageId: Int!) {
@@ -239,7 +251,7 @@ export const query = graphql`
         title
         databaseId
         commonPages {
-        pageTitle
+          pageTitle
           pageHeaderImageDesk {
             node {
               altText
@@ -285,4 +297,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

@@ -1,86 +1,85 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image";
-import { Link, graphql } from "gatsby";
-import Swiper from "swiper";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect, useLayoutEffect, useState } from "react"
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import { Link, graphql } from "gatsby"
+import Swiper from "swiper"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-import Layout from "../components/layout";
-import Obstetrics from "../components/Obstetrics";
-import Gynaecology from "../components/Gynaecology";
-import HerApproach from "../components/HerApproach";
-import CareStages from "../components/care-stages";
-import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim";
-import preloaderLogo from "../images/sushree-preloader-logo.svg";
+import Layout from "../components/layout"
+import Obstetrics from "../components/Obstetrics"
+import Gynaecology from "../components/Gynaecology"
+import HerApproach from "../components/HerApproach"
+import CareStages from "../components/care-stages"
+import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim"
+import preloaderLogo from "../images/sushree-preloader-logo.svg"
+import Seo from "../components/seo"
 
 const IndexPage = ({ data }) => {
-
-
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false)
   // const [loaderProgress, setLoaderProgress] = useState(0);
-  const [isLoaderDone, setIsLoaderDone] = useState(false);
-  const [isAnimationReady, setIsAnimationReady] = useState(false);
-  const [loaderProgress, setLoaderProgress] = useState(0);
-  const homePage = data?.allWpPage?.edges?.[0]?.node?.homePage;
+  const [isLoaderDone, setIsLoaderDone] = useState(false)
+  const [isAnimationReady, setIsAnimationReady] = useState(false)
+  const [loaderProgress, setLoaderProgress] = useState(0)
+  const homePage = data?.allWpPage?.edges?.[0]?.node?.homePage
 
-  const homePageTitle = homePage?.homePageTitle;
-  const mobImage = getImage(homePage?.homePageMobImage?.node?.gatsbyImage);
-  const deskImage = getImage(homePage?.homePageDeskImage?.node?.gatsbyImage);
+  const homePageTitle = homePage?.homePageTitle
+  const mobImage = getImage(homePage?.homePageMobImage?.node?.gatsbyImage)
+  const deskImage = getImage(homePage?.homePageDeskImage?.node?.gatsbyImage)
   const heroImage =
     deskImage && mobImage
       ? withArtDirection(deskImage, [
-        {
-          media: "(max-width: 767px)",
-          image: mobImage,
-        },
-      ])
-      : deskImage || mobImage;
-  const mobImageAlt = homePage?.homePageMobImage?.node?.altText;
-  const deskImageAlt = homePage?.homePageDeskImage?.node?.altText;
+          {
+            media: "(max-width: 767px)",
+            image: mobImage,
+          },
+        ])
+      : deskImage || mobImage
+  const mobImageAlt = homePage?.homePageMobImage?.node?.altText
+  const deskImageAlt = homePage?.homePageDeskImage?.node?.altText
 
-  const womensHealthcareTitle = homePage?.womensHealthcareTitle;
-  const womensHealthcareParagraph = homePage?.womensHealthcareParagraph;
+  const womensHealthcareTitle = homePage?.womensHealthcareTitle
+  const womensHealthcareParagraph = homePage?.womensHealthcareParagraph
   const womensHealthcareImage = getImage(
     homePage?.womensHealthcareImage?.node?.gatsbyImage
-  );
+  )
   const womensHealthcareImageAlt =
-    homePage?.womensHealthcareImage?.node?.altText;
-  const womensHealthcareBottomPara = homePage?.womensHealthcareBottomPara;
+    homePage?.womensHealthcareImage?.node?.altText
+  const womensHealthcareBottomPara = homePage?.womensHealthcareBottomPara
 
   const obstetricsData = {
     obstetricsTitle: homePage?.obstetricsTitle,
     obstetricsSubtitle: homePage?.obstetricsSubtitle,
     obstetricsSwiper: homePage?.obstetricsSwiper,
-  };
+  }
 
   const gynaecologyData = {
     gynaecologyTitle: homePage?.gynaecologyTitle,
     gynaecologySubtitle: homePage?.gynaecologySubtitle,
     gynaecologyAccordion: homePage?.gynaecologyAccordion,
-  };
+  }
 
   const herApproachData = {
     herApproachTitle: homePage?.herApproachTitle,
     herApproachSubtitle: homePage?.herApproachSubtitle,
     herApproachList: homePage?.herApproachList || [],
-  };
+  }
 
   const careStagesData = {
     careAcrossTitle: homePage?.careAcrossTitle,
     careAcrossPara: homePage?.careAcrossPara,
     careAcrossHorizontalSlider: homePage?.careAcrossHorizontalSlider || [],
-  };
+  }
 
-  const benefitsTitle = homePage?.benefitsOfLaparoscopicTitle;
-  const benefitsItems = homePage?.benefitsOfLaparoscopicSubtitle || [];
+  const benefitsTitle = homePage?.benefitsOfLaparoscopicTitle
+  const benefitsItems = homePage?.benefitsOfLaparoscopicSubtitle || []
 
-  const infertilityTitle = homePage?.infertilityTitle;
-  const infertilitySubtitle = homePage?.infertilitySubtitle;
-  const infertilityPara = homePage?.infertilityPara;
-  const infertilityListnew = homePage?.infertilityListnew || [];
+  const infertilityTitle = homePage?.infertilityTitle
+  const infertilitySubtitle = homePage?.infertilitySubtitle
+  const infertilityPara = homePage?.infertilityPara
+  const infertilityListnew = homePage?.infertilityListnew || []
 
   useEffect(() => {
-    let comprehensiveSwiper = null;
+    let comprehensiveSwiper = null
 
     if (
       typeof window !== "undefined" &&
@@ -94,77 +93,75 @@ const IndexPage = ({ data }) => {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
-      });
+      })
     }
 
     return () => {
-      if (comprehensiveSwiper) comprehensiveSwiper.destroy(true, true);
-    };
-  }, []);
+      if (comprehensiveSwiper) comprehensiveSwiper.destroy(true, true)
+    }
+  }, [])
 
   useEffect(() => {
-    let progressTimer;
+    let progressTimer
 
     const startProgress = () => {
       progressTimer = setInterval(() => {
-        setLoaderProgress((prev) => {
-          if (prev >= 90) return prev;
-          return prev + 4;
-        });
-      }, 100);
-    };
+        setLoaderProgress(prev => {
+          if (prev >= 90) return prev
+          return prev + 4
+        })
+      }, 100)
+    }
 
     const finishLoader = () => {
-      setLoaderProgress(100);
+      setLoaderProgress(100)
 
       setTimeout(() => {
-        setIsLoaderDone(true);
-      }, 500);
-    };
+        setIsLoaderDone(true)
+      }, 500)
+    }
 
-    startProgress();
+    startProgress()
 
     if (typeof window !== "undefined") {
       if (document.readyState === "complete") {
-        setTimeout(finishLoader, 900);
+        setTimeout(finishLoader, 900)
       } else {
-        window.addEventListener("load", finishLoader);
+        window.addEventListener("load", finishLoader)
       }
     }
 
     const fallbackTimer = setTimeout(() => {
-      finishLoader();
-    }, 5000);
+      finishLoader()
+    }, 5000)
 
     return () => {
-      clearInterval(progressTimer);
-      clearTimeout(fallbackTimer);
+      clearInterval(progressTimer)
+      clearTimeout(fallbackTimer)
 
       if (typeof window !== "undefined") {
-        window.removeEventListener("load", finishLoader);
+        window.removeEventListener("load", finishLoader)
       }
-    };
-  }, []);
+    }
+  }, [])
 
   useLayoutEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!isLoaderDone) return;
+    if (typeof window === "undefined") return
+    if (!isLoaderDone) return
 
-    initHomeAnimations();
+    initHomeAnimations()
 
     requestAnimationFrame(() => {
-      setIsAnimationReady(true);
-    });
+      setIsAnimationReady(true)
+    })
 
     return () => {
-      destroyHomeAnimations();
-    };
-  }, [isLoaderDone]);
+      destroyHomeAnimations()
+    }
+  }, [isLoaderDone])
 
   return (
-
     <Layout>
-
       {!isAnimationReady && (
         <div className="site-preloader">
           <div className="preloader-inner">
@@ -179,11 +176,7 @@ const IndexPage = ({ data }) => {
                 className="preloader-logo-color"
                 style={{ height: `${loaderProgress}%` }}
               >
-                <img
-                  src={preloaderLogo}
-                  alt=""
-                  aria-hidden="true"
-                />
+                <img src={preloaderLogo} alt="" aria-hidden="true" />
               </div>
             </div>
 
@@ -193,9 +186,7 @@ const IndexPage = ({ data }) => {
               Obstetrician & Gynaecologist
             </div>
 
-            <div className="preloader-count">
-              {loaderProgress}%
-            </div>
+            <div className="preloader-count">{loaderProgress}%</div>
 
             <div className="preloader-bar">
               <span style={{ width: `${loaderProgress}%` }}></span>
@@ -205,13 +196,15 @@ const IndexPage = ({ data }) => {
       )}
 
       <div className={`page-content ${isAnimationReady ? "page-loaded" : ""}`}>
-
         <section className="banner-section">
           <div className="container">
             <div className="div-wrapper">
               <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
-              <p className="sub-text">This Fibroids Awareness Month, focus more on fibroids & discover <br />
-                comprehensive care for a woman's health</p>
+              <p className="sub-text">
+                This Fibroids Awareness Month, focus more on fibroids & discover{" "}
+                <br />
+                comprehensive care for a woman's health
+              </p>
               <div className="btn-wrapper">
                 <Link className="btn" to="/contact">
                   Book An Appointment
@@ -220,7 +213,6 @@ const IndexPage = ({ data }) => {
             </div>
 
             <div className="img-wrap">
-
               {heroImage && (
                 <GatsbyImage
                   image={heroImage}
@@ -282,13 +274,17 @@ const IndexPage = ({ data }) => {
                 )}
               </div>
 
-
               {womensHealthcareBottomPara && (
-                <div data-aos="fade-up" className="text-wrap" dangerouslySetInnerHTML={{ __html: womensHealthcareBottomPara }} />
+                <div
+                  data-aos="fade-up"
+                  className="text-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html: womensHealthcareBottomPara,
+                  }}
+                />
               )}
             </div>
           </div>
-
         </section>
 
         <CareStages data={careStagesData} />
@@ -303,8 +299,8 @@ const IndexPage = ({ data }) => {
 
             <ul className="benef-wrapp">
               {benefitsItems.map((item, index) => {
-                const image = getImage(item?.benefitsImage?.node?.gatsbyImage);
-                const imageAlt = item?.benefitsImage?.node?.altText;
+                const image = getImage(item?.benefitsImage?.node?.gatsbyImage)
+                const imageAlt = item?.benefitsImage?.node?.altText
 
                 return (
                   <li key={index}>
@@ -323,7 +319,7 @@ const IndexPage = ({ data }) => {
                       <p>{item?.benefitsSubtitle}</p>
                     </div>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -365,8 +361,8 @@ const IndexPage = ({ data }) => {
         <HerApproach data={herApproachData} />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query MyQuery {
@@ -525,6 +521,20 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default IndexPage;
+export default IndexPage
+
+export const Head = ({ location }) => (
+  <Seo
+    pathname={location.pathname}
+    description="Consult Dr. Sushree Patra for personalised obstetrics, gynaecology, infertility and minimally invasive surgery care."
+    schema={{
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      name: "Dr. Sushree Patra",
+      url: "https://drsushreepatra.com/",
+      medicalSpecialty: ["Obstetrics", "Gynecology"],
+    }}
+  />
+)

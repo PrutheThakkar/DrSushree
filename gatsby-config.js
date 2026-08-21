@@ -1,14 +1,14 @@
-require("dotenv").config();
+require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
     title: "Dr. Sushree Patra",
-    description: "Dr. Sushree Patra - Obstetrician and Gynaecologist",
+    description:
+      "Consult Dr. Sushree Patra for compassionate, evidence-based obstetrics, gynaecology, infertility and minimally invasive surgery care.",
     author: "@DrSushreePatra",
 
-    siteUrl:
-      process.env.GATSBY_WEBSITE_URL ||
-      "https://drsushreepatra.com",
+    siteUrl: process.env.GATSBY_WEBSITE_URL || "https://drsushreepatra.com",
+    language: "en-IN",
   },
 
   plugins: [
@@ -39,4 +39,4 @@ module.exports = {
       },
     },
   ],
-};
+}

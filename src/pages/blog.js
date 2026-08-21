@@ -1,11 +1,8 @@
-import React from "react";
-import { graphql, Link } from "gatsby";
-import {
-  GatsbyImage,
-  getImage,
-  withArtDirection,
-} from "gatsby-plugin-image";
-import Layout from "../components/layout";
+import React from "react"
+import { graphql, Link } from "gatsby"
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 const getResponsiveImage = (desktopImage, mobileImage) => {
   if (desktopImage && mobileImage) {
@@ -14,29 +11,29 @@ const getResponsiveImage = (desktopImage, mobileImage) => {
         media: "(max-width: 767px)",
         image: mobileImage,
       },
-    ]);
+    ])
   }
 
-  return desktopImage || mobileImage;
-};
+  return desktopImage || mobileImage
+}
 
 const BlogPage = ({ data }) => {
-  const posts = data?.allWpPost?.edges || [];
-  const pageTitle = data?.wpPage?.title;
-  const blogPage = data?.wpPage?.blogPage;
+  const posts = data?.allWpPost?.edges || []
+  const pageTitle = data?.wpPage?.title
+  const blogPage = data?.wpPage?.blogPage
 
   const blogBannerImage = getImage(
     blogPage?.blogBennerImgDeskNew?.node?.gatsbyImage
-  );
+  )
 
   const blogBannerImageAlt =
     blogPage?.blogBennerImgDeskNew?.node?.altText ||
     pageTitle ||
-    "Blog banner image";
+    "Blog banner image"
 
-  const blogPageTitle = blogPage?.blogPageTitleNew;
-  const blogTopTitle = blogPage?.blogTopSectionTitleNew;
-  const blogTopSubtitle = blogPage?.blogTopSectionSubtitleNew;
+  const blogPageTitle = blogPage?.blogPageTitleNew
+  const blogTopTitle = blogPage?.blogTopSectionTitleNew
+  const blogTopSubtitle = blogPage?.blogTopSectionSubtitleNew
 
   return (
     <Layout>
@@ -76,19 +73,19 @@ const BlogPage = ({ data }) => {
             {posts.map(({ node }, index) => {
               const blogDeskImage = getImage(
                 node?.postnew?.postHeaderBannerDesk?.node?.gatsbyImage
-              );
+              )
 
               const blogMobImage = getImage(
                 node?.postnew?.postHeaderBannerMob?.node?.gatsbyImage
-              );
+              )
 
-              const blogImage = getResponsiveImage(blogDeskImage, blogMobImage);
+              const blogImage = getResponsiveImage(blogDeskImage, blogMobImage)
 
               const imageAlt =
                 node?.postnew?.postHeaderBannerDesk?.node?.altText ||
                 node?.postnew?.postHeaderBannerMob?.node?.altText ||
                 node?.title ||
-                "Blog image";
+                "Blog image"
 
               return (
                 <Link
@@ -119,14 +116,14 @@ const BlogPage = ({ data }) => {
                     </div>
                   </div>
                 </Link>
-              );
+              )
             })}
           </div>
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query BlogPageQuery {
@@ -157,7 +154,7 @@ export const query = graphql`
                   height: 480
                   layout: CONSTRAINED
                   placeholder: BLURRED
-                  quality:100
+                  quality: 100
                   formats: [AUTO, WEBP, AVIF]
                 )
               }
@@ -189,6 +186,14 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default BlogPage;
+export default BlogPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Women's Health Blog"
+    pathname={location.pathname}
+    description="Read evidence-based articles from Dr. Sushree Patra about pregnancy, gynaecology, fertility and women's health."
+  />
+)

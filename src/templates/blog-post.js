@@ -1,18 +1,23 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/layout";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import React from "react"
+import { graphql } from "gatsby"
+import Layout from "../components/layout"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Seo from "../components/seo"
 
 const BlogPostTemplate = ({ data }) => {
-  const post = data.wpPost;
-  const image = getImage(post?.featuredImage?.node?.localFile); // Corrected image query for featured image
-  const imageAlt = post?.featuredImage?.node?.altText || "Blog Post Image";
+  const post = data.wpPost
+  const image = getImage(post?.featuredImage?.node?.localFile) // Corrected image query for featured image
+  const imageAlt = post?.featuredImage?.node?.altText || "Blog Post Image"
 
   // Get the header images for the banner section
-  const headerDeskImage = getImage(post?.postnew?.postHeaderBannerDesk?.node?.gatsbyImage); // Corrected for banner desktop image
-  const headerMobImage = getImage(post?.postnew?.postHeaderBannerMob?.node?.gatsbyImage); // Corrected for banner mobile image
-  const pageTitle = data?.wpPage?.title;
-  const blogPageTitle = data?.wpPage?.blogPage?.blogPageTitleNew;
+  const headerDeskImage = getImage(
+    post?.postnew?.postHeaderBannerDesk?.node?.gatsbyImage
+  ) // Corrected for banner desktop image
+  const headerMobImage = getImage(
+    post?.postnew?.postHeaderBannerMob?.node?.gatsbyImage
+  ) // Corrected for banner mobile image
+  const pageTitle = data?.wpPage?.title
+  const blogPageTitle = data?.wpPage?.blogPage?.blogPageTitleNew
 
   return (
     <Layout>
@@ -70,20 +75,48 @@ const BlogPostTemplate = ({ data }) => {
       {/* ─── Blog Post Section ─── */}
       <section className="blog-post-section">
         <div className="container">
-        
-
           {/* Render the blog content */}
           <div dangerouslySetInnerHTML={{ __html: post?.content }} />
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
+
+export const Head = ({ data, location }) => {
+  const post = data?.wpPost
+  const description = (post?.excerpt || post?.content || "")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 155)
+
+  return (
+    <Seo
+      title={post?.title || "Blog"}
+      pathname={location.pathname}
+      description={description || undefined}
+      type="article"
+      schema={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post?.title,
+        datePublished: post?.date,
+        dateModified: post?.modified,
+        author: { "@type": "Person", name: "Dr. Sushree Patra" },
+        mainEntityOfPage: `https://drsushreepatra.com${location.pathname}`,
+      }}
+    />
+  )
+}
 
 export const query = graphql`
   query BlogPostQuery($id: String!) {
     wpPost(id: { eq: $id }) {
       title
+      excerpt
+      date
+      modified
       content
       slug
       featuredImage {
@@ -133,6 +166,6 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default BlogPostTemplate;
+export default BlogPostTemplate

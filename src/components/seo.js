@@ -1,42 +1,77 @@
-/**
- * SEO component that queries for data with
- * Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
-
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
-function Seo({ description, title, children }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+const absoluteUrl = (siteUrl, value = "") => {
+  if (!value) return siteUrl
+  if (/^https?:\/\//i.test(value)) return value
+  return `${siteUrl.replace(/\/$/, "")}/${value.replace(/^\//, "")}`
+}
+
+const Seo = ({
+  title,
+  description,
+  pathname = "/",
+  image,
+  type = "website",
+  noIndex = false,
+  schema,
+  children,
+}) => {
+  const { site } = useStaticQuery(graphql`
+    query SeoSiteMetadata {
+      site {
+        siteMetadata {
+          title
+          description
+          author
+          siteUrl
         }
       }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+    }
+  `)
+  const metadata = site.siteMetadata
+  const pageTitle = title ? `${title} | ${metadata.title}` : metadata.title
+  const metaDescription = description || metadata.description
+  const canonicalUrl = absoluteUrl(metadata.siteUrl, pathname)
+  const socialImage = image ? absoluteUrl(metadata.siteUrl, image) : null
+  const schemas = Array.isArray(schema) ? schema : schema ? [schema] : []
 
   return (
     <>
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <html lang="en-IN" />
+      <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
+      <meta
+        name="robots"
+        content={
+          noIndex
+            ? "noindex, nofollow"
+            : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        }
+      />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:locale" content="en_IN" />
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content={metadata.title} />
+      <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
-      <meta name="twitter:title" content={title} />
+      <meta property="og:url" content={canonicalUrl} />
+      {socialImage && <meta property="og:image" content={socialImage} />}
+      <meta
+        name="twitter:card"
+        content={socialImage ? "summary_large_image" : "summary"}
+      />
+      <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={metaDescription} />
+      {metadata.author && (
+        <meta name="twitter:creator" content={metadata.author} />
+      )}
+      {socialImage && <meta name="twitter:image" content={socialImage} />}
+      {schemas.map((item, index) => (
+        <script type="application/ld+json" key={index}>
+          {JSON.stringify(item)}
+        </script>
+      ))}
       {children}
     </>
   )

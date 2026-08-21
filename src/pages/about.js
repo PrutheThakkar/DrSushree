@@ -1,55 +1,56 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image";
-import Layout from "../components/layout";
+import React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
 const AboutPage = ({ data }) => {
-  const aboutPage = data?.allWpPage?.edges?.[0]?.node?.aboutPage;
+  const aboutPage = data?.allWpPage?.edges?.[0]?.node?.aboutPage
 
-  const pageTitle = aboutPage?.pageTitle;
-  const aboutDrTitle = aboutPage?.aboutDrTitle;
-  const aboutDrSubtitle = aboutPage?.aboutDrSubtitle;
-  const aboutDrPara = aboutPage?.aboutDrPara;
+  const pageTitle = aboutPage?.pageTitle
+  const aboutDrTitle = aboutPage?.aboutDrTitle
+  const aboutDrSubtitle = aboutPage?.aboutDrSubtitle
+  const aboutDrPara = aboutPage?.aboutDrPara
 
-  const clinicalPhilosophyTitle = aboutPage?.clinicalPhilosophyTitle;
-  const clinicalPhilosophySubtitle = aboutPage?.clinicalPhilosophySubtitle;
-  const clinicalPhilosophyList = aboutPage?.clinicalPhilosophyList || [];
+  const clinicalPhilosophyTitle = aboutPage?.clinicalPhilosophyTitle
+  const clinicalPhilosophySubtitle = aboutPage?.clinicalPhilosophySubtitle
+  const clinicalPhilosophyList = aboutPage?.clinicalPhilosophyList || []
 
-  const comprehensiveTitle = aboutPage?.comprehensiveTitle;
-  const comprehensiveSubtitle = aboutPage?.comprehensiveSubtitle;
-  const comprehensiveList = aboutPage?.comprehensiveList || [];
+  const comprehensiveTitle = aboutPage?.comprehensiveTitle
+  const comprehensiveSubtitle = aboutPage?.comprehensiveSubtitle
+  const comprehensiveList = aboutPage?.comprehensiveList || []
 
-  const beyondTheClinicTitle = aboutPage?.beyondTheClinicTitle;
-  const beyondTheClinicSubtitle = aboutPage?.beyondTheClinicSubtitle;
-  const beyondTheClinicPara = aboutPage?.beyondTheClinicPara;
+  const beyondTheClinicTitle = aboutPage?.beyondTheClinicTitle
+  const beyondTheClinicSubtitle = aboutPage?.beyondTheClinicSubtitle
+  const beyondTheClinicPara = aboutPage?.beyondTheClinicPara
   const beyondTheClinicImage = getImage(
     aboutPage?.beyondTheClinicImage?.node?.gatsbyImage
-  );
+  )
 
   const aboutHeaderImageMob = getImage(
     aboutPage?.aboutHeaderImageMob?.node?.gatsbyImage
-  );
+  )
   const aboutHeaderImageMobAlt =
-    aboutPage?.aboutHeaderImageMob?.node?.altText || "About banner mobile";
+    aboutPage?.aboutHeaderImageMob?.node?.altText || "About banner mobile"
 
   const aboutHeaderImageDesk = getImage(
     aboutPage?.aboutHeaderImageDesk?.node?.gatsbyImage
-  );
+  )
   const aboutHeaderImageDeskAlt =
-    aboutPage?.aboutHeaderImageDesk?.node?.altText || "About banner desktop";
+    aboutPage?.aboutHeaderImageDesk?.node?.altText || "About banner desktop"
 
   const aboutBannerImage =
     aboutHeaderImageDesk && aboutHeaderImageMob
       ? withArtDirection(aboutHeaderImageDesk, [
-        {
-          media: "(max-width: 767px)",
-          image: aboutHeaderImageMob,
-        },
-      ])
-      : aboutHeaderImageDesk || aboutHeaderImageMob;
+          {
+            media: "(max-width: 767px)",
+            image: aboutHeaderImageMob,
+          },
+        ])
+      : aboutHeaderImageDesk || aboutHeaderImageMob
 
   const aboutBannerAlt =
-    aboutHeaderImageDeskAlt || aboutHeaderImageMobAlt || "About banner";
+    aboutHeaderImageDeskAlt || aboutHeaderImageMobAlt || "About banner"
   return (
     <Layout>
       <section className="inner-banner-section">
@@ -58,8 +59,6 @@ const AboutPage = ({ data }) => {
             {pageTitle && (
               <h1 dangerouslySetInnerHTML={{ __html: pageTitle }} />
             )}
-
-
           </div>
 
           <div className="img-wrap">
@@ -179,10 +178,10 @@ const AboutPage = ({ data }) => {
             <div className="section-wrap">
               <ul>
                 {comprehensiveList.map((item, index) => {
-                  const itemImage = getImage(item?.image?.node?.gatsbyImage);
+                  const itemImage = getImage(item?.image?.node?.gatsbyImage)
                   const itemImageAlt =
                     item?.image?.node?.altText ||
-                    `Comprehensive image ${index + 1}`;
+                    `Comprehensive image ${index + 1}`
 
                   return (
                     <li key={index}>
@@ -203,7 +202,7 @@ const AboutPage = ({ data }) => {
                         )}
                       </div>
                     </li>
-                  );
+                  )
                 })}
               </ul>
             </div>
@@ -248,8 +247,8 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
 export const query = graphql`
   query MyQuery {
@@ -329,6 +328,14 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
-export default AboutPage;
+export default AboutPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="About"
+    pathname={location.pathname}
+    description="Learn about Dr. Sushree Patra's patient-centred approach to obstetrics, gynaecology and minimally invasive surgery."
+  />
+)
