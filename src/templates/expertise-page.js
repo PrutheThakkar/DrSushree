@@ -88,49 +88,7 @@ const ExpertisePageTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <div
-        className={`expertise-list-header ${
-          page?.databaseId === 169 ? "Infertilitypage" : ""
-        }`}
-      >
-        <div className="container">
-          <div className="btn-wrapper">
-            <a className="btn expertise-toggle-btn" href="#">
-              {page?.title || "Expertise"}
-            </a>
-          </div>
-
-          <div className="expertise-list-wrap">
-            <button
-              type="button"
-              className="expertise-close-btn"
-              aria-label="Close expertise list"
-            ></button>
-
-            <ul className="expertise-list">
-              {expertiseSections.map((item, index) => {
-                const sectionId = slugify(
-                  item?.expertiseTitle || `section-${index + 1}`
-                )
-
-                return (
-                  <li key={sectionId}>
-                    <a className="btn" href={`#${sectionId}`}>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: item?.expertiseTitle || "",
-                        }}
-                      />
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <section className="inner-banner-section">
+      <section className="inner-banner-section expertise-hero">
         <div className="container">
           <div className="div-wrapper">
             {page?.title && (
@@ -165,6 +123,46 @@ const ExpertisePageTemplate = ({ data }) => {
               />
             )}
           </div>
+
+          <div
+            className={`expertise-list-header ${
+              page?.databaseId === 169 ? "Infertilitypage" : ""
+            }`}
+          >
+            <div className="btn-wrapper">
+              <a className="btn expertise-toggle-btn" href="#">
+                {page?.title || "Expertise"}
+              </a>
+            </div>
+
+            <div className="expertise-list-wrap">
+              <button
+                type="button"
+                className="expertise-close-btn"
+                aria-label="Close expertise list"
+              ></button>
+
+              <ul className="expertise-list">
+                {expertiseSections.map((item, index) => {
+                  const sectionId = slugify(
+                    item?.expertiseTitle || `section-${index + 1}`
+                  )
+
+                  return (
+                    <li key={sectionId}>
+                      <a className="btn" href={`#${sectionId}`}>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: item?.expertiseTitle || "",
+                          }}
+                        />
+                      </a>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -181,8 +179,22 @@ const ExpertisePageTemplate = ({ data }) => {
               )
 
               return (
-                <li id={sectionId} key={sectionId}>
-                  <div className="title-wrap">
+                <li className="expertise-row" id={sectionId} key={sectionId}>
+                  {sectionImage && (
+                    <div className="expertise-row__media">
+                      <GatsbyImage
+                        image={sectionImage}
+                        alt={
+                          item?.expertiseImage?.node?.altText ||
+                          item?.expertiseTitle ||
+                          "Section image"
+                        }
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  <div className="expertise-row__content">
                     {item?.expertiseTitle && (
                       <h2 className="title">
                         {item.expertiseTitle}
@@ -197,30 +209,16 @@ const ExpertisePageTemplate = ({ data }) => {
                         )}
                       </h2>
                     )}
-                  </div>
 
-                  {sectionImage && (
-                    <div className="img-wrap">
-                      <GatsbyImage
-                        image={sectionImage}
-                        alt={
-                          item?.expertiseImage?.node?.altText ||
-                          item?.expertiseTitle ||
-                          "Section image"
-                        }
-                        loading="lazy"
+                    {item?.expertiseContent && (
+                      <div
+                        className="section-content"
+                        dangerouslySetInnerHTML={{
+                          __html: item.expertiseContent,
+                        }}
                       />
-                    </div>
-                  )}
-
-                  {item?.expertiseContent && (
-                    <div
-                      className="section-content"
-                      dangerouslySetInnerHTML={{
-                        __html: item.expertiseContent,
-                      }}
-                    />
-                  )}
+                    )}
+                  </div>
                 </li>
               )
             })}
@@ -234,12 +232,66 @@ const ExpertisePageTemplate = ({ data }) => {
 export default ExpertisePageTemplate
 
 export const Head = ({ data, location }) => {
-  const title = data?.allWpPage?.nodes?.[0]?.title || "Expertise"
+  const seoByPath = {
+    "/obstetrics/": {
+      title: "Obstetrician in Mira Road | Pregnancy & High-Risk Pregnancy Care",
+      description:
+        "Get personalised pregnancy care in Mira Road from Dr. Sushree Patra, including antenatal care, high-risk pregnancy management, labour and postpartum care.",
+      keywords: [
+        "obstetrician in Mira Road",
+        "pregnancy doctor Mira Road",
+        "high-risk pregnancy specialist Mira Road",
+        "antenatal care Mira Road",
+        "pregnancy care Mira Road",
+        "obstetrician Mira Road",
+      ],
+    },
+    "/gynaecology/": {
+      title: "Gynaecologist in Mira Road | Women's Health & Gynaecology Care",
+      description:
+        "Dr. Sushree Patra provides comprehensive gynaecological care in Mira Road for menstrual disorders, PCOS, fibroids, endometriosis and women's health concerns.",
+      keywords: [
+        "gynaecologist in Mira Road",
+        "gynecologist Mira Road",
+        "women's health doctor Mira Road",
+        "PCOS doctor Mira Road",
+        "menstrual disorder treatment Mira Road",
+        "gynaecology specialist Mira Road",
+      ],
+    },
+    "/infertility/": {
+      title: "Infertility Specialist in Mira Road | Fertility Care | Dr. Patra",
+      description:
+        "Dr. Sushree Patra provides evidence-based infertility evaluation and medical management in Mira Road, including hormonal assessment and ovulation management.",
+      keywords: [
+        "infertility specialist Mira Road",
+        "fertility specialist Mira Road",
+        "infertility doctor Mira Road",
+        "fertility treatment Mira Road",
+        "infertility treatment Mumbai",
+        "PCOS infertility treatment Mira Road",
+      ],
+    },
+  }
+  const fallbackTitle = data?.allWpPage?.nodes?.[0]?.title || "Expertise"
+  const pageSeo = seoByPath[location.pathname] || {
+    title: fallbackTitle,
+    description: `Learn about Dr. Sushree Patra's ${fallbackTitle.toLowerCase()} services, treatment options and patient-centred approach.`,
+    keywords: [],
+  }
   return (
     <Seo
-      title={title}
+      title={pageSeo.title}
       pathname={location.pathname}
-      description={`Learn about Dr. Sushree Patra's ${title.toLowerCase()} services, treatment options and patient-centred approach.`}
+      description={pageSeo.description}
+      keywords={pageSeo.keywords}
+      schema={{
+        "@context": "https://schema.org",
+        "@type": ["Physician", "MedicalWebPage"],
+        name: pageSeo.title,
+        url: `https://www.drsushreepatra.com${location.pathname}`,
+        medicalSpecialty: ["Obstetrics", "Gynecology"],
+      }}
     />
   )
 }
@@ -284,8 +336,8 @@ export const query = graphql`
               node {
                 altText
                 gatsbyImage(
-                  width: 1200
-                  height: 421
+                  width: 770
+                  height: 630
                   layout: CONSTRAINED
                   placeholder: BLURRED
                   quality: 100

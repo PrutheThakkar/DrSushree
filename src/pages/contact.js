@@ -4,6 +4,7 @@ import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import AppointmentForm from "../components/AppointmentForm"
 import Seo from "../components/seo"
+import contactLeftImage from "../images/contact-left-img.webp"
 
 const ContactPage = ({ data }) => {
   const contactPage = data?.allWpPage?.edges?.[0]?.node?.contact
@@ -14,12 +15,6 @@ const ContactPage = ({ data }) => {
   const contactPageSubtitle =
     contactPage?.contactPageSubtitle ||
     "We're here to help — book appointments or send questions"
-
-  const email = contactPage?.email || "drsushreeappoinments@gmail.com"
-  const phone = contactPage?.phone || "+91 8249321325"
-
-  const clinicAddress =
-    contactPage?.clinicAddress || "Wockhardt Hospitals, Mira Road"
 
   const contactBannerDesk = getImage(
     contactPage?.contactBannerDesk?.node?.gatsbyImage
@@ -73,41 +68,21 @@ const ContactPage = ({ data }) => {
         <div className="container">
           <div className="title-wrap">
             <h2 className="title">
-              Reach Out
+              Contact
               <span className="sub-title">{contactPageSubtitle}</span>
             </h2>
           </div>
 
           <div className="contact-grid">
-            <div className="contact-form-wrap">
-              <AppointmentForm />
+            <div className="contact-image-wrap">
+              <img
+                src={contactLeftImage}
+                alt="Women's health and fertility care"
+              />
             </div>
 
-            <div className="contact-info">
-              <div className="info-block">
-                <h3>Clinic Address</h3>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KSfyAk1PsOc7MX9gPf6DZPcD&daddr=Wockhardt+Hospitals,+Institute+of+Medical+Science+and+Research,+Evershine+Rd,+near+Mira+Road+Railway+Station,+Naya+Nagar,+Mira+Road+East,+Mira+Bhayandar,+Maharashtra+401107"
-                >
-                  {clinicAddress}
-                </a>
-              </div>
-
-              <div className="info-block">
-                <h3>Email</h3>
-                <p>
-                  <a href={`mailto:${email}`}>{email}</a>
-                </p>
-              </div>
-
-              <div className="info-block">
-                <h3>Phone</h3>
-                <p>
-                  <a href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a>
-                </p>
-              </div>
+            <div className="contact-form-wrap">
+              <AppointmentForm />
             </div>
           </div>
         </div>
@@ -166,8 +141,30 @@ export default ContactPage
 
 export const Head = ({ location }) => (
   <Seo
-    title="Contact & Appointments"
+    title="Contact Dr. Sushree Patra | Gynaecologist in Mira Road"
     pathname={location.pathname}
-    description="Contact Dr. Sushree Patra's clinic to ask a question or book an obstetrics and gynaecology appointment."
+    description="Contact Dr. Sushree Patra at Wockhardt Hospitals, Mira Road for pregnancy, infertility, gynaecology and women's health consultations."
+    keywords={[
+      "Dr. Sushree Patra contact",
+      "Dr. Sushree Patra appointment",
+      "gynaecologist Mira Road contact",
+      "obstetrician Mira Road appointment",
+      "pregnancy doctor Mira Road",
+    ]}
+    schema={{
+      "@context": "https://schema.org",
+      "@type": ["Physician", "MedicalBusiness"],
+      name: "Dr. Sushree Patra",
+      url: "https://www.drsushreepatra.com/contact/",
+      telephone: "+91 8249321325",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Wockhardt Hospitals, Evershine Road",
+        addressLocality: "Mira Road East",
+        addressRegion: "Maharashtra",
+        postalCode: "401107",
+        addressCountry: "IN",
+      },
+    }}
   />
 )

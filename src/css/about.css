@@ -36,25 +36,105 @@
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
 }
 .about-section .text-wrap {
   text-align: center;
   margin-top: 30px;
 }
 .about-section .text-wrap p {
-  font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem);
+  /* font-size: clamp(1.125rem, -0.1079rem + 1.444vw, 1.625rem); */
 }
 @media (max-width: 1024px) {
   .about-section .text-wrap p {
-    font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
+    /* font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem); */
   }
 }
 @media (max-width: 800px) {
   .about-section .text-wrap p br {
     display: none;
+  }
+}
+
+.clinical-philosophy {
+  position: relative;
+}
+.clinical-philosophy .title-wrap {
+  margin-bottom: clamp(55px, 6vw, 95px);
+}
+.clinical-philosophy__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr) minmax(
+      0,
+      1.08fr
+    );
+  align-items: stretch;
+  gap: clamp(30px, 2.8vw, 54px);
+}
+.clinical-philosophy__column {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 3vw, 50px);
+  margin: 0;
+  padding: 0;
+}
+.clinical-philosophy__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 110px;
+  padding: clamp(26px, 2.4vw, 38px);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fff 20%, #f1f5ed 100%);
+}
+.clinical-philosophy__card h3 {
+  margin: 0 0 30px;
+  color: #5f8f7a;
+  font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+  font-weight: 400;
+}
+.clinical-philosophy__card p {
+  margin: 0;
+  color: #5e6461;
+  font-size: clamp(1rem, 1.15vw, 1.3rem);
+  line-height: 1.35;
+}
+.clinical-philosophy__image {
+  min-height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.clinical-philosophy__image .gatsby-image-wrapper,
+.clinical-philosophy__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (max-width: 1000px) {
+  .clinical-philosophy__layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .clinical-philosophy__image {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: min(65vw, 520px);
+  }
+}
+@media (max-width: 650px) {
+  .clinical-philosophy__layout {
+    grid-template-columns: 1fr;
+  }
+  .clinical-philosophy__image {
+    grid-column: auto;
+    height: 420px;
+  }
+  .clinical-philosophy__column {
+    grid-template-rows: none;
+  }
+  .clinical-philosophy__card {
+    min-height: 0;
   }
 }
 
@@ -68,7 +148,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(../images/page-new-bg.svg);
+  background: none;
   background-size: initial;
   background-repeat: no-repeat;
   background-position: center center;
@@ -126,7 +206,7 @@
   width: 32%;
   margin-left: 15%;
   height: 100%;
-  background: #E2ECE8;
+  background: #e2ece8;
   padding: 20px;
   border-radius: 10px;
 }
@@ -366,9 +446,9 @@
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
 }
 .Comprehensive .section-wrap ul li .right {
   width: 50%;
@@ -378,6 +458,7 @@
     width: 100%;
   }
 }
+
 .Comprehensive .section-wrap ul li .right .pragraph-wrap {
   padding-left: 50px;
 }
@@ -447,4 +528,15 @@
   .Beyond-the-Clinic p {
     font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
   }
-}/*# sourceMappingURL=about.css.map */
+}
+
+.obstetrics-list {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.obstetrics-list li {
+  width: calc(50% - 10px);
+  margin: 10px;
+  width: 30%;
+}

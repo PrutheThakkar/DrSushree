@@ -7,7 +7,8 @@ module.exports = {
       "Consult Dr. Sushree Patra for compassionate, evidence-based obstetrics, gynaecology, infertility and minimally invasive surgery care.",
     author: "@DrSushreePatra",
 
-    siteUrl: process.env.GATSBY_WEBSITE_URL || "https://drsushreepatra.com",
+    // Keep every canonical and sitemap URL on the production www host.
+    siteUrl: "https://www.drsushreepatra.com",
     language: "en-IN",
   },
 
@@ -17,8 +18,12 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sass",
 
-    // Generate sitemap
-    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        excludes: ["/404/", "/404.html", "/dev-404-page/"],
+      },
+    },
 
     {
       resolve: "gatsby-source-wordpress",

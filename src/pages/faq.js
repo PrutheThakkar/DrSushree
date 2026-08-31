@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
 import Layout from "../components/layout"
@@ -54,6 +54,8 @@ const FaqPage = ({ data }) => {
     obstetrics: 0,
     infertility: 0,
   })
+  const [activeSection, setActiveSection] = useState("general")
+  const sectionRefs = useRef({})
 
   const toggleFaq = (sectionKey, index) => {
     setOpenItems(prev => ({
@@ -101,6 +103,48 @@ const FaqPage = ({ data }) => {
     },
   ]
 
+  const visibleFaqSections = faqSections.filter(section => section.list.length)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visibleEntry = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+
+        if (visibleEntry?.target?.dataset?.faqSection) {
+          setActiveSection(visibleEntry.target.dataset.faqSection)
+        }
+      },
+      {
+        rootMargin: "-18% 0px -62% 0px",
+        threshold: [0, 0.2, 0.5, 0.8],
+      }
+    )
+
+    visibleFaqSections.forEach(section => {
+      const element = sectionRefs.current[section.key]
+      if (element) observer.observe(element)
+    })
+
+    return () => observer.disconnect()
+  }, [
+    faqList.length,
+    laparoscopicList.length,
+    obstetricsList.length,
+    infertilityList.length,
+  ])
+
+  const handleTabClick = sectionKey => {
+    setActiveSection(sectionKey)
+    sectionRefs.current[sectionKey]?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+
   return (
     <Layout>
       <section className="inner-banner-section">
@@ -137,15 +181,35 @@ const FaqPage = ({ data }) => {
             </div>
           )}
 
-          {faqSections.map(
-            section =>
-              section.list.length > 0 && (
+          <div className="faq-content-layout">
+            <nav className="faq-category-tabs" aria-label="FAQ categories">
+              {visibleFaqSections.map(section => (
+                <button
+                  key={section.key}
+                  type="button"
+                  className={activeSection === section.key ? "active" : ""}
+                  onClick={() => handleTabClick(section.key)}
+                  aria-current={
+                    activeSection === section.key ? "true" : undefined
+                  }
+                >
+                  {section.title}
+                </button>
+              ))}
+            </nav>
+
+            <div className="faq-groups">
+              {visibleFaqSections.map(section => (
                 <div
                   className={`${section.className} sub-section`}
                   key={section.key}
+                  ref={element => {
+                    sectionRefs.current[section.key] = element
+                  }}
+                  data-faq-section={section.key}
                 >
                   <div className="faq-heading">
-                    <h2>{section.title}</h2>
+                    <h3>{section.title}</h3>
                   </div>
 
                   <div className="faq-list">
@@ -182,8 +246,9 @@ const FaqPage = ({ data }) => {
                     })}
                   </div>
                 </div>
-              )
-          )}
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </Layout>
@@ -256,8 +321,16 @@ export default FaqPage
 
 export const Head = ({ location }) => (
   <Seo
-    title="Frequently Asked Questions"
+    title="Gynaecology, Pregnancy & Infertility FAQs | Dr. Sushree Patra"
     pathname={location.pathname}
-    description="Answers to common questions about gynaecology, laparoscopic surgery, obstetrics, pregnancy and infertility care."
+    description="Find answers to common questions about pregnancy, infertility, PCOS, gynaecological conditions, fertility treatment and women's health."
+    keywords={[
+      "gynaecology FAQs",
+      "pregnancy FAQs",
+      "infertility FAQs",
+      "fertility questions",
+      "PCOS FAQs",
+      "women's health FAQs",
+    ]}
   />
 )

@@ -93,7 +93,7 @@ export const Head = ({ data, location }) => {
 
   return (
     <Seo
-      title={post?.title || "Blog"}
+      title={`${post?.title || "Blog"} | Dr. Sushree Patra`}
       pathname={location.pathname}
       description={description || undefined}
       type="article"
@@ -104,7 +104,7 @@ export const Head = ({ data, location }) => {
         datePublished: post?.date,
         dateModified: post?.modified,
         author: { "@type": "Person", name: "Dr. Sushree Patra" },
-        mainEntityOfPage: `https://drsushreepatra.com${location.pathname}`,
+        mainEntityOfPage: `https://www.drsushreepatra.com${location.pathname}`,
       }}
     />
   )

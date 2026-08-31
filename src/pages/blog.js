@@ -192,8 +192,22 @@ export default BlogPage
 
 export const Head = ({ location }) => (
   <Seo
-    title="Women's Health Blog"
+    title="Women's Health, Pregnancy & Gynaecology Blog | Dr. Sushree Patra"
     pathname={location.pathname}
-    description="Read evidence-based articles from Dr. Sushree Patra about pregnancy, gynaecology, fertility and women's health."
+    description="Read practical, evidence-based articles by Dr. Sushree Patra on pregnancy, infertility, PCOS, menstrual health and women's gynaecological care."
+    keywords={[
+      "women's health blog",
+      "pregnancy health blog",
+      "gynaecology blog",
+      "infertility blog",
+      "PCOS blog",
+      "pregnancy advice",
+    ]}
+    schema={{
+      "@context": "https://schema.org",
+      "@type": ["Blog", "CollectionPage"],
+      name: "Dr. Sushree Patra Women's Health Blog",
+      url: "https://www.drsushreepatra.com/blog/",
+    }}
   />
 )

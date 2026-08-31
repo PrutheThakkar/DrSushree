@@ -10,6 +10,7 @@ import Obstetrics from "../components/Obstetrics"
 import Gynaecology from "../components/Gynaecology"
 import HerApproach from "../components/HerApproach"
 import CareStages from "../components/care-stages"
+import InfertilityScroll from "../components/InfertilityScroll"
 import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim"
 import preloaderLogo from "../images/sushree-preloader-logo.svg"
 import Seo from "../components/seo"
@@ -325,38 +326,12 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
 
-        <section className="Infertility">
-          <div className="container">
-            <div className="title-wrap">
-              <h2 className="title">
-                {infertilityTitle}
-                <span className="sub-title">{infertilitySubtitle}</span>
-              </h2>
-            </div>
-
-            <ul className="infertility-wrapper">
-              {infertilityListnew.map((item, index) => (
-                <li key={index}>
-                  <div className="wrap">
-                    {item?.title && (
-                      <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
-                    )}
-                    {item?.subtitle && (
-                      <p dangerouslySetInnerHTML={{ __html: item.subtitle }} />
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            {infertilityPara && (
-              <p
-                className="content"
-                dangerouslySetInnerHTML={{ __html: infertilityPara }}
-              />
-            )}
-          </div>
-        </section>
+        <InfertilityScroll
+          title={infertilityTitle}
+          subtitle={infertilitySubtitle}
+          paragraph={infertilityPara}
+          items={infertilityListnew}
+        />
 
         <HerApproach data={herApproachData} />
       </div>
@@ -527,14 +502,32 @@ export default IndexPage
 
 export const Head = ({ location }) => (
   <Seo
+    title="Dr. Sushree Patra | Obstetrician & Gynaecologist in Mira Road"
     pathname={location.pathname}
-    description="Consult Dr. Sushree Patra for personalised obstetrics, gynaecology, infertility and minimally invasive surgery care."
+    description="Dr. Sushree Patra is an obstetrician and gynaecologist in Mira Road offering pregnancy care, infertility management and minimally invasive gynaecological surgery."
+    keywords={[
+      "gynaecologist in Mira Road",
+      "obstetrician in Mira Road",
+      "gynecologist Mira Road",
+      "pregnancy doctor Mira Road",
+      "women's health doctor Mira Road",
+      "Dr. Sushree Patra",
+    ]}
     schema={{
       "@context": "https://schema.org",
       "@type": "Physician",
       name: "Dr. Sushree Patra",
-      url: "https://drsushreepatra.com/",
+      url: "https://www.drsushreepatra.com/",
       medicalSpecialty: ["Obstetrics", "Gynecology"],
+      telephone: "+91 8249321325",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Wockhardt Hospitals, Evershine Road",
+        addressLocality: "Mira Road East",
+        addressRegion: "Maharashtra",
+        postalCode: "401107",
+        addressCountry: "IN",
+      },
     }}
   />
 )

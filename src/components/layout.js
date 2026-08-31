@@ -14,6 +14,7 @@ import "../css/obstetrics.css"
 import "../css/faq.css"
 import "../css/insidepage.css"
 import "../css/about.css"
+import "../css/sitemap.css"
 
 const Layout = ({ children }) => {
   useEffect(() => {

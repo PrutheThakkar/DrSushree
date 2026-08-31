@@ -1,0 +1,234 @@
+.sitemap-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 155px 0 75px;
+  text-align: center;
+  background: #e9eee9;
+}
+
+.sitemap-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.sitemap-eyebrow {
+  margin-bottom: 10px;
+  color: #5f8f7a;
+  font-family: "DMSans-Regular";
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sitemap-hero h1 {
+  margin: 0;
+  color: #2f3a36;
+  font-family: "DMSans-Regular";
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.sitemap-hero > .container > p:last-child {
+  max-width: 650px;
+  margin: 18px auto 0;
+  color: #545e59;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.sitemap-page {
+  /* padding: 75px 0 90px; */
+}
+
+.sitemap-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.sitemap-intro h2,
+.sitemap-blog-heading h2 {
+  margin: 0;
+  color: #2f3a36;
+  font-family: "DMSans-Regular";
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.sitemap-intro p {
+  max-width: 470px;
+  color: #68716d;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sitemap-card {
+  min-height: 330px;
+  padding: 30px 28px;
+  border: 1px solid rgba(95, 143, 122, 0.2);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sitemap-card-featured {
+  background: #2f3a36;
+}
+
+.sitemap-card-number {
+  color: #5f8f7a;
+  font-family: "DMSans-Regular";
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.sitemap-card h2 {
+  margin: 20px 0 24px;
+  color: #2f3a36;
+  font-family: "DMSans-Regular";
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.sitemap-card-featured h2,
+.sitemap-card-featured a {
+  color: #fff;
+}
+
+.sitemap-card ul,
+.sitemap-blog-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sitemap-card li + li,
+.sitemap-blog-panel li + li {
+  border-top: 1px solid rgba(95, 143, 122, 0.18);
+}
+
+.sitemap-card-featured li + li {
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.sitemap-card a,
+.sitemap-blog-panel a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 0;
+  color: #39433f;
+  font-size: 15px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.sitemap-card a:hover,
+.sitemap-blog-panel a:hover {
+  color: #5f8f7a;
+  transform: translateX(4px);
+}
+
+.sitemap-card a svg,
+.sitemap-blog-panel a svg {
+  flex: 0 0 21px;
+  width: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.sitemap-blog-panel {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+  margin-top: 45px;
+  padding: 42px 44px;
+  border-radius: 12px;
+  background: #e3ebe5;
+}
+
+.sitemap-blog-heading .sitemap-eyebrow {
+  margin-bottom: 12px;
+}
+
+.sitemap-blog-panel a {
+  padding: 14px 0;
+}
+
+@media (max-width: 1024px) {
+  .sitemap-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sitemap-blog-panel {
+    gap: 40px;
+    padding: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sitemap-hero {
+    padding: 120px 0 55px;
+  }
+
+  .sitemap-hero > .container > p:last-child {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .sitemap-page {
+    /* padding: 55px 0 70px; */
+  }
+
+  .sitemap-intro {
+    display: block;
+    margin-bottom: 34px;
+  }
+
+  .sitemap-intro p {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .sitemap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sitemap-card {
+    min-height: 0;
+    padding: 30px 26px;
+    border-radius: 10px;
+  }
+
+  .sitemap-card h2 {
+    margin: 20px 0 24px;
+    font-size: 23px;
+  }
+
+  .sitemap-blog-panel {
+    display: block;
+    margin-top: 42px;
+    padding: 34px 26px;
+    border-radius: 10px;
+  }
+
+  .sitemap-blog-panel ul {
+    margin-top: 22px;
+  }
+}

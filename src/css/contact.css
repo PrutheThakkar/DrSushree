@@ -18,7 +18,7 @@
   display: block;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #2F3A36;
+  color: #2f3a36;
 }
 .contact-page .contact-form .form-row input,
 .contact-page .contact-form .form-row textarea {
@@ -26,9 +26,9 @@
   padding: 12px 14px;
   border-radius: 6px;
   border: 1px solid rgba(47, 58, 54, 0.08);
-  background: #FBFBFB;
+  background: #fbfbfb;
   font-size: 15px;
-  color: #2F3A36;
+  color: #2f3a36;
   transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .contact-page .contact-form .form-row input:focus,
@@ -60,7 +60,7 @@
 }
 .contact-page .contact-info .info-block h3 {
   margin-bottom: 6px;
-  color: #2F3A36;
+  color: #2f3a36;
 }
 .contact-page .contact-info .info-block a {
   color: var(--blue-mid, #1e4d7b);
@@ -83,12 +83,11 @@
   .contact-page .contact-info {
     order: 2;
   }
-}/*# sourceMappingURL=contact.css.map */
-
-
+}
 
 .Contact-section.contact-page {
-  padding: 90px 0 100px;
+  margin-bottom: 120px;
+  padding: 90px 0 64px;
 }
 
 .Contact-section .title-wrap {
@@ -107,9 +106,21 @@
 
 .Contact-section .contact-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 310px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 32px;
-  align-items: start;
+  align-items: stretch;
+}
+
+.Contact-section .contact-image-wrap {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.Contact-section .contact-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .Contact-section .contact-form-wrap {
@@ -182,7 +193,6 @@
 
 .appointment-form input,
 .appointment-form textarea {
-  /* width: 100%; */
   border: 1px solid #d8d4cd;
   background: #fff;
   border-radius: 12px;
@@ -259,7 +269,7 @@
 
 @media (max-width: 767px) {
   .Contact-section.contact-page {
-    padding: 70px 0 80px;
+    padding: 70px 0 48px;
   }
 
   .Contact-section .title-wrap {

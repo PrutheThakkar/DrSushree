@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react"
+import { Formik, Field, Form, ErrorMessage } from "formik"
+import * as Yup from "yup"
 
 // const WEBSITE_URL = process.env.GATSBY_WEBSITE_URL;
 // const CF7_FORM_ID = process.env.GATSBY_CF7_FORM_ID || "60";
 
 const AppointmentForm = () => {
-  const [formMessage, setFormMessage] = useState("");
+  const [formMessage, setFormMessage] = useState("")
 
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
@@ -16,54 +16,54 @@ const AppointmentForm = () => {
       .email("Invalid email format")
       .required("Email is required"),
     message: Yup.string().required("Message is required"),
-  });
+  })
 
-const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
-  try {
-    setFormMessage("");
+  const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
+    try {
+      setFormMessage("")
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        phone: values.phone,
-        email: values.email,
-        message: values.message,
-      }),
-    });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phone: values.phone,
+          email: values.email,
+          message: values.message,
+        }),
+      })
 
-    const data = await response.json().catch(() => ({}));
+      const data = await response.json().catch(() => ({}))
 
-    console.log("API response:", data);
+      console.log("API response:", data)
 
-    if (!response.ok || !data.success) {
-    throw new Error(
-  typeof data?.details === "object"
-    ? JSON.stringify(data.details)
-    : data?.details || data?.message || "Something went wrong"
-);
+      if (!response.ok || !data.success) {
+        throw new Error(
+          typeof data?.details === "object"
+            ? JSON.stringify(data.details)
+            : data?.details || data?.message || "Something went wrong"
+        )
+      }
+
+      resetForm()
+
+      setFormMessage(
+        "Thank you! Your message has been sent. We'll get back to you shortly."
+      )
+    } catch (error) {
+      console.error("Form submit error:", error)
+
+      setFormMessage(
+        error?.message ||
+          "There was an error trying to send your message. Please try again later."
+      )
+    } finally {
+      setSubmitting(false)
     }
-
-    resetForm();
-
-    setFormMessage(
-      "Thank you! Your message has been sent. We'll get back to you shortly."
-    );
-  } catch (error) {
-    console.error("Form submit error:", error);
-
-    setFormMessage(
-      error?.message ||
-        "There was an error trying to send your message. Please try again later."
-    );
-  } finally {
-    setSubmitting(false);
   }
-};
 
   return (
     <Formik
@@ -80,22 +80,38 @@ const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
       {({ isSubmitting }) => (
         <Form className="appointment-form">
           <div className="form-group">
-            <Field type="text" name="firstName" placeholder="First Name" />
+            <Field
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+            />
             <ErrorMessage name="firstName" component="div" className="error" />
           </div>
 
           <div className="form-group">
-            <Field type="text" name="lastName" placeholder="Last Name" />
+            <Field
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+            />
             <ErrorMessage name="lastName" component="div" className="error" />
           </div>
 
           <div className="form-group">
-            <Field type="tel" name="phone" placeholder="Phone Number" />
+            <Field
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+            />
             <ErrorMessage name="phone" component="div" className="error" />
           </div>
 
           <div className="form-group">
-            <Field type="email" name="email" placeholder="Email" />
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+            />
             <ErrorMessage name="email" component="div" className="error" />
           </div>
 
@@ -129,7 +145,7 @@ const handleFormSubmit = async (values, { resetForm, setSubmitting }) => {
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
-export default AppointmentForm;
+export default AppointmentForm

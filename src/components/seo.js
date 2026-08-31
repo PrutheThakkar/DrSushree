@@ -13,6 +13,7 @@ const Seo = ({
   pathname = "/",
   image,
   type = "website",
+  keywords = [],
   noIndex = false,
   schema,
   children,
@@ -30,7 +31,7 @@ const Seo = ({
     }
   `)
   const metadata = site.siteMetadata
-  const pageTitle = title ? `${title} | ${metadata.title}` : metadata.title
+  const pageTitle = title || metadata.title
   const metaDescription = description || metadata.description
   const canonicalUrl = absoluteUrl(metadata.siteUrl, pathname)
   const socialImage = image ? absoluteUrl(metadata.siteUrl, image) : null
@@ -41,6 +42,12 @@ const Seo = ({
       <html lang="en-IN" />
       <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
+      {keywords.length > 0 && (
+        <meta
+          name="keywords"
+          content={Array.isArray(keywords) ? keywords.join(", ") : keywords}
+        />
+      )}
       <meta
         name="robots"
         content={

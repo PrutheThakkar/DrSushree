@@ -80,6 +80,7 @@ const Footer = () => {
               {/* <li><Link to="/explore">Explore</Link></li> */}
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/sitemap">Sitemap</Link></li>
             </ul>
           </div>
           <div className="col col-4">

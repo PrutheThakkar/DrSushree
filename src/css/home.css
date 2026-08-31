@@ -59,8 +59,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: #F6F7F5;
-  background: linear-gradient(0deg, rgb(246, 247, 245) 0%, rgba(246, 247, 245, 0) 35%);
+  background: #f6f7f5;
+  background: linear-gradient(
+    0deg,
+    rgb(246, 247, 245) 0%,
+    rgba(246, 247, 245, 0) 35%
+  );
   position: absolute;
   bottom: 0;
   z-index: 9;
@@ -91,7 +95,11 @@
 .banner-section .div-wrapper .btn-wrapper .btn {
   padding: 15px 40px;
   display: inline-block;
-  background: radial-gradient(circle, rgb(47, 58, 54) 15%, rgb(95, 143, 122) 100%);
+  background: radial-gradient(
+    circle,
+    rgb(47, 58, 54) 15%,
+    rgb(95, 143, 122) 100%
+  );
   color: #fff;
   color: #fff;
   border-radius: 50px;
@@ -115,7 +123,7 @@
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 }
 /* 
@@ -186,55 +194,52 @@
   }
 } */
 
-
 /* Womens-Healthcare start new*/
 
-.Womens-Healthcare .Womens-Healthcare-wrapper{
-display: flex;
-align-items: center;
+.Womens-Healthcare .Womens-Healthcare-wrapper {
+  display: flex;
+  align-items: center;
 }
-.Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
-width: 40%;
-height: clamp(360px, 70vh, 562px);
-}
-.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
-width: 60%;
-padding-left: 80px;
-}
-@media (max-width:1000px) {
-  .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
-width: 60%;
-
-} 
-  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
+.Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap {
   width: 40%;
-  
+  height: clamp(360px, 70vh, 562px);
+}
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap {
+  width: 60%;
+  padding-left: 80px;
+}
+@media (max-width: 1000px) {
+  .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap {
+    width: 60%;
   }
-  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
-  padding-left: 30px;
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap {
+    width: 40%;
+  }
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap {
+    padding-left: 30px;
   }
 }
-@media (max-width:767px) {
-  .Womens-Healthcare .Womens-Healthcare-wrapper{
-flex-direction: column;
-}
-   .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap{
-width: 100%;
-margin-bottom: 40px;
-height: 400px;
-} 
+@media (max-width: 767px) {
+  .Womens-Healthcare .Womens-Healthcare-wrapper {
+    flex-direction: column;
+  }
+  .Womens-Healthcare .Womens-Healthcare-wrapper .img-wrap {
+    width: 100%;
+    margin-bottom: 40px;
+    height: 400px;
+  }
 
-  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap{
-  width: 100%;
-  padding-left: 0;
+  .Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap {
+    width: 100%;
+    padding-left: 0;
   }
 }
-.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap h2{
-text-align: left;
-margin-bottom: 20px;
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap h2 {
+  text-align: left;
+  margin-bottom: 20px;
 }
-.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap p{
-font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
+.Womens-Healthcare .Womens-Healthcare-wrapper .text-wrap p {
+  /* font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem); */
 }
 
 /* Womens-Healthcare ends new*/
@@ -248,7 +253,7 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding: 0 0 48px;
+  padding: 0;
   --cards-visible: 4.2;
 }
 
@@ -310,7 +315,7 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   transition: all 0.8s;
 }
 .care-card:hover {
-  box-shadow: 0 8px 36px rgba(60, 107, 87, 0.18);
+  /* box-shadow: 0 8px 36px rgba(60, 107, 87, 0.18); */
   transform: translateY(-4px);
 }
 .care-card__img-wrap {
@@ -344,7 +349,7 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
 }
@@ -354,10 +359,14 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
 }
 .care-card__body {
   padding: 20px 22px 24px;
+  min-height: 70px;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  z-index: 2;
+  background: #f6f7f5;
 }
 .care-card__body h3 {
   /* font-family: "Cormorant Garamond", "Georgia", serif; */
@@ -366,6 +375,10 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   color: #2b2b2b;
   margin: 0;
   line-height: 1.3;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
 }
 .care-card__body p {
   font-family: "DM Sans", sans-serif;
@@ -422,7 +435,7 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .Obstetrics .ObstetricsSwiper .swiper-slide .img-title {
   position: absolute;
@@ -433,7 +446,7 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
 }
 @media (max-width: 1366px) {
   .Obstetrics .ObstetricsSwiper .swiper-slide .img-title {
-     font-size: clamp(1.125rem, 0.9696rem + 0.663vw, 1.5rem);
+    font-size: clamp(1.125rem, 0.9696rem + 0.663vw, 1.5rem);
   }
 }
 @media (max-width: 900px) {
@@ -443,18 +456,22 @@ font-size: clamp(1rem, -0.5411rem + 1.8051vw, 1.625rem);
   }
 }
 
-.Obstetrics .ObstetricsSwiper .swiper-slide .slide-title{
-position: relative;
-z-index: 99;
-display: block;
+.Obstetrics .ObstetricsSwiper .swiper-slide .slide-title {
+  position: relative;
+  z-index: 99;
+  display: block;
 }
 
 .Obstetrics .ObstetricsSwiper .swiper-slide::before {
- content: "";
- height: 100%;
- width: 100%;
- background: #E2ECE8;
-background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.11) 57%);
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #e2ece8;
+  background: linear-gradient(
+    0deg,
+    rgba(226, 236, 232, 1) 0%,
+    rgba(94, 94, 94, 0.11) 57%
+  );
   position: absolute;
   left: 0;
   bottom: 0;
@@ -482,6 +499,60 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 }
 .Obstetrics {
   position: relative;
+  background: #f6f7f5;
+}
+.Obstetrics .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.Obstetrics .title-wrap {
+  margin-bottom: clamp(70px, 8vw, 135px);
+}
+.Obstetrics .obstetrics-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* column-gap: clamp(35px, 6vw, 110px); */
+  row-gap: clamp(75px, 9vw, 145px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.Obstetrics .obstetrics-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+.Obstetrics .obstetrics-card img {
+  display: block;
+  width: clamp(140px, 11vw, 200px);
+  height: clamp(140px, 11vw, 200px);
+  object-fit: contain;
+}
+.Obstetrics .obstetrics-card h3 {
+  max-width: 420px;
+  margin: clamp(22px, 2vw, 34px) 0 0;
+  color: #5e6461;
+  font-family: "DMSans-Regular";
+  font-size: clamp(1rem, 0.65rem + 0.55vw, 1.375rem);
+  font-weight: normal;
+  line-height: 1.35;
+}
+@media (max-width: 900px) {
+  .Obstetrics .obstetrics-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* column-gap: 30px; */
+  }
+}
+@media (max-width: 520px) {
+  .Obstetrics .title-wrap {
+    margin-bottom: 55px;
+  }
+  .Obstetrics .obstetrics-list {
+    grid-template-columns: 1fr;
+    row-gap: 55px;
+  }
 }
 .Obstetrics .swiper-pagination-bullet {
   width: 10px;
@@ -519,7 +590,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   position: absolute;
   inset: 0;
   width: 0%;
-  background: #2F3A36;
+  background: #2f3a36;
   border-radius: 999px;
 }
 .Obstetrics {
@@ -542,7 +613,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 }
 .gynaecology-section::before {
   content: "";
-  background: url(../images/page-new-bg.svg);
+  background: none;
   background-size: 100;
   background-position: center;
   position: absolute;
@@ -574,12 +645,20 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   border-radius: 10px;
   overflow: hidden;
 }
-.gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide
+  .text-wrap {
   position: absolute;
   bottom: -30%;
   top: auto;
-  background: #F6F7F5;
-  background: linear-gradient(0deg, rgb(246, 247, 245) 0%, rgba(246, 247, 245, 0) 46%);
+  background: #f6f7f5;
+  background: linear-gradient(
+    0deg,
+    rgb(246, 247, 245) 0%,
+    rgba(246, 247, 245, 0) 46%
+  );
   width: 100%;
   height: 100%;
   display: flex;
@@ -589,30 +668,65 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   text-align: left;
   transition: all 0.8s;
 }
-.gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap p, .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap h3 {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide
+  .text-wrap
+  p,
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide
+  .text-wrap
+  h3 {
   padding: 0 20px;
 }
-.gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap h3 {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide
+  .text-wrap
+  h3 {
   margin-bottom: 10px;
 }
-.gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap .wrap {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide
+  .text-wrap
+  .wrap {
   padding: 25px 41px 25px 40px;
 }
-@media (max-width:767px) {
-  .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap .wrap {
-  padding: 0;
+@media (max-width: 767px) {
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .text-wrap
+    .wrap {
+    padding: 0;
+  }
 }
-}
-.gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide.swiper-slide-active .text-wrap {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-wrapper
+  .swiper-slide.swiper-slide-active
+  .text-wrap {
   bottom: 0;
   transition-delay: 0.8s;
 }
 .gynaecology-section .gynaecology-mob-swiper {
   /* Pagination container — the pill bar */
 }
-@media (max-width:767px) {
-  .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide .text-wrap p{
-  display: none;
+@media (max-width: 767px) {
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .text-wrap
+    p {
+    display: none;
   }
 }
 .gynaecology-section .gynaecology-mob-swiper .swiper-pagination {
@@ -661,7 +775,9 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   background: #d6d5cf;
 }
 @media (max-width: 767px) {
-  .gynaecology-section .gynaecology-mob-swiper .swiper-pagination-bullet-active {
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-pagination-bullet-active {
     width: 25px;
   }
 }
@@ -673,13 +789,15 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   position: absolute;
   inset: 0;
   width: 0%;
-  background: #2F3A36;
+  background: #2f3a36;
   border-radius: 999px;
 }
 .gynaecology-section .gynaecology-mob-swiper {
   /* Trigger fill animation on active bullet */
 }
-.gynaecology-section .gynaecology-mob-swiper .swiper-pagination-bullet-active::after {
+.gynaecology-section
+  .gynaecology-mob-swiper
+  .swiper-pagination-bullet-active::after {
   animation: bulletFill var(--swiper-autoplay-delay, 3000ms) linear forwards;
 }
 @keyframes bulletFill {
@@ -710,19 +828,26 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   padding: 20px 16px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.25s ease;
+  transform: translateX(0);
+  transition: transform 1s ease, background 0.25s ease;
+  transition: all 0.8s;
 }
 @media (max-width: 1200px) {
   .procedure-list__item {
     padding: 15px 16px;
   }
 }
-.procedure-list__item:hover .procedure-list__marker, .procedure-list__item--active .procedure-list__marker {
-  background: #1e2a2a;
+.procedure-list__item:hover {
+  transform: translateX(25px);
+  padding-left: 35px;
+}
+.procedure-list__item:hover .procedure-list__marker {
+  background: #5f8f7a;
+  border-color: #5f8f7a;
   opacity: 1;
 }
-.procedure-list__item:hover .procedure-list__name, .procedure-list__item--active .procedure-list__name {
-  color: #1e2a2a;
+.procedure-list__item:hover .procedure-list__name {
+  color: #5f8f7a;
 }
 .procedure-list__inner {
   display: flex;
@@ -738,14 +863,11 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   border-radius: 2px;
   margin-top: 4px;
   opacity: 0;
-  transition: opacity 0.25s ease, background 0.25s ease;
-}
-.procedure-list__item--active .procedure-list__marker {
-  background: #1e2a2a;
-  opacity: 1;
+  transition: opacity 0.25s ease, background 0.25s ease, border-color 0.25s ease;
 }
 .procedure-list__name {
   margin-bottom: 6px;
+  color: #1e2a2a;
   transition: color 0.25s ease;
 }
 .procedure-list__desc {
@@ -776,7 +898,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 .procedure-images__img-wrap--active {
@@ -788,16 +910,17 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 
 .Benefits-laparoscopic {
   position: relative;
+  margin-bottom: 0;
 }
 
 .Benefits-laparoscopic::before {
-    content: "";
-    background: url(/static/page-new-bg-80ff547….svg) center center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: rotate(17deg);
-    z-index: -1;
+  content: "";
+  background: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(17deg);
+  z-index: -1;
 }
 .Benefits-laparoscopic .benef-wrapp {
   display: flex;
@@ -841,6 +964,17 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 .Benefits-laparoscopic .benef-wrapp li .text-wrap h3 {
   margin-bottom: 15px;
 }
+.Benefits-laparoscopic .benef-wrapp li .text-wrap p {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+.Benefits-laparoscopic .benef-wrapp li:hover .text-wrap p {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 @media (max-width: 1680px) {
   .Benefits-laparoscopic .benef-wrapp li .text-wrap h3 {
     margin-bottom: 10px;
@@ -875,6 +1009,11 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   .Benefits-laparoscopic .benef-wrapp li:hover {
     transform: translateY(-10px) !important;
   }
+  .Benefits-laparoscopic .benef-wrapp li .text-wrap p {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
 }
 .Benefits-laparoscopic .benef-wrapp li:hover .img-wrap::before {
   opacity: 0;
@@ -901,7 +1040,8 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   display: flex;
   justify-content: flex-end;
 }
-.Comprehensive .navigation .swiper-button-next, .Comprehensive .navigation .swiper-button-prev {
+.Comprehensive .navigation .swiper-button-next,
+.Comprehensive .navigation .swiper-button-prev {
   position: relative;
   bottom: 0;
   right: auto;
@@ -911,13 +1051,15 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   margin: 0 5px;
   width: 15px;
   height: 15px;
-  color: #2F3A36;
-  border: 1px solid #2F3A36;
+  color: #2f3a36;
+  border: 1px solid #2f3a36;
 }
-.Comprehensive .navigation .swiper-button-next.swiper-button-disabled, .Comprehensive .navigation .swiper-button-prev.swiper-button-disabled {
-  border: 1px solid #2F3A36;
+.Comprehensive .navigation .swiper-button-next.swiper-button-disabled,
+.Comprehensive .navigation .swiper-button-prev.swiper-button-disabled {
+  border: 1px solid #2f3a36;
 }
-.Comprehensive .navigation .swiper-button-next:hover, .Comprehensive .navigation .swiper-button-prev:hover {
+.Comprehensive .navigation .swiper-button-next:hover,
+.Comprehensive .navigation .swiper-button-prev:hover {
   background: #5f8f7a;
   color: #fff;
   border: 1px solid #5f8f7a;
@@ -966,8 +1108,8 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   border: 1px solid rgba(100, 140, 130, 0.2);
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   white-space: nowrap;
   transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -1005,7 +1147,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 
@@ -1025,7 +1167,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 }
 .Her-Approach::before {
   content: "";
-  background: url(../images/page-new-bg.svg);
+  background: none;
   background-size: 100;
   background-position: center;
   position: absolute;
@@ -1039,10 +1181,10 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   align-items: center;
   margin: 0 auto;
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .Her-Approach .her-approach__content {
-  flex-direction: column-reverse;
-}
+    flex-direction: column-reverse;
+  }
 }
 
 .her-list {
@@ -1056,7 +1198,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   width: 50%;
   padding-right: 50px;
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .her-list {
     width: 100%;
     padding-right: 0;
@@ -1067,12 +1209,16 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.her-list__item--active .her-list__marker, .her-list__item:hover .her-list__marker {
-  background: #1e2a2a;
+.her-list__item--active .her-list__marker,
+.her-list__item:hover .her-list__marker {
+  background: #4e8474;
   opacity: 1;
 }
-.her-list__item--active .her-list__name, .her-list__item:hover .her-list__name {
-  color: #1e2a2a;
+.her-list__item:hover .her-list__name {
+  color: #4e8474;
+}
+.her-list__item:hover {
+  padding-left: 25px;
 }
 .her-list__inner {
   display: flex;
@@ -1084,7 +1230,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   height: 14px;
   min-width: 14px;
   background: transparent;
-  border: 1.5px solid #1e2a2a;
+  border: 1.5px solid #4e8474;
   border-radius: 2px;
   margin-top: 4px;
   opacity: 0;
@@ -1097,7 +1243,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 .her-list__name {
   margin-bottom: 10px;
   font-weight: 500;
-  color: #7a8a8a;
+  color: #1e2a2a;
   transition: color 0.25s ease;
 }
 
@@ -1105,7 +1251,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   flex: 1;
   width: 50%;
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .her-images {
     width: 100%;
     margin-bottom: 30px;
@@ -1120,7 +1266,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   overflow: hidden;
   height: 533px;
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .her-images__frame {
     height: 300px;
   }
@@ -1137,7 +1283,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
 }
 .her-images__img-wrap--active {
@@ -1145,6 +1291,296 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
 }
 .her-images__img-wrap--leaving {
   opacity: 0;
+}
+
+/* Approach to care: wide image with interactive overlay cards */
+.Her-Approach {
+  margin-bottom: clamp(40px, 6.25vw, 120px);
+  padding: clamp(70px, 8vw, 120px) 0 0;
+  overflow: hidden;
+}
+.Her-Approach::before {
+  display: none;
+}
+.Her-Approach .title-wrap {
+  margin-bottom: clamp(40px, 5vw, 70px);
+  text-align: center;
+}
+.her-approach__stage {
+  position: relative;
+  min-height: 640px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #dfe5e1;
+}
+.her-approach__stage::after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(20, 29, 26, 0.38));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.her-approach__stage:hover::after,
+.her-approach__stage:focus-within::after {
+  opacity: 1;
+}
+.her-approach__stage .her-images__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.her-approach__stage .her-images__img,
+.her-approach__stage .her-images__img .gatsby-image-wrapper,
+.her-approach__stage .her-images__img img {
+  width: 100%;
+  height: 100%;
+}
+.her-approach__stage .her-images__img img {
+  object-fit: cover;
+  object-position: center;
+}
+.her-approach__stage .her-list {
+  position: absolute;
+  right: clamp(24px, 4.5vw, 72px);
+  bottom: 32px;
+  left: clamp(24px, 4.5vw, 72px);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.4vw, 24px);
+  width: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.her-approach__stage:hover .her-list,
+.her-approach__stage:focus-within .her-list {
+  opacity: 1;
+  transform: translateY(0);
+}
+.her-approach__stage .her-list__item {
+  display: flex;
+  width: 100%;
+  min-height: 142px;
+  padding: 16px 12px 14px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  color: #43504b;
+  background: rgba(244, 244, 238, 0.75);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.her-approach__stage .her-list__item:hover,
+.her-approach__stage .her-list__item:focus-visible,
+.her-approach__stage .her-list__item--active {
+  padding-left: 12px;
+  color: #2f3a36;
+  background: rgba(255, 255, 250, 0.9);
+  transform: translateY(-5px);
+  outline: none;
+}
+.her-list__number {
+  display: block;
+  margin-bottom: 20px;
+  font-family: "NotoSerifEthiopic-Regular";
+  font-size: clamp(27px, 2vw, 38px);
+  line-height: 1;
+}
+.her-approach__stage .her-list__name {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(14px, 1.1vw, 18px);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+@media (max-width: 1024px) {
+  .her-approach__stage {
+    min-height: 580px;
+  }
+  .her-approach__stage .her-list {
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    gap: 10px;
+  }
+  .her-approach__stage .her-list__item {
+    min-height: 125px;
+    padding: 14px 8px 12px;
+  }
+  .her-list__number {
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .Her-Approach {
+    padding: 60px 0 0;
+  }
+  .Her-Approach .title-wrap {
+    margin-bottom: 32px;
+  }
+  .her-approach__stage {
+    min-height: 570px;
+    overflow: visible;
+    border-radius: 12px;
+  }
+  .her-approach__stage::after {
+    display: none;
+  }
+  .her-approach__stage .her-images__frame {
+    height: 340px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .her-approach__stage .her-list {
+    right: 10px;
+    bottom: 0;
+    left: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    opacity: 1;
+    transform: none;
+  }
+  .her-approach__stage .her-list li:last-child {
+    grid-column: 1 / -1;
+  }
+  .her-approach__stage .her-list__item {
+    min-height: 86px;
+    padding: 10px;
+    border-color: rgba(95, 143, 122, 0.18);
+    background: rgba(246, 247, 245, 0.94);
+    box-shadow: 0 7px 22px rgba(47, 58, 54, 0.08);
+  }
+  .her-approach__stage .her-list__item:hover,
+  .her-approach__stage .her-list__item:focus-visible,
+  .her-approach__stage .her-list__item--active {
+    padding-left: 10px;
+    transform: none;
+  }
+  .her-list__number {
+    margin-bottom: 6px;
+    font-size: 22px;
+  }
+  .her-approach__stage .her-list__name {
+    font-size: 13px;
+  }
+}
+
+.infertility-scroll {
+  position: relative;
+  margin-bottom: 0;
+}
+.infertility-scroll::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: none;
+  pointer-events: none;
+  z-index: -1;
+}
+.infertility-scroll__sticky {
+  overflow: hidden;
+  padding: clamp(60px, 7vw, 110px) 0;
+  /* background: #f8f9f7; */
+}
+.infertility-scroll .title-wrap {
+  margin-bottom: clamp(48px, 6vw, 90px);
+}
+.infertility-scroll__viewport {
+  width: 100%;
+  overflow: visible;
+}
+.infertility-scroll__track {
+  display: flex;
+  gap: clamp(24px, 2.5vw, 42px);
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  will-change: transform;
+}
+.infertility-scroll__card {
+  flex: 0 0 clamp(350px, 28vw, 455px);
+  min-height: 215px;
+  padding: clamp(24px, 2vw, 34px);
+  border: 1px solid rgba(95, 143, 122, 0.08);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fff 18%, #f2f6f1 100%);
+  box-shadow: 0 12px 32px rgba(45, 75, 63, 0.04);
+}
+.infertility-scroll__card-heading {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 42px;
+}
+.infertility-scroll__icon {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  overflow: hidden;
+  border: 1px solid rgba(95, 143, 122, 0.18);
+  border-radius: 50%;
+}
+.infertility-scroll__icon .gatsby-image-wrapper,
+.infertility-scroll__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.infertility-scroll__card h3 {
+  margin: 0;
+  color: #5f8f7a;
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  font-weight: 500;
+}
+.infertility-scroll__card p {
+  margin: 0;
+  color: #4d5552;
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
+  line-height: 1.45;
+}
+.infertility-scroll__footer {
+  max-width: 1050px;
+  margin: clamp(35px, 4vw, 60px) auto 0;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .infertility-scroll__sticky {
+    padding: 55px 0;
+  }
+  .infertility-scroll__viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .infertility-scroll__viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .infertility-scroll__track {
+    gap: 18px;
+    padding-right: 20px;
+  }
+  .infertility-scroll__card {
+    flex-basis: min(82vw, 360px);
+    min-height: 200px;
+  }
 }
 
 .Infertility {
@@ -1157,7 +1593,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(../images/page-new-bg.svg);
+  background: none;
   background-size: initial;
   background-repeat: no-repeat;
   background-position: center center;
@@ -1221,7 +1657,7 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   width: 32%;
   margin-left: 15%;
   height: 100%;
-  background: #E2ECE8;
+  background: #e2ece8;
   padding: 20px;
   border-radius: 10px;
 }
@@ -1305,4 +1741,4 @@ background: linear-gradient(0deg,rgba(226, 236, 232, 1) 0%, rgba(94, 94, 94, 0.1
   .Infertility p.content {
     font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
   }
-}/*# sourceMappingURL=home.css.map */
+} /*# sourceMappingURL=home.css.map */

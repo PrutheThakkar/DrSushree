@@ -6,7 +6,7 @@
  * Kroc Camen, and the H5BP dev community and team.
  */
 @font-face {
-  font-family: "Cabin_Condensed-Regular";
+  font-family: "DMSans-Regular";
   src: url("../fonts/Cabin_Condensed-Regular.ttf") format("truetype");
   font-weight: normal; /* Black */
   font-style: normal;
@@ -33,6 +33,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "DMSans-Regular";
+  src: url("../fonts/DMSans_24pt-Regular.ttf") format("truetype");
+  font-weight: normal; /* Black */
+  font-style: normal;
+  font-display: swap;
+}
 html {
   color: #545555;
 }
@@ -51,6 +58,7 @@ html {
   --btn-border: rgba(255,255,255,0.75);
   --font-head: 'Raleway', sans-serif;
   --font-body: 'Lato', sans-serif;
+  --section-gap: clamp(60px, 10.4167vw, 200px);
 }
 
 /* =========================
@@ -100,7 +108,7 @@ body::-webkit-scrollbar {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Cabin_Condensed-Regular";
+  font-family: "DMSans-Regular";
   color: #2F3A36;
   background: #F6F7F5;
   background-size: cover;
@@ -367,28 +375,8 @@ span {
 }
 
 section {
-  margin-bottom: 150px;
+  margin-bottom: var(--section-gap);
   overflow: hidden;
-}
-@media (max-width: 1920px) {
-  section {
-    margin-bottom: 120px;
-  }
-}
-@media (max-width: 1680px) {
-  section {
-    margin-bottom: 100px;
-  }
-}
-@media (max-width: 1440px) {
-  section {
-    margin-bottom: 80px;
-  }
-}
-@media (max-width: 1366px) {
-  section {
-    margin-bottom: 60px;
-  }
 }
 
 .container {
@@ -399,18 +387,18 @@ section {
 p {
   line-height: 1.5em;
   margin-bottom: clamp(0.625rem, -0.9161rem + 1.8051vw, 1.25rem);
-  font-size: clamp(1.05rem, 0.2586rem + 0.722vw, 1.125rem);
+  font-size: clamp(1.125rem, 0.8168rem + 0.3610vw, 1.25rem);
 }
-@media (max-width:767px) {
+@media (max-width:1365px) {
   p {
-    font-size: 14px;
+   font-size: clamp(0.875rem, 0.6339rem + 0.5030vw, 1.063rem);
   }
 }
 
 a {
   text-decoration: none;
   letter-spacing: 1px;
-  font-family: "Cabin_Condensed-Regular";
+  font-family: "DMSans-Regular";
 }
 
 ul li {
@@ -433,7 +421,7 @@ h1, h2 {
 }
 
 h3, h4 {
-  font-family: "Cabin_Condensed-Regular";
+  font-family: "DMSans-Regular";
   font-weight: normal;
 }
 
@@ -478,7 +466,7 @@ h2 {
   color: #000;
   font-size: clamp(1.125rem, 0.2004rem + 1.083vw, 1.5rem);
   margin-top: 10px;
-   font-family: "Cabin_Condensed-Regular";
+   font-family: "DMSans-Regular";
    font-weight: normal;
 }
 @media (max-width: 1366px) {
@@ -526,7 +514,7 @@ h3 {
 header {
   position: fixed;
   top: 3%;
-  z-index: 99;
+  z-index: 9999;
   width: 100%;
   /* box-shadow: 0 10px 30px rgba(60, 95, 77, 0.12); */
 }
@@ -1096,7 +1084,9 @@ footer .footer-wrap .right .col-4 svg {
 
 
 
-
+.inner-banner-section{
+  margin-bottom: 50px;
+}
 
 
 /* 

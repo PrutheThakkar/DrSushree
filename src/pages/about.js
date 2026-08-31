@@ -1,6 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  StaticImage,
+  getImage,
+  withArtDirection,
+} from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -98,7 +103,7 @@ const AboutPage = ({ data }) => {
 
       <section className="about-section">
         <div className="container">
-          <div className="title-wrap">
+          {/* <div className="title-wrap">
             {aboutDrTitle && (
               <h2 className="title">
                 {aboutDrTitle}
@@ -110,7 +115,7 @@ const AboutPage = ({ data }) => {
                 )}
               </h2>
             )}
-          </div>
+          </div> */}
 
           {aboutDrPara && (
             <div
@@ -121,7 +126,7 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      <section className="Infertility about">
+      <section className="clinical-philosophy">
         <div className="container">
           <div className="title-wrap">
             {clinicalPhilosophyTitle && (
@@ -140,20 +145,43 @@ const AboutPage = ({ data }) => {
           </div>
 
           {clinicalPhilosophyList.length > 0 && (
-            <ul className="infertility-wrapper">
-              {clinicalPhilosophyList.map((item, index) => (
-                <li key={index}>
-                  <div className="wrap">
+            <div className="clinical-philosophy__layout">
+              <ul className="clinical-philosophy__column">
+                {clinicalPhilosophyList.slice(0, 2).map((item, index) => (
+                  <li className="clinical-philosophy__card" key={index}>
                     {item?.title && (
                       <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
                     )}
                     {item?.subtitle && (
                       <p dangerouslySetInnerHTML={{ __html: item.subtitle }} />
                     )}
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="clinical-philosophy__image">
+                <StaticImage
+                  src="../images/clinical-philosophy-sec.webp"
+                  alt="Dr. Sushree Patra speaking with a patient"
+                  placeholder="blurred"
+                  loading="lazy"
+                  quality={90}
+                />
+              </div>
+
+              <ul className="clinical-philosophy__column">
+                {clinicalPhilosophyList.slice(2, 4).map((item, index) => (
+                  <li className="clinical-philosophy__card" key={index + 2}>
+                    {item?.title && (
+                      <h3 dangerouslySetInnerHTML={{ __html: item.title }} />
+                    )}
+                    {item?.subtitle && (
+                      <p dangerouslySetInnerHTML={{ __html: item.subtitle }} />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </section>
@@ -195,10 +223,25 @@ const AboutPage = ({ data }) => {
 
                       <div className="right">
                         {item?.paragraph && (
-                          <p
-                            className="pragraph-wrap"
-                            dangerouslySetInnerHTML={{ __html: item.paragraph }}
-                          />
+                          // <p
+                          //   className="pragraph-wrap"
+                          //   dangerouslySetInnerHTML={{ __html: item.paragraph }}
+                          // />
+                          <>
+                            <p className="pragraph-wrap">
+                              Beyond pregnancy and surgery, Dr. Patra manages a
+                              wide spectrum of gynaecological conditions
+                              including menstrual disorders, PCOS, fibroids,
+                              endometriosis, infertility (primary and
+                              secondary), and routine preventive care. 
+                            </p>
+                            <p className="pragraph-wrap">
+                              She recognises that many women delay seeking help
+                              for symptoms that deserve attention and aims to
+                              create a space where concerns are addressed
+                              without hesitation or judgment.
+                            </p>
+                          </>
                         )}
                       </div>
                     </li>
@@ -210,7 +253,7 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      <section className="Beyond-the-Clinic">
+      {/* <section className="Beyond-the-Clinic">
         <div className="container">
           <div className="title-wrap">
             {beyondTheClinicTitle && (
@@ -245,7 +288,7 @@ const AboutPage = ({ data }) => {
             />
           )}
         </div>
-      </section>
+      </section> */}
     </Layout>
   )
 }
@@ -334,8 +377,23 @@ export default AboutPage
 
 export const Head = ({ location }) => (
   <Seo
-    title="About"
+    title="Dr. Sushree Patra | Obstetrician & Gynaecologist in Mira Road"
     pathname={location.pathname}
-    description="Learn about Dr. Sushree Patra's patient-centred approach to obstetrics, gynaecology and minimally invasive surgery."
+    description="Learn about Dr. Sushree Patra, a consultant obstetrician and gynaecologist specialising in pregnancy care, infertility and minimally invasive gynaecological surgery."
+    keywords={[
+      "Dr. Sushree Patra",
+      "obstetrician gynaecologist Mira Road",
+      "gynaecologist Mira Road",
+      "infertility specialist Mira Road",
+      "laparoscopic gynaecologist Mira Road",
+      "women's health specialist",
+    ]}
+    schema={{
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      name: "Dr. Sushree Patra",
+      url: "https://www.drsushreepatra.com/about/",
+      medicalSpecialty: ["Obstetrics", "Gynecology"],
+    }}
   />
 )

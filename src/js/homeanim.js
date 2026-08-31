@@ -345,7 +345,6 @@ export const initHomeAnimations = () => {
       ".gynaecology-section .procedure-list__item",
       {
         y: 30,
-        opacity: 0,
         duration: 0.55,
         stagger: 0.12,
       },

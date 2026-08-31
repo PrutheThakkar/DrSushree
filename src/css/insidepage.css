@@ -345,3 +345,58 @@
     transform: rotate(-45deg);
   }
 }
+
+/* Shared expertise-page hero navigation */
+.expertise-hero > .container {
+  position: relative;
+  height: 100%;
+}
+
+.expertise-hero > .container > .img-wrap {
+  height: 100%;
+  overflow: hidden;
+}
+
+.expertise-hero {
+  margin-bottom: clamp(110px, 9vw, 175px);
+  overflow: visible;
+}
+
+@media (min-width: 1001px) {
+  .expertise-hero .expertise-list-header {
+    position: absolute;
+    left: 50%;
+    bottom: -34px;
+    width: 90%;
+    height: 70px;
+    transform: translateX(-50%);
+  }
+
+  .expertise-hero .expertise-list-header .btn-wrapper {
+    display: none;
+  }
+
+  .expertise-hero .expertise-list-wrap,
+  .expertise-hero .expertise-list-header ul {
+    width: 100%;
+    height: 100%;
+  }
+
+  .expertise-hero .expertise-list-header ul {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    overflow: visible;
+  }
+
+  .expertise-hero .expertise-list-header ul li {
+    flex: 1 1 0;
+    width: auto;
+    height: 52px;
+    padding: 8px 12px;
+  }
+}
