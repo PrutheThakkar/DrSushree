@@ -115,12 +115,12 @@ const InfertilityScroll = ({ title, subtitle, paragraph, items = [] }) => {
             </ul>
           </div>
 
-          {paragraph && (
+          {/* {paragraph && (
             <p
               className="infertility-scroll__footer"
               dangerouslySetInnerHTML={{ __html: paragraph }}
             />
-          )}
+          )} */}
         </div>
       </div>
     </section>

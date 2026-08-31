@@ -1,103 +1,128 @@
 .banner-section .hero-img {
-    width: 100%;
+  width: 100%;
 }
 
-.gatsby-image-wrapper{
-    width: 100%;
-    height: 100%;
+.gatsby-image-wrapper {
+  width: 100%;
+  height: 100%;
 }
 
 /* .swiper-horizontal{
     height: 767px;
 } */
 
-.Benefits-laparoscopic .benef-wrapp li .img-wrap{
-    height: 395px;
+.Benefits-laparoscopic .benef-wrapp li .img-wrap {
+  height: 395px;
+  width: 100%;
+}
+@media (max-width: 1920px) {
+  .Benefits-laparoscopic .benef-wrapp li .img-wrap {
+    height: 300px;
     width: 100%;
+  }
 }
-@media (max-width:1920px) {
-    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
-        height: 300px;
-        width: 100%;
-    }  
+@media (max-width: 1680px) {
+  .Benefits-laparoscopic .benef-wrapp li .img-wrap {
+    height: 250px;
+    width: 100%;
+  }
 }
-@media (max-width:1680px) {
-    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
-        height: 250px;
-        width: 100%;
-    }  
-}
-@media (max-width:1440px) {
-    .Benefits-laparoscopic .benef-wrapp li .img-wrap{
-        height: 200px;
-        width: 100%;
-    }  
+@media (max-width: 1440px) {
+  .Benefits-laparoscopic .benef-wrapp li .img-wrap {
+    height: 200px;
+    width: 100%;
+  }
 }
 
-.Obstetrics .container{
-    position: relative;
-    padding-bottom: 0;
+.Obstetrics .container {
+  position: relative;
+  padding-bottom: 0;
 }
 
-.Obstetrics .swiper-pagination{
-   justify-content: center;
-    width: auto !important;
-    left: 50% !important;
-    position: absolute;
-    bottom: 8px;
+.Obstetrics .swiper-pagination {
+  justify-content: center;
+  width: auto !important;
+  left: 50% !important;
+  position: absolute;
+  bottom: 8px;
 }
 
-
-
-.banner-section h1{
-    color: #5F8F7A;
+.banner-section h1 {
+  color: #5f8f7a;
 }
-.banner-section p.sub-text{
-    font-size: 24px;
-    font-family: "NotoSerifEthiopic-Regular";
-    margin-top: 10px;
+.banner-section p.sub-text {
+  font-size: 24px;
+  font-family: "NotoSerifEthiopic-Regular";
+  margin-top: 10px;
 }
-@media (max-width:1920px) {
-   .banner-section p.sub-text{
+@media (max-width: 1920px) {
+  .banner-section p.sub-text {
     font-size: 22px;
     font-family: "NotoSerifEthiopic-Regular";
     margin-top: 10px;
-} 
+  }
 }
-@media (max-width:1680px) {
-   .banner-section p.sub-text{
+@media (max-width: 1680px) {
+  .banner-section p.sub-text {
     font-size: 20px;
     font-family: "NotoSerifEthiopic-Regular";
     margin-top: 10px;
-} 
+  }
 }
-@media (max-width:1440px) {
-   .banner-section p.sub-text{
+@media (max-width: 1440px) {
+  .banner-section p.sub-text {
     font-size: 18px;
     font-family: "NotoSerifEthiopic-Regular";
     margin-top: 10px;
-} 
+  }
 }
-@media (max-width:1280px) {
-   .banner-section p.sub-text{
+@media (max-width: 1280px) {
+  .banner-section p.sub-text {
     font-size: 16px;
     font-family: "NotoSerifEthiopic-Regular";
     margin-top: 10px;
-} 
-   .banner-section p.sub-text br{
-   display: none;
-} 
+  }
+  .banner-section p.sub-text br {
+    display: none;
+  }
 }
 
-@media (max-width: 767px) {
-    .banner-section {
-        height: 500px;
-        padding-bottom: 100px;
-    }
+@media (max-width: 1024px) {
+  .banner-section {
+    height: clamp(620px, 90svh, 780px);
+    padding-bottom: 0;
+  }
 }
-@media (max-width:767px) {
-    
-    .banner-section .div-wrapper{
-    top: 72%;
-    }
+@media (max-width: 1024px) {
+  .banner-section .div-wrapper {
+    top: auto;
+    bottom: 24px;
+    width: calc(100% - 32px);
+    padding: 18px 16px;
+  }
+
+  .banner-section h1 {
+    color: #29463c;
+    font-size: clamp(1.55rem, 5.2vw, 2.2rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+    text-shadow: 0 2px 18px rgba(246, 247, 245, 0.92);
+  }
+
+  .banner-section p.sub-text {
+    color: #2f3a36;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    line-height: 1.4;
+    margin: 8px auto 0;
+    max-width: 31ch;
+    text-shadow: 0 2px 14px rgba(246, 247, 245, 0.92);
+  }
+
+  .banner-section .div-wrapper .btn-wrapper {
+    margin-top: 20px;
+  }
+
+  .banner-section .div-wrapper .btn-wrapper .btn {
+    padding: 12px 28px;
+  }
 }

@@ -208,7 +208,7 @@ const IndexPage = ({ data }) => {
               </p>
               <div className="btn-wrapper">
                 <Link className="btn" to="/contact">
-                  Book An Appointment
+                  Consult Now
                 </Link>
               </div>
             </div>

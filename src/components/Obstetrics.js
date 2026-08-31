@@ -1,10 +1,10 @@
-import React from "react";
-import gestationalDiabetes from "../images/gestational-diabetes.svg";
-import multiplePregnancies from "../images/multiple-pregrancies.svg";
-import otherMaternal from "../images/other-maternal.svg";
-import preEclampsia from "../images/pre-eclampsia.svg";
-import previousPregnancy from "../images/previous-pregnancy.svg";
-import thyroidDisorders from "../images/Rectangle 46.svg";
+import React from "react"
+import gestationalDiabetes from "../images/gestational-diabetes.svg"
+import multiplePregnancies from "../images/multiple-pregrancies.svg"
+import otherMaternal from "../images/other-maternal.svg"
+import preEclampsia from "../images/pre-eclampsia.svg"
+import previousPregnancy from "../images/previous-pregnancy.svg"
+import thyroidDisorders from "../images/Rectangle 46.svg"
 
 const conditions = [
   {
@@ -16,11 +16,11 @@ const conditions = [
   { image: previousPregnancy, title: "Previous Pregnancy Losses" },
   { image: multiplePregnancies, title: "Multiple Pregnancies" },
   { image: otherMaternal, title: "Other Maternal Or Fetal Risk Factors" },
-];
+]
 
 const Obstetrics = ({ data }) => {
-  const obstetricsTitle = data?.obstetricsTitle || "";
-  const obstetricsSubtitle = data?.obstetricsSubtitle || "";
+  const obstetricsTitle = data?.obstetricsTitle || ""
+  const obstetricsSubtitle = data?.obstetricsSubtitle || ""
 
   return (
     <section className="Obstetrics">
@@ -49,7 +49,7 @@ const Obstetrics = ({ data }) => {
         </ul>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Obstetrics;
+export default Obstetrics

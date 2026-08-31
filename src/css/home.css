@@ -320,29 +320,14 @@
 }
 .care-card__img-wrap {
   width: 100%;
-  height: 600px;
+  height: clamp(240px, 45vh, 600px);
   aspect-ratio: 4/3.2;
   overflow: hidden;
   border-radius: 10px;
 }
-@media (max-width: 1920px) {
-  .care-card__img-wrap {
-    height: 550px;
-  }
-}
-@media (max-width: 1680px) {
-  .care-card__img-wrap {
-    height: 500px;
-  }
-}
 @media (max-width: 1440px) {
   .care-card__img-wrap {
-    height: 400px;
-  }
-}
-@media (max-width: 1366px) {
-  .care-card__img-wrap {
-    height: 300px;
+    height: clamp(240px, 35vh, 600px);
   }
 }
 .care-card__img-wrap img {
@@ -512,7 +497,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   /* column-gap: clamp(35px, 6vw, 110px); */
-  row-gap: clamp(75px, 9vw, 145px);
+  row-gap: clamp(75px, 9vw, 50px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -545,13 +530,22 @@
     /* column-gap: 30px; */
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 800px) {
   .Obstetrics .title-wrap {
-    margin-bottom: 55px;
+    margin-bottom: 48px;
   }
   .Obstetrics .obstetrics-list {
     grid-template-columns: 1fr;
-    row-gap: 55px;
+    row-gap: 42px;
+  }
+  .Obstetrics .obstetrics-card img {
+    width: clamp(120px, 30vw, 170px);
+    height: clamp(120px, 30vw, 170px);
+  }
+  .Obstetrics .obstetrics-card h3 {
+    max-width: 28ch;
+    margin-top: 16px;
+    font-size: clamp(1rem, 3.8vw, 1.15rem);
   }
 }
 .Obstetrics .swiper-pagination-bullet {
@@ -809,6 +803,54 @@
   }
 }
 
+@media (max-width: 900px) {
+  .gynaecology-section .gynaecology-mob-swiper .swiper-wrapper .swiper-slide {
+    overflow: visible;
+  }
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .img-wrap {
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .text-wrap {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: block;
+    background: none;
+  }
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .text-wrap
+    .wrap {
+    padding: 18px 0 0;
+  }
+  .gynaecology-section
+    .gynaecology-mob-swiper
+    .swiper-wrapper
+    .swiper-slide
+    .text-wrap
+    p {
+    display: block;
+  }
+  .gynaecology-section .gynaecology-mob-swiper .swiper-pagination {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 18px auto 0;
+    transform: none;
+  }
+}
+
 .procedure-list {
   list-style: none;
   padding: 0;
@@ -837,16 +879,17 @@
     padding: 15px 16px;
   }
 }
-.procedure-list__item:hover {
-  transform: translateX(25px);
-  padding-left: 35px;
+.procedure-list__item--active {
+  /* Keep every procedure aligned; only the marker and title indicate selection. */
+  transform: translateX(0);
+  padding-left: 16px;
 }
-.procedure-list__item:hover .procedure-list__marker {
+.procedure-list__item--active .procedure-list__marker {
   background: #5f8f7a;
   border-color: #5f8f7a;
   opacity: 1;
 }
-.procedure-list__item:hover .procedure-list__name {
+.procedure-list__item--active .procedure-list__name {
   color: #5f8f7a;
 }
 .procedure-list__inner {
@@ -876,7 +919,7 @@
 
 .procedure-images {
   flex: 1;
-  height: 533px;
+  height: 600px;
   width: 50%;
 }
 .procedure-images__frame {
@@ -892,7 +935,8 @@
   inset: 0;
   opacity: 0;
   transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity;
+  transform-origin: center bottom;
+  will-change: opacity, transform;
 }
 .procedure-images__img-wrap img {
   width: 100%;
@@ -1353,24 +1397,34 @@
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(12px, 1.4vw, 24px);
+  gap: clamp(32px, 3vw, 64px);
   width: auto;
   margin: 0;
   padding: 0;
   list-style: none;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-.her-approach__stage:hover .her-list,
-.her-approach__stage:focus-within .her-list {
   opacity: 1;
   transform: translateY(0);
+}
+.her-approach__stage .her-list li {
+  position: relative;
+  min-width: 0;
+}
+.her-approach__stage .her-list li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: clamp(-32px, -1.5vw, -16px);
+  z-index: 3;
+  color: #5f8f7a;
+  font-size: clamp(26px, 2vw, 38px);
+  font-weight: 300;
+  line-height: 1;
+  transform: translate(50%, -50%);
 }
 .her-approach__stage .her-list__item {
   display: flex;
   width: 100%;
-  min-height: 142px;
+  min-height: 112px;
   padding: 16px 12px 14px;
   align-items: center;
   justify-content: center;
@@ -1395,19 +1449,14 @@
   transform: translateY(-5px);
   outline: none;
 }
-.her-list__number {
-  display: block;
-  margin-bottom: 20px;
-  font-family: "NotoSerifEthiopic-Regular";
-  font-size: clamp(27px, 2vw, 38px);
-  line-height: 1;
-}
 .her-approach__stage .her-list__name {
   margin: 0;
+  max-width: 22ch;
   color: inherit;
   font-size: clamp(14px, 1.1vw, 18px);
   font-weight: 400;
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 @media (max-width: 1024px) {
@@ -1421,15 +1470,12 @@
     gap: 10px;
   }
   .her-approach__stage .her-list__item {
-    min-height: 125px;
+    min-height: 105px;
     padding: 14px 8px 12px;
-  }
-  .her-list__number {
-    margin-bottom: 14px;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .Her-Approach {
     padding: 60px 0 0;
   }
@@ -1461,6 +1507,9 @@
   .her-approach__stage .her-list li:last-child {
     grid-column: 1 / -1;
   }
+  .her-approach__stage .her-list li::after {
+    display: none;
+  }
   .her-approach__stage .her-list__item {
     min-height: 86px;
     padding: 10px;
@@ -1473,10 +1522,6 @@
   .her-approach__stage .her-list__item--active {
     padding-left: 10px;
     transform: none;
-  }
-  .her-list__number {
-    margin-bottom: 6px;
-    font-size: 22px;
   }
   .her-approach__stage .her-list__name {
     font-size: 13px;
@@ -1536,7 +1581,7 @@
   height: 64px;
   flex: 0 0 64px;
   overflow: hidden;
-  border: 1px solid rgba(95, 143, 122, 0.18);
+  /* border: 1px solid rgba(95, 143, 122, 0.18); */
   border-radius: 50%;
 }
 .infertility-scroll__icon .gatsby-image-wrapper,

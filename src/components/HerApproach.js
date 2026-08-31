@@ -34,7 +34,6 @@ const HerApproach = ({ data }) => {
             {herApproachList.map((item, index) => (
               <li key={index}>
                 <button type="button" className="her-list__item">
-                  <span className="her-list__number">{index + 1}</span>
                   <span
                     className="her-list__name"
                     dangerouslySetInnerHTML={{

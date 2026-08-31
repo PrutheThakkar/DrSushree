@@ -39,7 +39,7 @@ const ExpertisePageTemplate = ({ data }) => {
 
       setTimeout(() => {
         if (btnWrapper) btnWrapper.classList.remove("hidden")
-      }, 250)
+      }, 550)
     }
 
     const handleToggle = e => {
@@ -89,81 +89,81 @@ const ExpertisePageTemplate = ({ data }) => {
   return (
     <Layout>
       <section className="inner-banner-section expertise-hero">
-        <div className="container">
-          <div className="div-wrapper">
-            {page?.title && (
-              <h1 dangerouslySetInnerHTML={{ __html: commonPages.pageTitle }} />
-            )}
+        {/* <div className="container"> */}
+        <div className="div-wrapper">
+          {page?.title && (
+            <h1 dangerouslySetInnerHTML={{ __html: commonPages.pageTitle }} />
+          )}
+        </div>
+
+        <div className="img-wrap">
+          {headerMobileImage && (
+            <GatsbyImage
+              image={headerMobileImage}
+              alt={
+                commonPages?.pageHeaderImageMobile?.node?.altText ||
+                page?.title ||
+                "Header mobile image"
+              }
+              className="hero-img hero-img--mobile"
+              loading="lazy"
+            />
+          )}
+
+          {headerDeskImage && (
+            <GatsbyImage
+              image={headerDeskImage}
+              alt={
+                commonPages?.pageHeaderImageDesk?.node?.altText ||
+                page?.title ||
+                "Header desktop image"
+              }
+              className="hero-img hero-img--desktop"
+              loading="lazy"
+            />
+          )}
+        </div>
+
+        <div
+          className={`expertise-list-header ${
+            page?.databaseId === 169 ? "Infertilitypage" : ""
+          }`}
+        >
+          <div className="btn-wrapper">
+            <a className="btn expertise-toggle-btn" href="#">
+              {page?.title || "Expertise"}
+            </a>
           </div>
 
-          <div className="img-wrap">
-            {headerMobileImage && (
-              <GatsbyImage
-                image={headerMobileImage}
-                alt={
-                  commonPages?.pageHeaderImageMobile?.node?.altText ||
-                  page?.title ||
-                  "Header mobile image"
-                }
-                className="hero-img hero-img--mobile"
-                loading="lazy"
-              />
-            )}
+          <div className="expertise-list-wrap">
+            <button
+              type="button"
+              className="expertise-close-btn"
+              aria-label="Close expertise list"
+            ></button>
 
-            {headerDeskImage && (
-              <GatsbyImage
-                image={headerDeskImage}
-                alt={
-                  commonPages?.pageHeaderImageDesk?.node?.altText ||
-                  page?.title ||
-                  "Header desktop image"
-                }
-                className="hero-img hero-img--desktop"
-                loading="lazy"
-              />
-            )}
-          </div>
+            <ul className="expertise-list">
+              {expertiseSections.map((item, index) => {
+                const sectionId = slugify(
+                  item?.expertiseTitle || `section-${index + 1}`
+                )
 
-          <div
-            className={`expertise-list-header ${
-              page?.databaseId === 169 ? "Infertilitypage" : ""
-            }`}
-          >
-            <div className="btn-wrapper">
-              <a className="btn expertise-toggle-btn" href="#">
-                {page?.title || "Expertise"}
-              </a>
-            </div>
-
-            <div className="expertise-list-wrap">
-              <button
-                type="button"
-                className="expertise-close-btn"
-                aria-label="Close expertise list"
-              ></button>
-
-              <ul className="expertise-list">
-                {expertiseSections.map((item, index) => {
-                  const sectionId = slugify(
-                    item?.expertiseTitle || `section-${index + 1}`
-                  )
-
-                  return (
-                    <li key={sectionId}>
-                      <a className="btn" href={`#${sectionId}`}>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: item?.expertiseTitle || "",
-                          }}
-                        />
-                      </a>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
+                return (
+                  <li key={sectionId}>
+                    <a className="btn" href={`#${sectionId}`}>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: item?.expertiseTitle || "",
+                        }}
+                      />
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
         </div>
+        {/* </div> */}
       </section>
 
       <section className="expertise-wrap">
