@@ -79,6 +79,40 @@ const InfertilityScroll = ({ title, subtitle, paragraph, items = [] }) => {
       return () => tween.scrollTrigger?.kill()
     })
 
+    media.add("(max-width: 900px)", () => {
+      const viewport = viewportRef.current
+      const cards = Array.from(trackRef.current.children)
+      let activeIndex = 0
+      let autoplayId
+
+      const goToNextCard = () => {
+        activeIndex = (activeIndex + 1) % cards.length
+        viewport.scrollTo({
+          left: cards[activeIndex].offsetLeft - trackRef.current.offsetLeft,
+          behavior: "smooth",
+        })
+      }
+
+      const startAutoplay = () => {
+        window.clearInterval(autoplayId)
+        autoplayId = window.setInterval(goToNextCard, 3500)
+      }
+
+      const pauseAutoplay = () => window.clearInterval(autoplayId)
+
+      viewport.addEventListener("pointerdown", pauseAutoplay)
+      viewport.addEventListener("pointerup", startAutoplay)
+      viewport.addEventListener("pointercancel", startAutoplay)
+      startAutoplay()
+
+      return () => {
+        window.clearInterval(autoplayId)
+        viewport.removeEventListener("pointerdown", pauseAutoplay)
+        viewport.removeEventListener("pointerup", startAutoplay)
+        viewport.removeEventListener("pointercancel", startAutoplay)
+      }
+    })
+
     return () => media.revert()
   }, [items.length])
 

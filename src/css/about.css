@@ -529,14 +529,3 @@
     font-size: clamp(0.938rem, 0.9123rem + 0.1096vw, 1rem);
   }
 }
-
-.obstetrics-list {
-  display: flex !important;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.obstetrics-list li {
-  width: calc(50% - 10px);
-  margin: 10px;
-  width: 30%;
-}

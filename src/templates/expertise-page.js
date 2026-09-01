@@ -197,7 +197,9 @@ const ExpertisePageTemplate = ({ data }) => {
                   <div className="expertise-row__content">
                     {item?.expertiseTitle && (
                       <h2 className="title">
-                        {item.expertiseTitle}
+                        <span className="expertise-title-text">
+                          {item.expertiseTitle}
+                        </span>
 
                         {item?.expertiseSubtitle && (
                           <span

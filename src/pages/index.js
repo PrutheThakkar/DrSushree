@@ -13,6 +13,7 @@ import CareStages from "../components/care-stages"
 import InfertilityScroll from "../components/InfertilityScroll"
 import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim"
 import preloaderLogo from "../images/sushree-preloader-logo.svg"
+import mobileHeroBanner from "../images/header-img-mob.jpg"
 import Seo from "../components/seo"
 
 const IndexPage = ({ data }) => {
@@ -208,7 +209,7 @@ const IndexPage = ({ data }) => {
               </p>
               <div className="btn-wrapper">
                 <Link className="btn" to="/contact">
-                  Consult Now
+                  Request A Consultation
                 </Link>
               </div>
             </div>
@@ -218,12 +219,20 @@ const IndexPage = ({ data }) => {
                 <GatsbyImage
                   image={heroImage}
                   alt={deskImageAlt || mobImageAlt || "Personalised care"}
-                  className="hero-img"
+                  className="hero-img hero-img--desktop-source"
                   loading="eager"
                   decoding="async"
                   fetchPriority="high"
                 />
               )}
+              <img
+                src={mobileHeroBanner}
+                alt={mobImageAlt || "Women's healthcare"}
+                className="hero-img hero-img--mobile-source"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
               {/* {mobImage && (
                 <GatsbyImage
                   image={mobImage}
@@ -276,13 +285,18 @@ const IndexPage = ({ data }) => {
               </div>
 
               {womensHealthcareBottomPara && (
-                <div
-                  data-aos="fade-up"
-                  className="text-wrap"
-                  dangerouslySetInnerHTML={{
-                    __html: womensHealthcareBottomPara,
-                  }}
-                />
+                <div data-aos="fade-up" className="text-wrap">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: womensHealthcareBottomPara,
+                    }}
+                  />
+                  <div className="btn-wrapper">
+                    <Link className="btn" to="/about">
+                      Know More
+                    </Link>
+                  </div>
+                </div>
               )}
             </div>
           </div>

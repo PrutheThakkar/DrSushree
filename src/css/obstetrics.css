@@ -87,18 +87,38 @@
     grid-row: auto;
   }
 
+  .expertise-row__content {
+    display: contents;
+  }
+
+  .expertise-row__content .title {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .expertise-row__content .expertise-title-text {
+    display: block;
+    width: 100%;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
   .expertise-row__media {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
     aspect-ratio: auto;
     height: min(70vw, 520px);
+  }
+
+  .expertise-row__content .section-content {
+    grid-column: 1;
+    grid-row: 3;
   }
 }
 
 @media (max-width: 600px) {
   .expertise-row__media {
     height: 300px;
-  }
-
-  .expertise-row__content .title {
-    margin-bottom: 25px;
   }
 }

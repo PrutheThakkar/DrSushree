@@ -77,6 +77,11 @@ export const initHomeAnimations = () => {
       scale: 0.97,
     });
 
+    gsap.set(".banner-section .sub-text", {
+      autoAlpha: 0,
+      y: 24,
+    });
+
     gsap.set(".hero-line", {
       overflow: "hidden",
       display: "block",
@@ -131,13 +136,24 @@ export const initHomeAnimations = () => {
     );
 
     tl.to(
-      ".hero-line-inner",
+      ".banner-section .hero-line-inner",
       {
         yPercent: 0,
         duration: 0.85,
         stagger: 0.12,
       },
-      "-=0.05"
+      ">"
+    );
+
+    // Keep the hero copy in a clear title -> text -> button sequence.
+    tl.to(
+      ".banner-section .sub-text",
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.65,
+      },
+      ">"
     );
 
     tl.to(
@@ -149,7 +165,7 @@ export const initHomeAnimations = () => {
         duration: 0.6,
         ease: "power3.out",
       },
-      "-=0.25"
+      ">"
     );
   }
 
@@ -219,6 +235,7 @@ export const initHomeAnimations = () => {
       },
       "-=0.35"
     );
+
   }
 
   // =========================================================

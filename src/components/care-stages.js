@@ -208,6 +208,23 @@ const CareStages = ({ data }) => {
     const init = () => {
       currentStepRef.current = 0
       sizeCards()
+
+      if (window.innerWidth <= 768) {
+        if (stRef.current) {
+          stRef.current.kill()
+          stRef.current = null
+        }
+        if (tweenRef.current) {
+          tweenRef.current.kill()
+          tweenRef.current = null
+        }
+
+        sectionRef.current.style.height = "auto"
+        gsap.set(trackRef.current, { clearProps: "transform" })
+        dotsWrapRef.current.innerHTML = ""
+        return
+      }
+
       buildDots()
       setSectionHeight()
       updateDots(0)
