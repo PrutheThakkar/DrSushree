@@ -1,0 +1,113 @@
+.underwater-banner.banner-section > .container > .img-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.underwater-banner .underwater-banner__effects {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.underwater-banner .underwater-banner__filters {
+  position: absolute;
+}
+
+.underwater-banner .underwater-banner__light {
+  position: absolute;
+  inset: -12%;
+  background: repeating-conic-gradient(
+    from 165deg at 50% -10%,
+    transparent 0deg 7deg,
+    rgba(255, 255, 225, 0.12) 9deg 12deg,
+    transparent 15deg 24deg
+  );
+  filter: blur(18px);
+  opacity: 0.45;
+}
+
+.underwater-banner .underwater-banner__bubble {
+  position: absolute;
+  bottom: -70px;
+  left: var(--bubble-left);
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  border-radius: 50%;
+  /* Crop the pearl-like bubble directly from the existing banner artwork. */
+  background-image: url("../images/hero-section.jpg");
+  background-size: 1200% 866.875%;
+  background-position: 7.045% 65.2%;
+  mask-image: radial-gradient(circle, #000 58%, transparent 71%);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .underwater-banner .hero-img img,
+  .underwater-banner img.hero-img {
+    filter: url("#homepage-water-current");
+  }
+
+  .underwater-banner .img-wrap {
+    animation: underwater-banner-drift 10s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .underwater-banner .underwater-banner__light {
+    animation: underwater-banner-light 10s ease-in-out infinite alternate;
+  }
+
+  .underwater-banner .underwater-banner__bubble {
+    animation: underwater-banner-bubble var(--bubble-duration) linear
+      var(--bubble-delay) infinite;
+  }
+}
+
+@keyframes underwater-banner-drift {
+  0%,
+  100% {
+    scale: 1.035;
+    translate: -7px 0;
+  }
+  50% {
+    scale: 1.05;
+    translate: 7px -8px;
+  }
+}
+
+@keyframes underwater-banner-light {
+  from {
+    translate: -2% 0;
+    rotate: -2deg;
+    opacity: 0.3;
+  }
+  to {
+    translate: 2% 1%;
+    rotate: 2deg;
+    opacity: 0.6;
+  }
+}
+
+@keyframes underwater-banner-bubble {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(32px, -65vh);
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(-24px, -150vh);
+    opacity: 0;
+  }
+}

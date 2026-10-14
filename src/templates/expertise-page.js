@@ -150,7 +150,7 @@ const ExpertisePageTemplate = ({ data }) => {
 
                 return (
                   <li key={sectionId}>
-                    <a className="btn" href={`#${sectionId}`}>
+                    <a className="expertise-section-link" href={`#${sectionId}`}>
                       <span
                         dangerouslySetInnerHTML={{
                           __html: item?.expertiseTitle || "",

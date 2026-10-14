@@ -9,6 +9,7 @@ import Layout from "../components/layout"
 import Obstetrics from "../components/Obstetrics"
 import Gynaecology from "../components/Gynaecology"
 import HerApproach from "../components/HerApproach"
+import UnderwaterBanner from "../components/underwater-banner"
 import CareImageStack from "../components/care-image-stack"
 import InfertilityScroll from "../components/InfertilityScroll"
 import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim"
@@ -198,7 +199,8 @@ const IndexPage = ({ data }) => {
       )}
 
       <div className={`page-content ${isAnimationReady ? "page-loaded" : ""}`}>
-        <section className="banner-section">
+        <section className="banner-section underwater-banner">
+          <UnderwaterBanner />
           <div className="container">
             <div className="div-wrapper">
               <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />

@@ -1,3 +1,7 @@
+.Womens-Healthcare:has(+ .care-image-stack) {
+  margin-bottom: clamp(24px, 3vw, 48px);
+}
+
 .care-image-stack {
   position: relative;
   /* Include the stage's bottom padding in the shared section spacing. */
