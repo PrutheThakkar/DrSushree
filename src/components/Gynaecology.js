@@ -1,206 +1,157 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import Swiper from "swiper"
-import { Autoplay, EffectFade, Pagination } from "swiper/modules"
+import React, { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import "swiper/css"
-import "swiper/css/pagination"
-import "swiper/css/effect-fade"
+import clamImage from "../images/seafoam_glass_clam_with_luminous_pearls_2.webp"
+import "../css/gynaecology-feature.css"
+
+const fallbackProcedures = [
+  {
+    title: "Laparoscopic Hysterectomy",
+    paragraph:
+      "Removal of the uterus using minimally invasive laparoscopic techniques.<br />Ensures smaller incisions, less pain, and faster recovery.",
+  },
+  {
+    title: "Myomectomy (Fibroid Removal)",
+    paragraph:
+      "Surgical removal of uterine fibroids while preserving the uterus.<br />Helps relieve symptoms while maintaining fertility.",
+  },
+  {
+    title: "Endometriosis Surgery",
+    paragraph:
+      "Targeted removal of endometriosis tissue to reduce pain and improve function. Performed with precision to preserve surrounding healthy structures.",
+  },
+  {
+    title: "Ovarian Cyst Surgery",
+    paragraph:
+      "Removal of ovarian cysts using minimally invasive techniques.<br />Ensures relief from symptoms while preserving ovarian health and function.",
+  },
+]
 
 const Gynaecology = ({ data }) => {
-  const gynaecologyTitle = data?.gynaecologyTitle
-  const gynaecologySubtitle = data?.gynaecologySubtitle
-  const gynaecologyAccordion = data?.gynaecologyAccordion || []
-
-  const [currentIndex, setCurrentIndex] = useState(0)
   const sectionRef = useRef(null)
-  const imageCardsRef = useRef([])
+  const procedures = data?.gynaecologyAccordion?.length
+    ? data.gynaecologyAccordion
+    : fallbackProcedures
 
-  // Initialize Swiper for mobile slider
   useEffect(() => {
-    const swiper = new Swiper(".gynaecology-mob-swiper", {
-      effect: "fade",
-      fadeEffect: {
-        crossFade: true,
-      },
-      speed: 1500,
-      autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      modules: [Autoplay, Pagination, EffectFade],
-    })
-
-    return () => {
-      if (swiper) swiper.destroy()
-    }
-  }, [])
-
-  // Pin the section on desktop and reveal each image as an upward-moving card.
-  useLayoutEffect(() => {
-    if (gynaecologyAccordion.length < 2 || !sectionRef.current) {
-      return undefined
-    }
-
     gsap.registerPlugin(ScrollTrigger)
+    const section = sectionRef.current
     const media = gsap.matchMedia()
-
-    media.add("(min-width: 901px)", () => {
-      const cards = imageCardsRef.current.filter(Boolean)
-      if (cards.length < 2) return undefined
-
-      const context = gsap.context(() => {
-        gsap.set(cards, {
-          opacity: 1,
-          scale: 0.96,
-          yPercent: 110,
-        })
-        gsap.set(cards[0], { scale: 1, yPercent: 0 })
-        cards.forEach((card, index) => gsap.set(card, { zIndex: index + 1 }))
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 10%",
-            end: () => `+=${window.innerHeight * (cards.length - 1)}`,
-            pin: true,
-            scrub: 0.7,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const shell = section.querySelector(".gynaecology-feature__image")
+      const lid = section.querySelector(".gynaecology-feature__shell-lid")
+      const cards = Array.from(
+        section.querySelectorAll(".gynaecology-feature__card")
+      )
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: shell,
+          start: "top 85%",
+          once: true,
+        },
+      })
+      timeline.fromTo(
+        lid,
+        {
+          rotationX: -82,
+          transformOrigin: "50% 60%",
+        },
+        {
+          rotationX: 0,
+          duration: 1.5,
+          ease: "power2.inOut",
+        }
+      )
+      cards.forEach((card, index) => {
+        const cardBounds = card.getBoundingClientRect()
+        const shellBounds = shell.getBoundingClientRect()
+        const baseY = window.innerWidth > 900 && index % 2 === 1 ? 60 : 0
+        timeline.fromTo(
+          card,
+          {
+            x:
+              shellBounds.left +
+              shellBounds.width / 2 -
+              cardBounds.left -
+              cardBounds.width / 2,
+            y:
+              baseY +
+              shellBounds.top +
+              shellBounds.height / 2 -
+              cardBounds.top -
+              cardBounds.height / 2,
+            scale: 0.15,
+            autoAlpha: 0,
+            rotationX: 20,
+            transformPerspective: 900,
           },
-        })
-
-        cards.slice(1).forEach((card, index) => {
-          const nextIndex = index + 1
-          timeline.to(card, {
-            duration: 1,
-            ease: "power2.inOut",
+          {
+            x: 0,
+            y: baseY,
             scale: 1,
-            yPercent: 0,
-            onStart: () => setCurrentIndex(nextIndex),
-            onReverseComplete: () => setCurrentIndex(nextIndex - 1),
-          })
-        })
-      }, sectionRef)
-
-      return () => {
-        context.revert()
-        setCurrentIndex(0)
-      }
+            autoAlpha: 1,
+            rotationX: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            onComplete: () =>
+              gsap.set(card, { clearProps: "transform,opacity,visibility" }),
+          },
+          0.9 + index * 0.15
+        )
+      })
     })
-
     return () => media.revert()
-  }, [gynaecologyAccordion.length])
+  }, [procedures.length])
 
   return (
-    <section ref={sectionRef} className="gynaecology-section">
+    <section
+      className="gynaecology-section gynaecology-feature"
+      ref={sectionRef}
+    >
       <div className="container">
         <div className="title-wrap">
           <h2 className="title">
-            {gynaecologyTitle}
-            <span className="subtitle">{gynaecologySubtitle}</span>
+            {data?.gynaecologyTitle ||
+              "Gynaecology - Minimally Invasive Surgical Expertise"}
+            <span className="subtitle">
+              {data?.gynaecologySubtitle || "Advanced laparoscopic procedures"}
+            </span>
           </h2>
         </div>
-
-        <div className="gynaecology-section__content">
-          {/* Left: Procedure List */}
-          <ul className="procedure-list">
-            {gynaecologyAccordion.map((item, index) => (
-              <li
-                key={index}
-                className={`procedure-list__item ${
-                  index === currentIndex ? "procedure-list__item--active" : ""
-                }`}
-              >
-                <div className="procedure-list__inner">
-                  <span className="procedure-list__marker"></span>
-                  <div className="procedure-list__text">
-                    <h3
-                      className="procedure-list__name"
-                      dangerouslySetInnerHTML={{
-                        __html: item?.title,
-                      }}
-                    />
-
-                    <p
-                      className="procedure-list__desc"
-                      dangerouslySetInnerHTML={{
-                        __html: item?.paragraph,
-                      }}
-                    />
-                  </div>
-                </div>
-              </li>
+        <div className="gynaecology-feature__layout">
+          <div
+            className="gynaecology-feature__image"
+            role="img"
+            aria-label="Seafoam glass clam with luminous pearls"
+          >
+            <img
+              className="gynaecology-feature__shell-base"
+              src={clamImage}
+              alt=""
+              width={754}
+              height={598}
+              loading="lazy"
+            />
+            <img
+              className="gynaecology-feature__shell-lid"
+              src={clamImage}
+              alt=""
+              width={754}
+              height={598}
+              loading="lazy"
+            />
+          </div>
+          <div className="gynaecology-feature__cards">
+            {procedures.map((item, index) => (
+              <article className="gynaecology-feature__card" key={index}>
+                <h3 dangerouslySetInnerHTML={{ __html: item.title || "" }} />
+                <div
+                  className="gynaecology-feature__description"
+                  dangerouslySetInnerHTML={{ __html: item.paragraph || "" }}
+                />
+              </article>
             ))}
-          </ul>
-
-          {/* Right: Image Stack */}
-          <div className="procedure-images">
-            <div className="procedure-images__frame">
-              {gynaecologyAccordion.map((item, index) => {
-                const image = getImage(item?.image?.node?.gatsbyImage)
-                const imageAlt = item?.image?.node?.altText
-                return (
-                  <div
-                    key={index}
-                    ref={el => {
-                      imageCardsRef.current[index] = el
-                    }}
-                    className={`procedure-images__img-wrap ${
-                      index === currentIndex
-                        ? "procedure-images__img-wrap--active"
-                        : ""
-                    }`}
-                    data-index={index}
-                  >
-                    {image && (
-                      <GatsbyImage
-                        image={image}
-                        alt={imageAlt || item?.title || "Gynaecology"}
-                        width={600}
-                        height={400}
-                        loading="lazy"
-                      />
-                    )}
-                  </div>
-                )
-              })}
-            </div>
           </div>
-        </div>
-
-        {/* Mobile Swiper */}
-        <div className="swiper gynaecology-mob-swiper">
-          <div className="swiper-wrapper">
-            {gynaecologyAccordion.map((item, index) => {
-              const image = getImage(item?.image?.node?.gatsbyImage)
-              const imageAlt = item?.image?.node?.altText
-              return (
-                <div className="swiper-slide" key={index}>
-                  <div className="img-wrap">
-                    {image && (
-                      <GatsbyImage
-                        image={image}
-                        alt={imageAlt || item?.title || "Gynaecology"}
-                      />
-                    )}
-                  </div>
-                  <div className="text-wrap">
-                    <div className="wrap">
-                      <h3>{item?.title}</h3>
-                      <p className="img-title">{item?.paragraph}</p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-          <div className="swiper-pagination"></div>
         </div>
       </div>
     </section>

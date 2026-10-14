@@ -1,5 +1,5 @@
 import React from "react"
-import { StaticImage } from "gatsby-plugin-image"
+import "../css/approach-to-care.css"
 
 const HerApproach = ({ data }) => {
   const herApproachTitle = data?.herApproachTitle || ""
@@ -9,7 +9,7 @@ const HerApproach = ({ data }) => {
   if (!herApproachList.length) return null
 
   return (
-    <section className="Her-Approach">
+    <section className="Her-Approach approach-to-care">
       <div className="container">
         <div className="title-wrap">
           <h2 className="title">
@@ -18,33 +18,20 @@ const HerApproach = ({ data }) => {
           </h2>
         </div>
 
-        <div className="her-approach__stage">
-          <div className="her-images__frame">
-            <StaticImage
-              src="../images/approach-to-care.webp"
-              alt="Dr. Sushree Patra discussing care with a patient"
-              className="her-images__img"
-              loading="lazy"
-              placeholder="blurred"
-              quality={90}
-            />
-          </div>
-
-          <ul className="her-list">
-            {herApproachList.map((item, index) => (
-              <li key={index}>
-                <button type="button" className="her-list__item">
-                  <span
-                    className="her-list__name"
-                    dangerouslySetInnerHTML={{
-                      __html: item?.herApproachTitle,
-                    }}
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="approach-to-care__list">
+          {herApproachList.map((item, index) => (
+            <li key={index}>
+              <div className="approach-to-care__card">
+                <span
+                  className="approach-to-care__name"
+                  dangerouslySetInnerHTML={{
+                    __html: item?.herApproachTitle,
+                  }}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

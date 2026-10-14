@@ -1,0 +1,65 @@
+.Her-Approach.approach-to-care .approach-to-care__list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(36px, 3.6vw, 76px);
+  list-style: none;
+  margin: 0;
+  padding: 0 24px;
+}
+
+.approach-to-care .approach-to-care__list > li {
+  position: relative;
+  min-width: 0;
+}
+
+.approach-to-care .approach-to-care__list > li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: clamp(36px, 3.6vw, 76px);
+  transform: translateY(-50%);
+  color: #43504b;
+  text-align: center;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.approach-to-care .approach-to-care__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 112px;
+  height: 100%;
+  padding: 20px 16px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #eaf0ed;
+  text-align: center;
+}
+
+.approach-to-care .approach-to-care__name {
+  color: #575f5c;
+  font-size: clamp(16px, 1.2vw, 24px);
+  line-height: 1.3;
+}
+
+@media (max-width: 900px) {
+  .Her-Approach.approach-to-care .approach-to-care__list {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .approach-to-care .approach-to-care__list > li:not(:last-child)::after {
+    content: "↓";
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    transform: none;
+  }
+}

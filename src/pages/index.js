@@ -9,7 +9,7 @@ import Layout from "../components/layout"
 import Obstetrics from "../components/Obstetrics"
 import Gynaecology from "../components/Gynaecology"
 import HerApproach from "../components/HerApproach"
-import CareStages from "../components/care-stages"
+import CareImageStack from "../components/care-image-stack"
 import InfertilityScroll from "../components/InfertilityScroll"
 import { initHomeAnimations, destroyHomeAnimations } from "../js/homeanim"
 import preloaderLogo from "../images/sushree-preloader-logo.svg"
@@ -302,7 +302,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
 
-        <CareStages data={careStagesData} />
+        <CareImageStack data={careStagesData} />
 
         <Obstetrics data={obstetricsData} />
 

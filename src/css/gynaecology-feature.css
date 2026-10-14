@@ -1,0 +1,130 @@
+.gynaecology-feature .gynaecology-feature__layout {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gynaecology-feature .gynaecology-feature__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  perspective: 900px;
+  aspect-ratio: 754 / 598;
+}
+
+.gynaecology-feature .gynaecology-feature__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gynaecology-feature .gynaecology-feature__shell-base {
+  clip-path: inset(55% 0 0 0);
+}
+
+.gynaecology-feature .gynaecology-feature__shell-lid {
+  clip-path: inset(0 0 45% 0);
+}
+
+.gynaecology-feature .gynaecology-feature__cards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 7%;
+  row-gap: clamp(160px, 18vw, 280px);
+  padding-bottom: 60px;
+}
+
+.gynaecology-feature .gynaecology-feature__card {
+  padding: clamp(20px, 2vw, 32px);
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(250, 248, 244, 0.9),
+    rgba(228, 234, 222, 0.65)
+  );
+}
+
+.gynaecology-feature .gynaecology-feature__card:nth-child(even) {
+  transform: translateY(60px);
+}
+
+.gynaecology-feature .gynaecology-feature__card h3 {
+  color: #639681;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: 400;
+  margin: 0 0 28px;
+}
+
+.gynaecology-feature .gynaecology-feature__description,
+.gynaecology-feature .gynaecology-feature__description p {
+  color: #575f5c;
+  font-size: clamp(14px, 1.1vw, 18px);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .gynaecology-feature .gynaecology-feature__image {
+    position: static;
+    display: block;
+    transform: none;
+    width: min(70%, 380px);
+    margin: 0 auto 32px;
+  }
+
+  .gynaecology-feature .gynaecology-feature__cards {
+    gap: 20px;
+    padding-bottom: 0;
+  }
+
+  .gynaecology-feature .gynaecology-feature__card:nth-child(even) {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .gynaecology-feature .gynaecology-feature__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gynaecology-feature .gynaecology-feature__card {
+    animation: gynaecology-card-float 6s ease-in-out infinite;
+  }
+
+  .gynaecology-feature .gynaecology-feature__card:nth-child(2) {
+    animation-delay: -1.5s;
+    animation-duration: 6.8s;
+  }
+
+  .gynaecology-feature .gynaecology-feature__card:nth-child(3) {
+    animation-delay: -3s;
+    animation-duration: 7.2s;
+  }
+
+  .gynaecology-feature .gynaecology-feature__card:nth-child(4) {
+    animation-delay: -4.5s;
+    animation-duration: 6.4s;
+  }
+}
+
+/* Individual translation preserves the existing staggered card positions. */
+@keyframes gynaecology-card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
