@@ -1,3 +1,33 @@
+.about-section--philosophy .title-wrap {
+  margin-bottom: clamp(32px, 3.8vw, 72px);
+}
+
+.about-section--philosophy .about-section__portrait {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.about-section.about-section--philosophy .text-wrap {
+  width: min(100%, 1280px);
+  margin: clamp(28px, 3.8vw, 72px) auto 0;
+}
+
+.about-section--philosophy .text-wrap p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .about-section--philosophy .about-section__portrait {
+    aspect-ratio: 3 / 2;
+  }
+
+  .about-section--philosophy .about-section__portrait img {
+    object-position: 35% center;
+  }
+}
+
 .about-section .img-wrap {
   height: 858px;
   width: auto;

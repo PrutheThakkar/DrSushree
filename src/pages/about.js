@@ -102,10 +102,10 @@ const AboutPage = ({ data }) => {
       </section>
 
 
-      <section className="about-section">
+      <section className="about-section about-section--philosophy">
         <div className="container">
 
-<div className="title-wrap">
+          <div className="title-wrap">
             {clinicalPhilosophyTitle && (
               <h2 className="title">
                 {clinicalPhilosophyTitle}
@@ -120,6 +120,16 @@ const AboutPage = ({ data }) => {
               </h2>
             )}
           </div>
+          <StaticImage
+            src="../images/about-top-dr-img.jpg"
+            alt="Dr. Sushree Patra in her clinic"
+            className="about-section__portrait"
+            layout="fullWidth"
+            aspectRatio={2.5}
+            placeholder="blurred"
+            loading="lazy"
+            quality={90}
+          />
           {aboutDrPara && (
             <div
               className="text-wrap"
