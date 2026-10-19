@@ -203,12 +203,15 @@ const IndexPage = ({ data }) => {
           <UnderwaterBanner />
           <div className="container">
             <div className="div-wrapper">
-              <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} />
-              <p className="sub-text">
+            
+              <h1>Personalised care for women at every stage,<br/>
+from preconception to gynaecological treatment</h1>
+              {/* <h1 dangerouslySetInnerHTML={{ __html: homePageTitle }} /> */}
+              {/* <p className="sub-text">
                 This Fibroids Awareness Month, focus more on fibroids & discover{" "}
                 <br />
                 comprehensive care for a woman's health
-              </p>
+              </p> */}
               <div className="btn-wrapper">
                 <Link className="btn" to="/contact">
                   Request A Consultation
@@ -310,7 +313,8 @@ const IndexPage = ({ data }) => {
 
         <Gynaecology data={gynaecologyData} />
 
-        <section className="Benefits-laparoscopic">
+        {/* regulations */}
+        {/* <section className="Benefits-laparoscopic">
           <div className="container">
             <h2>{benefitsTitle}</h2>
 
@@ -340,7 +344,8 @@ const IndexPage = ({ data }) => {
               })}
             </ul>
           </div>
-        </section>
+        </section> */}
+        {/* regulations */}
 
         <InfertilityScroll
           title={infertilityTitle}

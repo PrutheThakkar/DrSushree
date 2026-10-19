@@ -47,11 +47,11 @@ const AboutPage = ({ data }) => {
   const aboutBannerImage =
     aboutHeaderImageDesk && aboutHeaderImageMob
       ? withArtDirection(aboutHeaderImageDesk, [
-          {
-            media: "(max-width: 767px)",
-            image: aboutHeaderImageMob,
-          },
-        ])
+        {
+          media: "(max-width: 767px)",
+          image: aboutHeaderImageMob,
+        },
+      ])
       : aboutHeaderImageDesk || aboutHeaderImageMob
 
   const aboutBannerAlt =
@@ -101,22 +101,25 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
+
       <section className="about-section">
         <div className="container">
-          {/* <div className="title-wrap">
-            {aboutDrTitle && (
+
+<div className="title-wrap">
+            {clinicalPhilosophyTitle && (
               <h2 className="title">
-                {aboutDrTitle}
-                {aboutDrSubtitle && (
+                {clinicalPhilosophyTitle}
+                {clinicalPhilosophySubtitle && (
                   <span
                     className="sub-title"
-                    dangerouslySetInnerHTML={{ __html: aboutDrSubtitle }}
+                    dangerouslySetInnerHTML={{
+                      __html: clinicalPhilosophySubtitle,
+                    }}
                   />
                 )}
               </h2>
             )}
-          </div> */}
-
+          </div>
           {aboutDrPara && (
             <div
               className="text-wrap"
@@ -126,7 +129,8 @@ const AboutPage = ({ data }) => {
         </div>
       </section>
 
-      <section className="clinical-philosophy">
+      {/* regulations */}
+      {/* <section className="clinical-philosophy">
         <div className="container">
           <div className="title-wrap">
             {clinicalPhilosophyTitle && (
@@ -184,7 +188,8 @@ const AboutPage = ({ data }) => {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
+      {/* regulations */}
 
       <section className="Comprehensive">
         <div className="container">
@@ -233,7 +238,7 @@ const AboutPage = ({ data }) => {
                               wide spectrum of gynaecological conditions
                               including menstrual disorders, PCOS, fibroids,
                               endometriosis, infertility (primary and
-                              secondary), and routine preventive care. 
+                              secondary), and routine preventive care.
                             </p>
                             <p className="pragraph-wrap">
                               She recognises that many women delay seeking help

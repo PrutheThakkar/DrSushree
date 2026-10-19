@@ -11,8 +11,8 @@
 .expertise-wrap .expertise-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
-  gap: clamp(30px, 4vw, 70px);
+  align-items: start;
+  gap: clamp(24px, 2.5vw, 40px);
   margin-bottom: var(--section-gap);
   scroll-margin-top: 130px;
 }
@@ -31,7 +31,10 @@
 }
 
 .expertise-row__media {
-  aspect-ratio: 5 / 4;
+  width: 100%;
+  min-width: 0;
+  justify-self: stretch;
+  aspect-ratio: 8 / 5;
   height: auto;
   overflow: hidden;
   border-radius: 10px;
@@ -107,8 +110,8 @@
   .expertise-row__media {
     grid-column: 1 !important;
     grid-row: 2 !important;
-    aspect-ratio: auto;
-    height: min(70vw, 520px);
+    aspect-ratio: 8 / 5;
+    height: auto;
   }
 
   .expertise-row__content .section-content {
@@ -117,8 +120,3 @@
   }
 }
 
-@media (max-width: 600px) {
-  .expertise-row__media {
-    height: 300px;
-  }
-}

@@ -338,8 +338,8 @@ export const query = graphql`
               node {
                 altText
                 gatsbyImage(
-                  width: 770
-                  height: 630
+                  width: 960
+                  height: 600
                   layout: CONSTRAINED
                   placeholder: BLURRED
                   quality: 100

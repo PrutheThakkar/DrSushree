@@ -17,13 +17,13 @@ const Footer = () => {
     <footer>
       <div className="footer-top">
         <div className="img-wrap">
-          <StaticImage src="../images/footer-img.jpg" alt="footer-top-img" />
+          <StaticImage src="../images/footer-img.jpg" alt="footer-top-img" objectPosition="center bottom" />
         </div>
         <div className="text-wrap">
           <h2>
-            Every woman deserves care that listens,
+            Every woman deserves care that listens
             <br />
-            Book your appointment with Dr. Sushree today
+           
           </h2>
           <div className="btn-wrapper">
             <a className="btn" href="/contact">Book An Appointment</a>
@@ -40,9 +40,7 @@ const Footer = () => {
             </div>
             <div className="text-wrap">
               <p>
-                Dr. Sushree Patra is a dedicated gynaecologist <br />
-                committed to providing compassionate and <br />
-                evidence-based care.
+                Dr. Sushree Patra is a dedicated and well trained gynaecologist and obstetrician
               </p>
               <div className="social-icons">
                 <ul>
