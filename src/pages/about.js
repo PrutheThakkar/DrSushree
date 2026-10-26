@@ -121,7 +121,7 @@ const AboutPage = ({ data }) => {
             )}
           </div>
           <StaticImage
-            src="../images/about-top-dr-img.jpg"
+            src="../images/About-clinical-philosophy-about-page.webp"
             alt="Dr. Sushree Patra in her clinic"
             className="about-section__portrait"
             layout="fullWidth"
@@ -144,7 +144,7 @@ const AboutPage = ({ data }) => {
         <div className="container">
           <div className="title-wrap">
             {clinicalPhilosophyTitle && (
-              <h2 className="title">
+              <h2 className="title"
                 {clinicalPhilosophyTitle}
                 {clinicalPhilosophySubtitle && (
                   <span
@@ -221,18 +221,18 @@ const AboutPage = ({ data }) => {
             <div className="section-wrap">
               <ul>
                 {comprehensiveList.map((item, index) => {
-                  const itemImage = getImage(item?.image?.node?.gatsbyImage)
-                  const itemImageAlt =
-                    item?.image?.node?.altText ||
-                    `Comprehensive image ${index + 1}`
-
                   return (
                     <li key={index}>
                       <div className="left">
                         <div className="img">
-                          {itemImage && (
-                            <GatsbyImage image={itemImage} alt={itemImageAlt} />
-                          )}
+                          <StaticImage
+                            src="../images/about-page -2nd-image.webp"
+                            alt="Comprehensive gynaecological care with Dr. Sushree Patra"
+                            layout="fullWidth"
+                            placeholder="blurred"
+                            loading="lazy"
+                            quality={90}
+                          />
                         </div>
                       </div>
 
